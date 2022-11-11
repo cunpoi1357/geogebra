@@ -1,13 +1,46 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .menu-item {
+        @apply flex select-none items-center w-full pl-7 pr-[30px] py-4 text-black cursor-pointer hover:text-primary-blue transition-colors;
+    }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+    @font-face {
+        font-family: UTM Swiss Condensed;
+        font-weight: 400;
+        src: url('./assets/fonts/UTM-Swiss-Condensed.ttf') format('ttf');
+    }
+    html {
+        @apply font-UTM;
+    }
+}
+
+.bg {
+    background-image: linear-gradient(
+        to right,
+        hsla(214, 100%, 90%, 100%) 0%,
+        hsla(214, 100%, 90%, 0%) 20%,
+        hsla(214, 100%, 90%, 0%) 50%,
+        hsla(214, 100%, 90%, 0%) 80%,
+        hsla(214, 100%, 90%, 100%) 100%
+    );
+}
+
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
 }
