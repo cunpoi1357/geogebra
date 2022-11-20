@@ -62,12 +62,12 @@ function MultipleChoiceManagement() {
                             options={topics || []}
                             placeholder='Loại'
                         />
-                        <Button className='col-span-2 bg-[#2c3a57]' type='submit' icon={<SearchIcon />}>
+                        <Button className='col-span-2 bg-[#247dea]' type='submit' icon={<SearchIcon />}>
                             Tìm kiếm
                         </Button>
                     </form>
                     <Button
-                        className='col-span-2 bg-[#2c3a57]'
+                        className='col-span-2 bg-[#247dea]'
                         type='submit'
                         icon={<PlusIcon />}
                         onClick={() => setShowModal(true)}
@@ -76,18 +76,17 @@ function MultipleChoiceManagement() {
                     </Button>
                 </div>
                 <MultipleChoiceCreateModal isOpen={showModal} onClose={handleCloseModal} />
-                <div className='grid grid-cols-12 gap-16'>
-                    <div className='relative col-span-12'>
-                        <MultipleChoiceTable
-                            data={examples.filter(
-                                item =>
-                                    item.type === 'multiple-choice' &&
-                                    item.id.includes(filters.id) &&
-                                    item.question.includes(filters.question) &&
-                                    item.topic.includes(filters.topic)
-                            )}
-                        />
-                    </div>
+
+                <div className='shadow-xl'>
+                    <MultipleChoiceTable
+                        data={examples.filter(
+                            item =>
+                                item.type === 'multiple-choice' &&
+                                item.id.includes(filters.id) &&
+                                item.question.includes(filters.question) &&
+                                item.topic.includes(filters.topic)
+                        )}
+                    />
                 </div>
             </section>
         </div>

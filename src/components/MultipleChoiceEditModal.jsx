@@ -45,7 +45,7 @@ function MultipleChoiceEditModal({ onClose, isOpen, data }) {
             onRequestClose={onClose}
             className='fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-secondary-dark-blue/30'
         >
-            <div className='bg-neutrals-01 p-6 min-h-[200px] min-w-[300px] rounded border border-green-400'>
+            <div className='bg-neutrals-01 p-6 min-h-[200px] min-w-[300px] rounded'>
                 <div className='align-center w-[1500px] flex flex-col'>
                     <header className='flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />

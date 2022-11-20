@@ -22,7 +22,8 @@ function AdminHeader({ children }) {
     const handleCloseModal = () => setShowModal(false)
 
     return (
-        <Header title={children}>
+        <header className='flex justify-between items-center h-[80px] m-4 bg-neutrals-01 px-10 shadow rounded-xl'>
+            <h2 className='font-bold'>{children}</h2>
             <nav className='flex items-center'>
                 <div className='flex items-center cursor-pointer'>
                     {user ? (
@@ -47,7 +48,7 @@ function AdminHeader({ children }) {
                 </div>
             </nav>
             <LoginModal isOpen={showModal} onClose={handleCloseModal} />
-        </Header>
+        </header>
     )
 }
 

@@ -10,7 +10,8 @@ import { toast } from 'react-toastify'
 import Button from '../components/Button'
 
 function TheoryManagement() {
-    const [content, setContent] = useState('')
+    const [content, setContent] = useState([])
+    const [input, setInput] = useState('')
     const [types, setTypes] = useState([])
     const { control, handleSubmit, watch, getValues } = useForm()
 
@@ -25,19 +26,37 @@ function TheoryManagement() {
         get(ref(database, `theory/${path}`)).then(snapshot => {
             const theoryData = snapshot.val()
             if (!theoryData) {
-                set(ref(database, `theory/${path}`), { name, content: name }).catch(error => toast.error(error.message))
-                setContent(name)
+                set(ref(database, `theory/${path}`), { name, content: `[text] ${name}` }).catch(error =>
+                    toast.error(error.message)
+                )
+                setInput(`[text] ${name}`)
             } else {
-                setContent(theoryData.content)
+                setInput(theoryData.content)
             }
         })
     })
+    useEffect(() => {
+        const Lines = input.split(/\r?\n/) || []
+        const regex = /\[(\w*)\]\s*([\w\W]*)/
+        const result = []
+        Lines.forEach(line => {
+            const data = line.match(regex)
+
+            data &&
+                result.push({
+                    type: data[1],
+                    content: data[2]
+                })
+        })
+        console.log(result)
+        setContent(result)
+    }, [input])
 
     const handleUpdate = () => {
         const { name, path } = JSON.parse(getValues('type'))
         set(ref(database, `theory/${path}`), {
             name,
-            content
+            content: input
         })
             .then(() => toast.success('Lưu thành công'))
             .catch(error => toast.error(error.message))
@@ -62,11 +81,24 @@ function TheoryManagement() {
                 <div className='box-border grid h-[640px] grid-cols-2 gap-10'>
                     <textarea
                         className='w-full h-full col-span-1 p-4 border rounded outline-neutral-600 border-neutral-400'
-                        onChange={e => setContent(e.target.value)}
-                        value={content}
+                        onChange={e => setInput(e.target.value)}
+                        value={input}
                     />
                     <div className='w-full h-full col-span-1 p-4 overflow-auto border rounded outline-neutral-600 border-neutral-400'>
-                        <Markdown className='w-full'>{content}</Markdown>
+                        {content.map(line => {
+                            if (line.type === 'text')
+                                return (
+                                    <Markdown key={line.content} className='w-full'>
+                                        {line.content}
+                                    </Markdown>
+                                )
+                            else if (line.type === 'geogebra')
+                                return (
+                                    <span key={line.content} className='block'>
+                                        [Geogebra] {line.content}
+                                    </span>
+                                )
+                        })}
                     </div>
                 </div>
             </div>

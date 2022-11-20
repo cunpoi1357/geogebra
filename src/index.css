@@ -6,6 +6,10 @@
     .menu-item {
         @apply flex select-none items-center w-full pl-7 pr-[30px] py-4 text-black cursor-pointer hover:text-primary-blue transition-colors;
     }
+
+    .admin-bar-bg {
+        background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+    }
 }
 
 @layer base {

@@ -15,7 +15,7 @@ function AdminLayout({ children }) {
     }, [user])
 
     return (
-        <div className='flex bg-[#f4f5f6]'>
+        <div className='flex bg-[#f4f5f6] h-[100vh]'>
             <AdminNavBar />
             <main className='flex flex-col flex-1'>
                 {user ? (

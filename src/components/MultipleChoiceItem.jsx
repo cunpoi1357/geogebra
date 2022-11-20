@@ -19,10 +19,10 @@ function MultipleChoiceItem({ data, index }) {
     }
 
     return (
-        <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
+        <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767]'>
             {data && (
                 <>
-                    <th scope='row' className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
+                    <th scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>
                         {index}
                     </th>
                     <td className='px-6 py-4'>{JSON.parse(data.topic).name}</td>
@@ -31,10 +31,7 @@ function MultipleChoiceItem({ data, index }) {
                         <Latex>{data.question}</Latex>
                     </td>
                     {['A', 'B', 'C', 'D'].map(letter => (
-                        <td
-                            key={letter}
-                            className={`py-4 px-6 ${data.answerKey === letter && 'text-gray-900  dark:text-white'}`}
-                        >
+                        <td key={letter} className={`py-4 px-6 ${data.answerKey === letter && 'text-gray-900'}`}>
                             <Latex>{data[letter]}</Latex>
                         </td>
                     ))}
@@ -43,7 +40,7 @@ function MultipleChoiceItem({ data, index }) {
                     </td>
                     <td className='flex items-center gap-3 px-6 py-4'>
                         <label title='Xem'>
-                            <a href={`/example/${data.id}`} target='_blank' rel='noopener noreferrer'>
+                            <a href={`/question/${data.id}`} target='_blank' rel='noopener noreferrer'>
                                 <EyeIcon className='cursor-pointer' />
                             </a>
                         </label>
