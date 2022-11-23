@@ -33,8 +33,6 @@ function MultipleChoiceManagement() {
         reset()
     })
 
-    const handleCloseModal = () => setShowModal(false)
-
     useEffect(() => {
         onValue(ref(database, 'examples'), snapshot => {
             setExamples(toArray(snapshot.val()).filter(item => !!item))
@@ -75,7 +73,7 @@ function MultipleChoiceManagement() {
                         Tạo
                     </Button>
                 </div>
-                <MultipleChoiceCreateModal isOpen={showModal} onClose={handleCloseModal} />
+                <MultipleChoiceCreateModal isOpen={showModal} onClose={() => setShowModal(false)} />
 
                 <div className='shadow-xl'>
                     <MultipleChoiceTable

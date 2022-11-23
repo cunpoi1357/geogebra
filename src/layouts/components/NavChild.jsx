@@ -1,11 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
-function NavChild({ data }) {
+function NavChild({ data, className }) {
     return (
-        <Link to={`/list/${data.path}`} className='menu-item'>
+        <NavLink
+            to={`/list/${data.path}`}
+            className={({ isActive }) => `menu-item ${className} ${isActive && 'font-bold'}`}
+        >
             {data.name}
-        </Link>
+        </NavLink>
     )
 }
 

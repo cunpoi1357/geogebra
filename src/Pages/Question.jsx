@@ -1,6 +1,7 @@
 import { child, get, ref } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import DefectQuestion from '../components/DefectQuestion'
 
 import MultipleChoiceQuestion from '../components/MultipleChoiceQuestion'
 import { database } from '../firebase'
@@ -24,7 +25,15 @@ function Example() {
             })
     }, [id])
 
-    return <>{data?.type === 'multiple-choice' && <MultipleChoiceQuestion data={data} />}</>
+    return (
+        <>
+            {data?.type === 'multiple-choice' ? (
+                <MultipleChoiceQuestion data={data} />
+            ) : (
+                data?.type === 'defect' && <DefectQuestion data={data} />
+            )}
+        </>
+    )
 }
 
 export default Example

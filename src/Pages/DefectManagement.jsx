@@ -1,6 +1,7 @@
-import { get, ref } from 'firebase/database'
+import { get, onValue, ref } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toArray from 'lodash/toArray'
 
 import { database } from '../firebase'
 import { PlusIcon, SearchIcon } from '../components/Icon'
@@ -8,8 +9,12 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import SelectTree from '../components/SelectTree'
 import AdminHeader from '../layouts/components/AdminHeader'
+import DefectTable from '../components/DefectTable'
+import DefectCreateModal from '../components/DefectCreateModal'
 
 function DefectManagement() {
+    const [examples, setExamples] = useState([])
+    const [showModal, setShowModal] = useState(false)
     const [filters, setFilters] = useState({
         id: '',
         question: '',
@@ -21,6 +26,12 @@ function DefectManagement() {
 
     useEffect(() => {
         get(ref(database, 'structure')).then(snapshot => setTopics(JSON.parse(snapshot.val())))
+    }, [])
+
+    useEffect(() => {
+        onValue(ref(database, 'examples'), snapshot => {
+            setExamples(toArray(snapshot.val()).filter(item => !!item))
+        })
     }, [])
 
     const onSubmit = handleSubmit(data => {
@@ -49,34 +60,31 @@ function DefectManagement() {
                             options={topics}
                             placeholder='Loại'
                         />
-                        <Button className='col-span-2 bg-[#2c3a57]' type='submit' icon={<SearchIcon />}>
+                        <Button className='col-span-2 bg-[#247dea]' type='submit' icon={<SearchIcon />}>
                             Tìm kiếm
                         </Button>
                     </form>
-                    <Button className='col-span-2 bg-[#2c3a57]' type='submit' icon={<PlusIcon />}>
+                    <Button
+                        className='col-span-2 bg-[#247dea]'
+                        type='submit'
+                        icon={<PlusIcon />}
+                        onClick={() => setShowModal(true)}
+                    >
                         Tạo
                     </Button>
                 </div>
+                <DefectCreateModal isOpen={showModal} onClose={() => setShowModal(false)} />
                 <div className='grid grid-cols-12 gap-16'>
-                    <div className='relative col-span-12'>
-                        <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
-                            <thead className='text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
-                                <tr>
-                                    <th scope='col' className='px-6 py-3'>
-                                        STT
-                                    </th>
-                                    <th scope='col' className='px-6 py-3'>
-                                        Chủ đề
-                                    </th>
-                                    <th scope='col' className='px-6 py-3'>
-                                        Đề bài
-                                    </th>
-                                    <th scope='col' className='px-6 py-3'>
-                                        Hành động
-                                    </th>
-                                </tr>
-                            </thead>
-                        </table>
+                    <div className='relative col-span-12 shadow-xl'>
+                        <DefectTable
+                            data={examples.filter(
+                                item =>
+                                    item.type === 'defect' &&
+                                    item.id.includes(filters.id) &&
+                                    item.question.includes(filters.question) &&
+                                    item.topic.includes(filters.topic)
+                            )}
+                        />
                     </div>
                 </div>
             </section>

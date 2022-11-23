@@ -3,7 +3,7 @@ import MultipleChoiceItem from './MultipleChoiceItem'
 function MultipleChoiceTable({ data = [] }) {
     return (
         <table className='w-full text-sm text-left border border-[#a3a3a3]'>
-            <thead className='text-xs text-[#a3a6b8] uppercase bg-[#fcfcfd]'>
+            <thead className='text-xs text-[#a3a6b8] uppercase bg-[#fcfcfd] border  border-[#a3a3a3]'>
                 <tr>
                     <th scope='col' className='px-6 py-3'>
                         STT

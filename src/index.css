@@ -4,11 +4,24 @@
 
 @layer components {
     .menu-item {
-        @apply flex select-none items-center w-full pl-7 pr-[30px] py-4 text-black cursor-pointer hover:text-primary-blue transition-colors;
+        @apply flex select-none items-center w-full pl-7 pr-[30px] py-4 text-black cursor-pointer hover:bg-[#edeff1] transition-colors;
     }
 
     .admin-bar-bg {
         background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+    }
+    .bg {
+        background-image: linear-gradient(
+            to right,
+            hsla(214, 100%, 90%, 100%) 0%,
+            hsla(214, 100%, 90%, 0%) 20%,
+            hsla(214, 100%, 90%, 0%) 50%,
+            hsla(214, 100%, 90%, 0%) 80%,
+            hsla(214, 100%, 90%, 100%) 100%
+        );
+    }
+    body {
+        @apply overflow-hidden;
     }
 }
 
@@ -21,17 +34,6 @@
     html {
         @apply font-UTM;
     }
-}
-
-.bg {
-    background-image: linear-gradient(
-        to right,
-        hsla(214, 100%, 90%, 100%) 0%,
-        hsla(214, 100%, 90%, 0%) 20%,
-        hsla(214, 100%, 90%, 0%) 50%,
-        hsla(214, 100%, 90%, 0%) 80%,
-        hsla(214, 100%, 90%, 100%) 100%
-    );
 }
 
 html *::-webkit-scrollbar {

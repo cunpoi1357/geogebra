@@ -26,7 +26,7 @@ function List() {
 
     const theory = useMemo(() => {
         const result = []
-        if (content.content) {
+        if (content?.content) {
             const Lines = content.content.split(/\r?\n/) || []
             const regex = /\[(\w*)\]\s*([\w\W]*)/
             Lines.forEach(line => {
@@ -43,29 +43,32 @@ function List() {
     }, [content])
 
     return (
-        <div className='p-6'>
-            <section className='border border-[#6382a3] rounded-lg overflow-hidden bg-white'>
+        <div className='h-[100vh] p-6 overflow-auto'>
+            <section className='border border-[#6382a3] rounded-lg bg-white'>
                 <header className='text-white bg-[#6382a3] w-full text-3xl px-4'>{content?.name}</header>
                 <div className='block p-2 text-2xl'>
-                    {theory.map(line => {
-                        if (line.type === 'text')
-                            return (
-                                <Markdown key={line.content} className='w-full'>
-                                    {line.content}
-                                </Markdown>
-                            )
-                        if (line.type === 'geogebra')
-                            return (
-                                <Geogebra
-                                    key={line.content}
-                                    id={line.content}
-                                    appName='3d'
-                                    material_id={line.content}
-                                    showMenuBar={false}
-                                    lang='vi'
-                                />
-                            )
-                    })}
+                    {theory &&
+                        theory.map(line => {
+                            if (line.type === 'text')
+                                return (
+                                    <Markdown key={line.content} className='w-full'>
+                                        {line.content}
+                                    </Markdown>
+                                )
+                            if (line.type === 'geogebra')
+                                return (
+                                    <div key={line.content}>
+                                        <Geogebra
+                                            className='h-[800px]'
+                                            id={line.content}
+                                            appName='3d'
+                                            material_id={line.content}
+                                            showMenuBar={false}
+                                            lang='vi'
+                                        />
+                                    </div>
+                                )
+                        })}
                 </div>
             </section>
             <ul className='grid grid-cols-4 p-6'>

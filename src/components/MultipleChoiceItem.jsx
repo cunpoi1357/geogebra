@@ -10,8 +10,6 @@ import { EditIcon, EyeIcon, TrashIcon } from './Icon'
 function MultipleChoiceItem({ data, index }) {
     const [showModal, setShowModal] = useState(false)
 
-    const handleCloseModal = () => setShowModal(false)
-
     const handleRemove = () => {
         remove(ref(database, 'examples/' + data.id))
             .then(() => toast.success('Xóa thành công'))
@@ -22,16 +20,14 @@ function MultipleChoiceItem({ data, index }) {
         <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767]'>
             {data && (
                 <>
-                    <th scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>
-                        {index}
-                    </th>
+                    <td className='px-6 py-4 font-medium whitespace-nowrap'>{index}</td>
                     <td className='px-6 py-4'>{JSON.parse(data.topic).name}</td>
                     <td className='px-6 py-4'>{data.geogebraId}</td>
                     <td className='px-6 py-4'>
                         <Latex>{data.question}</Latex>
                     </td>
                     {['A', 'B', 'C', 'D'].map(letter => (
-                        <td key={letter} className={`py-4 px-6 ${data.answerKey === letter && 'text-gray-900'}`}>
+                        <td key={letter} className={`py-4 px-6 ${data.answerKey === letter && 'text-[#2e83eb]'}`}>
                             <Latex>{data[letter]}</Latex>
                         </td>
                     ))}
@@ -51,7 +47,7 @@ function MultipleChoiceItem({ data, index }) {
                             <TrashIcon className='cursor-pointer' />
                         </label>
                     </td>
-                    <MultipleChoiceEditModal onClose={handleCloseModal} isOpen={showModal} data={data} />
+                    <MultipleChoiceEditModal onClose={() => setShowModal(false)} isOpen={showModal} data={data} />
                 </>
             )}
         </tr>
