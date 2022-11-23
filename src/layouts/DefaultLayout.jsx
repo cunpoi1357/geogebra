@@ -21,7 +21,6 @@ function DefaultLayout({ children }) {
             <div className='grid w-[100vw] grid-cols-12'>
                 <main className='flex-1 bg h-[100vh] overflow-hidden lg:col-span-9 col-span-12 relative'>
                     {children}
-                    <GetRandomQuestionButton />
                 </main>
                 <Navbar className='lg:col-span-3 h-[100vh] flex flex-col bg-white' />
             </div>
@@ -31,6 +30,8 @@ function DefaultLayout({ children }) {
             >
                 <MenuIcon />
             </button>
+
+            <GetRandomQuestionButton className='absolute z-10 w-10 h-10 p-2 bg-white border border-gray-600 rounded-full right-6 bottom-10 hover:opacity-50' />
 
             <ReactModal
                 appElement={document.getElementById('app')}

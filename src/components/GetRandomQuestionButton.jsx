@@ -8,7 +8,7 @@ import { ShuffleIcon } from './Icon'
 import { database } from '../firebase'
 import { toast } from 'react-toastify'
 
-function GetRandomQuestionButton() {
+function GetRandomQuestionButton({ className }) {
     const [examples, setExamples] = useState([])
     const navigate = useNavigate()
 
@@ -24,10 +24,7 @@ function GetRandomQuestionButton() {
         toast.success('Lấy câu hỏi ngẫu nhiên thành công')
     }
     return (
-        <button
-            className='absolute z-10 w-10 h-10 p-2 bg-white border border-gray-600 rounded-full right-6 bottom-[87px] hover:opacity-50'
-            onClick={handleClick}
-        >
+        <button className={className} onClick={handleClick}>
             <ShuffleIcon />
         </button>
     )
