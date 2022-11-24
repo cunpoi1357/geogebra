@@ -19,10 +19,10 @@ function DefaultLayout({ children }) {
         <div className='flex flex-col '>
             <Header />
             <div className='grid w-[100vw] grid-cols-12'>
+                <Navbar className='lg:col-span-3 h-[100vh] hidden lg:flex flex-col bg-white' />
                 <main className='flex-1 bg h-[100vh] overflow-hidden lg:col-span-9 col-span-12 relative'>
                     {children}
                 </main>
-                <Navbar className='lg:col-span-3 h-[100vh] flex flex-col bg-white' />
             </div>
             <button
                 className='absolute z-10 w-10 h-10 p-3 transition-colors bg-white border border-gray-600 rounded-full left-6 bottom-10 lg:hidden hover:opacity-50'

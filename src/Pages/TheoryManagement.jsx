@@ -48,7 +48,6 @@ function TheoryManagement() {
                     content: data[2]
                 })
         })
-        console.log(result)
         setContent(result)
     }, [input])
 
@@ -86,18 +85,31 @@ function TheoryManagement() {
                     />
                     <div className='w-full h-full col-span-1 p-4 overflow-auto border rounded outline-neutral-600 border-neutral-400'>
                         {content.map(line => {
-                            if (line.type === 'text')
-                                return (
-                                    <Markdown key={line.content} className='w-full'>
-                                        {line.content}
-                                    </Markdown>
-                                )
-                            else if (line.type === 'geogebra')
-                                return (
-                                    <span key={line.content} className='block'>
-                                        [Geogebra] {line.content}
-                                    </span>
-                                )
+                            switch (line.type) {
+                                case 'text':
+                                    return (
+                                        <Markdown key={line.content} className='w-full'>
+                                            {line.content}
+                                        </Markdown>
+                                    )
+                                case 'geogebra':
+                                    return (
+                                        <span key={line.content} className='block'>
+                                            [Geogebra] {line.content}
+                                        </span>
+                                    )
+                                case 'block':
+                                    const content = line.content.split('|')
+                                    return (
+                                        <p key={line.content} className='border border-neutral-400'>
+                                            <span className='font-bold'>{content[0]}</span>
+                                            <Markdown className='w-full'>{content[1]}</Markdown>
+                                        </p>
+                                    )
+                                default:
+                                    break
+                            }
+                            return null
                         })}
                     </div>
                 </div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
 import Button from '../../components/Button'
-import Header from '../../components/Header'
 import LoginModal from '../../components/LoginModal'
 
 function AdminHeader({ children }) {

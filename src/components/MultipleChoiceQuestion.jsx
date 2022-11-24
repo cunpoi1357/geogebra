@@ -31,9 +31,12 @@ function MultipleChoiceQuestion({ data }) {
                         <Latex>{data.question}</Latex>
                     </header>
                     <section className='overflow-auto md:p-10 '>
-                        <div className='flex justify-center mt-10'>
-                            <Geogebra appName='3d' material_id={data.geogebraId} showMenuBar={false} lang='vi' />
-                        </div>
+                        {data.geogebraId && (
+                            <div className='flex justify-center mt-10'>
+                                <Geogebra appName='3d' material_id={data.geogebraId} showMenuBar={false} lang='vi' />
+                            </div>
+                        )}
+
                         <div className='flex flex-col items-center p-4'>
                             <div className='md:w-[600px] w-full grid grid-cols-2 grid-rows-2 md:gap-x-24 md:gap-y-5 gap-4 mt-8'>
                                 {['A', 'B', 'C', 'D'].map(letter => (

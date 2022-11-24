@@ -60,7 +60,8 @@ function MultipleChoiceEditModal({ onClose, isOpen, data }) {
                                 name='topic'
                                 control={control}
                                 options={type || []}
-                                placeholder='Loại'
+                                placeholder='Chuyên đề'
+                                label='Chuyên đề'
                                 isRequired='Vui lòng nhập trường này'
                             />
 
@@ -69,6 +70,7 @@ function MultipleChoiceEditModal({ onClose, isOpen, data }) {
                                 name='A'
                                 control={control}
                                 placeholder='Đáp án A'
+                                label='Đáp án A'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Input
@@ -76,6 +78,7 @@ function MultipleChoiceEditModal({ onClose, isOpen, data }) {
                                 name='B'
                                 control={control}
                                 placeholder='Đáp án B'
+                                label='Đáp án B'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Input
@@ -83,6 +86,7 @@ function MultipleChoiceEditModal({ onClose, isOpen, data }) {
                                 name='C'
                                 control={control}
                                 placeholder='Đáp án C'
+                                label='Đáp án C'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Input
@@ -90,6 +94,7 @@ function MultipleChoiceEditModal({ onClose, isOpen, data }) {
                                 name='D'
                                 control={control}
                                 placeholder='Đáp án D'
+                                label='Đáp án D'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Select
@@ -98,6 +103,7 @@ function MultipleChoiceEditModal({ onClose, isOpen, data }) {
                                 control={control}
                                 options={['A', 'B', 'C', 'D']}
                                 placeholder='Đáp án'
+                                label='Đáp án'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Input
@@ -105,7 +111,7 @@ function MultipleChoiceEditModal({ onClose, isOpen, data }) {
                                 name='geogebraId'
                                 control={control}
                                 placeholder='Geogebra ID'
-                                isRequired='Vui lòng nhập trường này'
+                                label='Geogebra ID'
                             />
                         </div>
                         <div className='grid grid-cols-2 col-span-1 grid-rows-4 gap-6'>
@@ -114,6 +120,7 @@ function MultipleChoiceEditModal({ onClose, isOpen, data }) {
                                 className='col-span-2 row-span-2'
                                 control={control}
                                 placeholder='Đề bài'
+                                label='Đề bài'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Textarea
@@ -121,6 +128,7 @@ function MultipleChoiceEditModal({ onClose, isOpen, data }) {
                                 className='col-span-2 row-span-3'
                                 control={control}
                                 placeholder='Lời giải'
+                                label='Lời giải'
                             />
                         </div>
 

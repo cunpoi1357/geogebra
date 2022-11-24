@@ -49,31 +49,43 @@ function List() {
                 <div className='block py-1 text-2xl md:p-2'>
                     {theory &&
                         theory.map(line => {
-                            if (line.type === 'text')
-                                return (
-                                    <Markdown key={line.content} className='w-full'>
-                                        {line.content}
-                                    </Markdown>
-                                )
-                            if (line.type === 'geogebra')
-                                return (
-                                    <div key={line.content} className='w-full mb-4'>
-                                        <Geogebra
-                                            className='h-[800px]'
-                                            id={line.content}
-                                            appName='3d'
-                                            material_id={line.content}
-                                            showMenuBar={false}
-                                            lang='vi'
-                                        />
-                                    </div>
-                                )
+                            switch (line.type) {
+                                case 'text':
+                                    return (
+                                        <Markdown key={line.content} className='w-full'>
+                                            {line.content}
+                                        </Markdown>
+                                    )
+                                case 'geogebra':
+                                    return (
+                                        <div key={line.content} className='w-full mb-4'>
+                                            <Geogebra
+                                                className='h-[800px]'
+                                                id={line.content}
+                                                appName='3d'
+                                                material_id={line.content}
+                                                showMenuBar={false}
+                                                lang='vi'
+                                            />
+                                        </div>
+                                    )
+                                case 'block':
+                                    const content = line.content.split('|')
+                                    return (
+                                        <div key={line.content} className='flex justify-center'>
+                                            <div className='bg-[#e5f1ff] w-2/3 sd p-2 rounded-md inline-block'>
+                                                <h3 className='bg-[#fffceb] rounded-md px-2'>{content[0]}</h3>
+                                                <p>
+                                                    <Markdown className='w-full'>{content[1]}</Markdown>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )
+                                default:
+                                    break
+                            }
                             return null
                         })}
-                    <div className='bg-[#e5f1ff] sd mx-8 p-2 rounded-md inline-block'>
-                        <h3 className='bg-[#fffceb] rounded-md px-2'>Tiêu đề</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, expedita?</p>
-                    </div>
                 </div>
             </section>
             <ul className='grid grid-cols-2 gap-8 p-6 md:grid-cols-4'>

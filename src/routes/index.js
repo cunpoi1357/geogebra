@@ -9,6 +9,7 @@ import List from '../Pages/List'
 import TheoryManagement from '../Pages/TheoryManagement'
 import MultipleChoiceManagement from '../Pages/MultipleChoiceManagement'
 import DefectManagement from '../Pages/DefectManagement'
+import StructureManagement from '../Pages/StructureManagement'
 
 const publicRoutes = [
     {
@@ -41,6 +42,11 @@ const publicRoutes = [
     {
         path: config.routes.defect,
         component: DefectManagement,
+        layout: AdminLayout
+    },
+    {
+        path: config.routes.structureManagement,
+        component: StructureManagement,
         layout: AdminLayout
     }
 ]
