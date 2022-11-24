@@ -19,7 +19,9 @@ function Textarea({ className, name, control, label, isRequired, ...props }) {
             )}
 
             <textarea
-                className='w-full h-full p-4 outline-neutral-600 border border-neutral-400 rounded'
+                className={`w-full ${
+                    label ? 'h-[calc(100%-32px)] ' : 'h-full'
+                } p-4 outline-neutral-600 border border-neutral-400 rounded`}
                 id={inputId}
                 {...props}
                 {...field}

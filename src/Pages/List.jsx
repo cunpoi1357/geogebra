@@ -43,10 +43,10 @@ function List() {
     }, [content])
 
     return (
-        <div className='h-[100vh] p-6 overflow-auto'>
+        <div className='h-[100vh] md:p-6 overflow-auto p-1 pb-28'>
             <section className='border border-[#6382a3] rounded-lg bg-white'>
                 <header className='text-white bg-[#6382a3] w-full text-3xl px-4'>{content?.name}</header>
-                <div className='block p-2 text-2xl'>
+                <div className='block py-1 text-2xl md:p-2'>
                     {theory &&
                         theory.map(line => {
                             if (line.type === 'text')
@@ -57,7 +57,7 @@ function List() {
                                 )
                             if (line.type === 'geogebra')
                                 return (
-                                    <div key={line.content}>
+                                    <div key={line.content} className='w-full mb-4'>
                                         <Geogebra
                                             className='h-[800px]'
                                             id={line.content}
@@ -68,10 +68,15 @@ function List() {
                                         />
                                     </div>
                                 )
+                            return null
                         })}
+                    <div className='bg-[#e5f1ff] sd mx-8 p-2 rounded-md inline-block'>
+                        <h3 className='bg-[#fffceb] rounded-md px-2'>Tiêu đề</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, expedita?</p>
+                    </div>
                 </div>
             </section>
-            <ul className='grid grid-cols-4 p-6'>
+            <ul className='grid grid-cols-2 gap-8 p-6 md:grid-cols-4'>
                 {examples.map((item, index) => (
                     <li key={item.id} className='relative justify-center col-span-1 cursor-pointer rounded-xl'>
                         <Link className='flex items-center w-full' to={`/question/${item.id}`}>

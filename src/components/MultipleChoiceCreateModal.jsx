@@ -50,7 +50,7 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
             className='fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-secondary-dark-blue/30'
         >
             <div className='bg-neutrals-01 p-6 min-h-[200px] min-w-[300px] rounded'>
-                <div className='align-center w-[1500px] flex flex-col'>
+                <div className='align-center w-[80vw] flex flex-col'>
                     <header className='flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
                         <p className='flex-1 inline-block font-bold text-neutrals-07'>Tạo câu hỏi trắc nghiệm mới</p>
@@ -64,7 +64,8 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                                 name='topic'
                                 control={control}
                                 options={data || []}
-                                placeholder='Loại'
+                                placeholder='Chuyên đề'
+                                label='Chuyên đề'
                                 isRequired='Vui lòng nhập trường này'
                             />
 
@@ -73,6 +74,7 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                                 name='A'
                                 control={control}
                                 placeholder='Đáp án A'
+                                label='Đáp án A'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Input
@@ -80,6 +82,7 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                                 name='B'
                                 control={control}
                                 placeholder='Đáp án B'
+                                label='Đáp án B'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Input
@@ -87,6 +90,7 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                                 name='C'
                                 control={control}
                                 placeholder='Đáp án C'
+                                label='Đáp án C'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Input
@@ -94,6 +98,7 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                                 name='D'
                                 control={control}
                                 placeholder='Đáp án D'
+                                label='Đáp án D'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Select
@@ -102,6 +107,7 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                                 control={control}
                                 options={['A', 'B', 'C', 'D']}
                                 placeholder='Đáp án'
+                                label='Đáp án'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Input
@@ -109,7 +115,7 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                                 name='geogebraId'
                                 control={control}
                                 placeholder='Geogebra ID'
-                                isRequired='Vui lòng nhập trường này'
+                                label='Geogebra ID'
                             />
                         </div>
                         <div className='grid grid-cols-2 col-span-1 grid-rows-4 gap-6'>
@@ -118,6 +124,7 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                                 className='col-span-2 row-span-2'
                                 control={control}
                                 placeholder='Đề bài'
+                                label='Đề bài'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Textarea
@@ -125,6 +132,7 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                                 className='col-span-2 row-span-3'
                                 control={control}
                                 placeholder='Lời giải'
+                                label='Lời giải'
                             />
                         </div>
 

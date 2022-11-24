@@ -45,6 +45,7 @@ function DefaultLayout({ children }) {
                         bottom: 0,
                         left: 0,
                         width: '400px',
+                        maxWidth: '100%',
                         padding: 0
                     },
                     overlay: {

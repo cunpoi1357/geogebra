@@ -6,7 +6,6 @@ import { get, ref } from 'firebase/database'
 
 import { ShuffleIcon } from './Icon'
 import { database } from '../firebase'
-import { toast } from 'react-toastify'
 
 function GetRandomQuestionButton({ className }) {
     const [examples, setExamples] = useState([])
@@ -21,7 +20,6 @@ function GetRandomQuestionButton({ className }) {
     const handleClick = () => {
         const question = sample(examples)
         navigate(`/question/${question.id}`)
-        toast.success('Lấy câu hỏi ngẫu nhiên thành công')
     }
     return (
         <button className={className} onClick={handleClick}>

@@ -19,7 +19,7 @@ function Input({ className, name, control, label, isRequired, ...props }) {
             )}
 
             <input
-                className={`w-full p-4 outline-neutral-600 placeholder-neutrals-04 border border-neutral-400 rounded`}
+                className='w-full p-4 outline-neutral-600 placeholder-neutrals-04 border border-neutral-400 rounded'
                 id={inputId}
                 {...props}
                 {...field}
