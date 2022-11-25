@@ -25,7 +25,7 @@ function MultipleChoiceQuestion({ data }) {
             {data && (
                 <>
                     <header className='py-3 px-4 w-[100wh] bg-[#fff2ea] text-xl m-1 rounded rounded-tr-3xl border border-[#6382a3]'>
-                        <span className='bg-[#6382a3] rounded text-white font-semibold p-1 -ml-4 mr-2 -translate-y-2 inline-block leading-6'>
+                        <span className='bg-[#6382a3] rounded-br-xl text-white font-semibold p-1 -ml-4 mr-2 -translate-y-3 inline-block leading-6'>
                             Câu {data.question.split(/^Câu (\d+)\./)[1]}
                         </span>
                         <Latex>{data.question.split(/^Câu (\d+)\./)[2]}</Latex>
@@ -56,7 +56,7 @@ function MultipleChoiceQuestion({ data }) {
                                 ))}
                             </div>
                             {chose && (
-                                <div className='md:w-[800px]'>
+                                <div className='md:w-[800px] pb-80'>
                                     <p>Lời giải:</p>
                                     {data?.answer.split('.').map(item => (
                                         <div key={item}>
