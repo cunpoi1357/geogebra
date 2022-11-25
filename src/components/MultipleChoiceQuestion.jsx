@@ -4,10 +4,10 @@ import Latex from 'react-latex'
 import { toast } from 'react-toastify'
 
 function MultipleChoiceQuestion({ data }) {
-    const [chose, setChose] = useState('')
+    const [chose, setChose] = useState(null)
 
     useEffect(() => {
-        if (chose !== '') {
+        if (chose !== null) {
             if (chose === data.answerKey)
                 toast.success('Đáp án đúng', {
                     autoClose: 1000
@@ -19,6 +19,7 @@ function MultipleChoiceQuestion({ data }) {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chose])
+    useEffect(() => setChose(null), [data])
 
     return (
         <div className='h-[100vh] flex flex-col relative overflow-hidden'>
@@ -30,7 +31,7 @@ function MultipleChoiceQuestion({ data }) {
                         </span>
                         <Latex>{data.question.split(/^Câu (\d+)\./)[2]}</Latex>
                     </header>
-                    <section className='overflow-auto md:p-10 '>
+                    <section className='pb-20 overflow-auto md:p-10'>
                         {data.geogebraId && (
                             <div className='flex justify-center mt-10'>
                                 <Geogebra appName='3d' material_id={data.geogebraId} showMenuBar={false} lang='vi' />
@@ -55,8 +56,8 @@ function MultipleChoiceQuestion({ data }) {
                                     </button>
                                 ))}
                             </div>
-                            {chose && (
-                                <div className='md:w-[800px] pb-80'>
+                            {chose && data?.answer && (
+                                <div className='md:w-[800px]'>
                                     <p>Lời giải:</p>
                                     {data?.answer.split('.').map(item => (
                                         <div key={item}>

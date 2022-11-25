@@ -37,7 +37,7 @@ function TheoryManagement() {
     })
     useEffect(() => {
         const Lines = input.split(/\r?\n/) || []
-        const regex = /\[(\w*)\]\s*([\w\W]*)/
+        const regex = /\[(\w+\s*-*\s*\w+)\]\s*([\w\W]*)/
         const result = []
         Lines.forEach(line => {
             const data = line.match(regex)
@@ -48,6 +48,7 @@ function TheoryManagement() {
                     content: data[2]
                 })
         })
+        console.log(result)
         setContent(result)
     }, [input])
 

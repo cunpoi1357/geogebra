@@ -29,7 +29,7 @@ function List() {
         const result = []
         if (content?.content) {
             const Lines = content.content.split(/\r?\n/) || []
-            const regex = /\[(\w*)\]\s*([\w\W]*)/
+            const regex = /\[(\w+\s*-*\s*\w+)\]\s*([\w\W]*)/
             Lines.forEach(line => {
                 const data = line.match(regex)
 
@@ -53,17 +53,23 @@ function List() {
                     {theory &&
                         theory.map(line => {
                             switch (line.type) {
+                                case 'text - center':
+                                    return (
+                                        <div key={line.content} className='flex justify-center w-full md:px-8'>
+                                            <Markdown>{line.content}</Markdown>
+                                        </div>
+                                    )
                                 case 'text':
                                     return (
-                                        <Markdown key={line.content} className='w-full'>
+                                        <Markdown key={line.content} className='w-full md:px-8'>
                                             {line.content}
                                         </Markdown>
                                     )
                                 case 'geogebra':
                                     return (
-                                        <div key={line.content} className='w-full mb-4'>
+                                        <div key={line.content} className='w-full mb-4 md:flex md:justify-center'>
                                             <Geogebra
-                                                className='h-[800px]'
+                                                className='md:h-[600px] h-[800px]'
                                                 id={line.content}
                                                 appName='3d'
                                                 material_id={line.content}
@@ -75,7 +81,7 @@ function List() {
                                 case 'block':
                                     const content = line.content.split('|')
                                     return (
-                                        <div key={line.content} className='flex justify-center'>
+                                        <div key={line.content} className='flex justify-center mb-8'>
                                             <div className='bg-[#e5f1ff] w-2/3 sd p-2 rounded-md inline-block'>
                                                 <h3 className='bg-[#fffceb] rounded-md px-2'>{content[0]}</h3>
                                                 <p>
