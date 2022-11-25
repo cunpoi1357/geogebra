@@ -1,6 +1,8 @@
 import { ref, remove } from 'firebase/database'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import orderBy from 'lodash/orderBy'
+import toArray from 'lodash/toArray'
 
 import { database } from '../firebase'
 import MultipleChoiceItem from './MultipleChoiceItem'
@@ -16,6 +18,9 @@ function MultipleChoiceTable({ data = [] }) {
             .catch(error => toast.error(error.message))
         setShowYesNoModal(false)
     }
+
+    const sortFn = item => Number(toArray(item.question.match(/^Câu (\d+)\./))[1])
+
     return (
         <table className='w-full text-sm text-left border border-[#a3a3a3]'>
             <thead className='text-xs text-[#a3a6b8] uppercase bg-[#fcfcfd] border  border-[#a3a3a3]'>
@@ -23,11 +28,8 @@ function MultipleChoiceTable({ data = [] }) {
                     <th scope='col' className='px-6 py-3'>
                         STT
                     </th>
-                    <th scope='col' className='px-6 py-3'>
+                    <th scope='col' className='w-2/12 px-6 py-3'>
                         Chủ đề
-                    </th>
-                    <th scope='col' className='px-6 py-3'>
-                        Geogebra ID
                     </th>
                     <th scope='col' className='px-6 py-3'>
                         Đề bài
@@ -44,7 +46,7 @@ function MultipleChoiceTable({ data = [] }) {
                 </tr>
             </thead>
             <tbody>
-                {data.map((item, index) => (
+                {orderBy(data, ['topic', sortFn], ['esc', 'esc']).map((item, index) => (
                     <MultipleChoiceItem
                         key={item.id}
                         index={index + 1}

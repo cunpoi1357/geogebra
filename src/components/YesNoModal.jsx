@@ -7,7 +7,9 @@ import { XIcon } from './Icon'
 function YesNoModal({ title, isOpen, onClose, onSubmit }) {
     useEffect(() => {
         const handleKeyPress = e => {
-            if (e.code === 'Enter') onSubmit()
+            if (e.code === 'Enter') {
+                onSubmit()
+            }
         }
         document.addEventListener('keypress', handleKeyPress)
         return () => document.removeEventListener('keypress', handleKeyPress)

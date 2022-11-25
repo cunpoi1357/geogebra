@@ -13,7 +13,6 @@ function MultipleChoiceItem({ data, index, onRemove }) {
                 <>
                     <td className='px-6 py-4 font-medium whitespace-nowrap'>{index}</td>
                     <td className='px-6 py-4'>{JSON.parse(data.topic).name}</td>
-                    <td className='px-6 py-4'>{data.geogebraId}</td>
                     <td className='px-6 py-4'>
                         <Latex>{data.question}</Latex>
                     </td>

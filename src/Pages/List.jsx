@@ -2,6 +2,7 @@ import { get, ref } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import toArray from 'lodash/toArray'
+import orderBy from 'lodash/orderBy'
 
 import { database } from '../firebase'
 import Markdown from '../components/Markdown'
@@ -41,6 +42,8 @@ function List() {
         }
         return result
     }, [content])
+
+    const sortFn = item => Number(toArray(item.question.match(/^Câu (\d+)\./))[1])
 
     return (
         <div className='h-[100vh] md:p-6 overflow-auto p-1 pb-28'>
@@ -89,7 +92,7 @@ function List() {
                 </div>
             </section>
             <ul className='grid grid-cols-2 gap-8 p-6 md:grid-cols-4'>
-                {examples.map((item, index) => (
+                {orderBy(examples, [sortFn], ['esc']).map((item, index) => (
                     <li key={item.id} className='relative justify-center col-span-1 cursor-pointer rounded-xl'>
                         <Link className='flex items-center w-full' to={`/question/${item.id}`}>
                             <span className='bg-[#6382a3] px-4 text-2xl rounded-l-xl text-white pr-6 inline-block'>
