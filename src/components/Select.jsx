@@ -13,12 +13,12 @@ function Select({ className, name, control, label, isRequired, options, placehol
     return (
         <div className={`${className} relative`}>
             {label && (
-                <label className='mb-2 text-base font-normal text-neutrals-07 block'>
-                    {label} {isRequired && <span className='text-primary-red font-bold'>*</span>}
+                <label className='block mb-2 text-base font-normal text-neutrals-07'>
+                    {label} {isRequired && <span className='font-bold text-primary-red'>*</span>}
                 </label>
             )}
             <select
-                className='w-full p-4 placeholder-neutrals-04 border border-neutrals-03 rounded appearance-none'
+                className='w-full p-4 border rounded appearance-none placeholder-neutrals-04 border-neutrals-03'
                 onClick={() => setIdSelected(!isSelected)}
                 {...field}
                 onBlur={() => {
@@ -38,11 +38,11 @@ function Select({ className, name, control, label, isRequired, options, placehol
                 ))}
             </select>
             {isSelected ? (
-                <ChevronUpIcon className='absolute block w-4 h-4 top-1/2 right-4 -translate-y-1/2' />
+                <ChevronUpIcon className='absolute block w-4 h-4 -translate-y-1/2 top-1/2 right-4' />
             ) : (
-                <ChevronDownIcon className='absolute block w-4 h-4 top-1/2 right-4 -translate-y-1/2' />
+                <ChevronDownIcon className='absolute block w-4 h-4 -translate-y-1/2 top-1/2 right-4' />
             )}
-            {fieldState.error && <p className='text-red-400 absolute -bottom-6'>{fieldState.error.message}</p>}
+            {fieldState.error && <p className='absolute text-red-400 -bottom-6'>{fieldState.error.message}</p>}
         </div>
     )
 }

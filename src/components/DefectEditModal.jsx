@@ -43,8 +43,8 @@ function DefectEditModal({ isOpen, onClose, data }) {
             onRequestClose={onClose}
             className='fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-secondary-dark-blue/30'
         >
-            <div className='bg-neutrals-01 p-6 min-h-[200px] min-w-[300px] rounded'>
-                <div className='align-center w-[750px] flex flex-col'>
+            <div className='bg-neutrals-01 p-6 min-h-[200px] w-1/2 rounded'>
+                <div className='flex flex-col w-full align-center'>
                     <header className='flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
                         <p className='flex-1 inline-block font-bold text-neutrals-07'>Tạo câu hỏi trắc nghiệm mới</p>
