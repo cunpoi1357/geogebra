@@ -35,7 +35,7 @@ function MultipleChoiceItem({ data, index, onRemove }) {
                             <TrashIcon className='cursor-pointer' />
                         </label>
                     </td>
-                    <MultipleChoiceEditModal onClose={() => setShowModal(false)} isOpen={showModal} data={data} />
+                    <MultipleChoiceEditModal onClose={() => setShowModal(false)} isOpen={showModal} id={data.id} />
                 </>
             )}
         </tr>

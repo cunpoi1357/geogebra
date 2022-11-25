@@ -27,9 +27,9 @@ function MultipleChoiceQuestion({ data }) {
                 <>
                     <header className='py-3 px-4 w-[100wh] bg-[#fff2ea] text-xl m-1 rounded rounded-tr-3xl border border-[#6382a3]'>
                         <span className='bg-[#6382a3] rounded-br-xl text-white font-semibold p-1 -ml-4 mr-2 -translate-y-3 inline-block leading-6'>
-                            Câu {data.question.split(/^Câu (\d+)\./)[1]}
+                            {data.question.split(/^Câu (\d+)\./)[1] && `Câu ${data.question.split(/^Câu (\d+)\./)[1]}`}
                         </span>
-                        <Latex>{data.question.split(/^Câu (\d+)\./)[2]}</Latex>
+                        <Latex>{data.question.split(/^Câu (\d+)\./)[2] || data.question}</Latex>
                     </header>
                     <section className='pb-20 overflow-auto md:p-10'>
                         {data.geogebraId && (
@@ -59,9 +59,9 @@ function MultipleChoiceQuestion({ data }) {
                             {chose && data?.answer && (
                                 <div className='md:w-[800px]'>
                                     <p>Lời giải:</p>
-                                    {data?.answer.split('.').map(item => (
+                                    {data?.answer.split(/\n/).map(item => (
                                         <div key={item}>
-                                            <Latex>{item}</Latex>.
+                                            <Latex>{item}</Latex>
                                         </div>
                                     ))}
                                 </div>

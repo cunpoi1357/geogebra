@@ -12,18 +12,23 @@ import Select from './Select'
 import SelectTree from './SelectTree'
 import Textarea from './Textarea'
 
-function MultipleChoiceEditModal({ onClose, isOpen, data }) {
+function MultipleChoiceEditModal({ id, onClose, isOpen }) {
     const { control, handleSubmit, reset, setValue } = useForm()
 
     const [type, setType] = useState([])
+    const [question, setQuestion] = useState({})
+
     useEffect(() => {
+        get(ref(database, `examples/${id}`)).then(snapshot => {
+            setQuestion(snapshot.val())
+        })
         get(ref(database, 'structure')).then(snapshot => setType(JSON.parse(snapshot.val())))
-        Array.from(Object.keys(data)).forEach(key => setValue(key, data[key]))
+        Array.from(Object.keys(question)).forEach(key => setValue(key, question[key]))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [isOpen])
 
     const onSubmit = handleSubmit(dataForm => {
-        update(ref(database, 'examples/' + data.id), dataForm)
+        update(ref(database, 'examples/' + id), dataForm)
             .then(() => {
                 toast.success('Cập nhật thành công')
             })

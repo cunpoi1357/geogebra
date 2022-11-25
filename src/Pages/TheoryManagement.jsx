@@ -93,6 +93,12 @@ function TheoryManagement() {
                                             {line.content}
                                         </Markdown>
                                     )
+                                case 'text - center':
+                                    return (
+                                        <div key={line.content} className='flex justify-center w-full md:px-8'>
+                                            <Markdown key={line.content}>{line.content}</Markdown>
+                                        </div>
+                                    )
                                 case 'geogebra':
                                     return (
                                         <span key={line.content} className='block'>

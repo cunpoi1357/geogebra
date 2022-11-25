@@ -8,6 +8,7 @@ import Navbar from './components/Navbar'
 import Header from './components/Header'
 import { MenuIcon, XIcon } from '../components/Icon'
 import GetRandomQuestionButton from '../components/GetRandomQuestionButton'
+import Footer from './components/Footer'
 
 function DefaultLayout({ children }) {
     const [isOpen, setIsOpen] = useState(true)
@@ -22,8 +23,10 @@ function DefaultLayout({ children }) {
                 <Navbar className='lg:col-span-3 h-[100vh] hidden lg:flex flex-col bg-white' />
                 <main className='flex-1 bg h-[100vh] overflow-hidden lg:col-span-9 col-span-12 relative'>
                     {children}
+                    <Footer className='absolute bottom-0 left-0 right-0 h-5' />
                 </main>
             </div>
+
             <button
                 className='absolute z-10 w-10 h-10 p-3 transition-colors bg-white border border-gray-600 rounded-full left-6 bottom-10 lg:hidden hover:opacity-50'
                 onClick={() => setIsOpen(true)}
