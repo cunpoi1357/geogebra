@@ -39,13 +39,13 @@ function MultipleChoiceQuestion({ data }) {
                         )}
 
                         <div className='flex flex-col items-center p-4'>
-                            <div className='md:w-[600px] w-full grid grid-cols-2 grid-rows-2 md:gap-x-24 md:gap-y-5 gap-4 mt-8'>
+                            <div className='md:w-[800px] w-full grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 md:gap-x-24 md:gap-y-5 gap-4 mt-8'>
                                 {['A', 'B', 'C', 'D'].map(letter => (
                                     <button
                                         key={letter}
                                         className={`flex text-2xl items-center bg-[#fdfdbd] h-20 rounded-md border-2 border-[#b8b8bb] hover:opacity-50 hover:border-black transition-colors ${
                                             chose === letter &&
-                                            (letter === data.answerKey ? 'border-green-500' : 'border-red-500')
+                                            (letter === data.answerKey ? 'bg-green-300' : 'bg-red-300')
                                         }`}
                                         onClick={() => setChose(letter)}
                                     >

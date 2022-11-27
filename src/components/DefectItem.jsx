@@ -31,7 +31,7 @@ function DefectItem({ data, index }) {
                 <label title='Xóa' onClick={handleRemove}>
                     <TrashIcon className='cursor-pointer' />
                 </label>
-                <DefectEditModal isOpen={showModal} onClose={() => setShowModal(false)} data={data} />
+                <DefectEditModal isOpen={showModal} onClose={() => setShowModal(false)} id={data.id} />
             </td>
         </tr>
     )

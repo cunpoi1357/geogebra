@@ -10,18 +10,23 @@ import { XIcon } from './Icon'
 import SelectTree from './SelectTree'
 import Textarea from './Textarea'
 
-function DefectEditModal({ isOpen, onClose, data }) {
+function DefectEditModal({ isOpen, onClose, id }) {
     const { control, handleSubmit, reset, setValue } = useForm()
 
     const [topics, setTopics] = useState([])
+    const [question, setQuestion] = useState({})
+
     useEffect(() => {
+        get(ref(database, `examples/${id}`)).then(snapshot => {
+            setQuestion(snapshot.val())
+        })
         get(ref(database, 'structure')).then(snapshot => setTopics(JSON.parse(snapshot.val())))
-        Array.from(Object.keys(data)).forEach(key => setValue(key, data[key]))
+        Array.from(Object.keys(question)).forEach(key => setValue(key, question[key]))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [isOpen])
 
     const onSubmit = handleSubmit(dataForm => {
-        update(ref(database, 'examples/' + data.id), dataForm)
+        update(ref(database, 'examples/' + id), dataForm)
             .then(() => {
                 toast.success('Cập nhật thành công')
             })
@@ -47,7 +52,7 @@ function DefectEditModal({ isOpen, onClose, data }) {
                 <div className='flex flex-col w-full align-center'>
                     <header className='flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
-                        <p className='flex-1 inline-block font-bold text-neutrals-07'>Tạo câu hỏi trắc nghiệm mới</p>
+                        <p className='flex-1 inline-block font-bold text-neutrals-07'>Chỉnh sửa câu hỏi</p>
                         <XIcon className='inline-block cursor-pointer text-neutrals-04' onClick={onClose} />
                     </header>
                     <hr className='bg-neutrals-03 w-full h-[1px] my-6'></hr>
