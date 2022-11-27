@@ -1,6 +1,7 @@
+import { lazy } from 'react'
 import config from '../config'
 
-import AdminLayout from '../layouts/AdminLayout'
+// import AdminLayout from '../layouts/AdminLayout'
 
 import Question from '../Pages/Question'
 import Home from '../Pages/Home'
@@ -10,6 +11,8 @@ import TheoryManagement from '../Pages/TheoryManagement'
 import MultipleChoiceManagement from '../Pages/MultipleChoiceManagement'
 import DefectManagement from '../Pages/DefectManagement'
 import StructureManagement from '../Pages/StructureManagement'
+import TestManagement from '../Pages/TestManagement'
+const AdminLayout = lazy(() => import('../layouts/AdminLayout'))
 
 const publicRoutes = [
     {
@@ -35,13 +38,18 @@ const publicRoutes = [
         layout: AdminLayout
     },
     {
-        path: config.routes.multipleChoice,
+        path: config.routes.multipleChoiceManagement,
         component: MultipleChoiceManagement,
         layout: AdminLayout
     },
     {
-        path: config.routes.defect,
+        path: config.routes.defectManagement,
         component: DefectManagement,
+        layout: AdminLayout
+    },
+    {
+        path: config.routes.testManagement,
+        component: TestManagement,
         layout: AdminLayout
     },
     {

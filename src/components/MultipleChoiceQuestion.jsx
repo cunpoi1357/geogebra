@@ -8,14 +8,8 @@ function MultipleChoiceQuestion({ data }) {
 
     useEffect(() => {
         if (chose !== null) {
-            if (chose === data.answerKey)
-                toast.success('Đáp án đúng', {
-                    autoClose: 1000
-                })
-            else
-                toast.error('Đáp án sai', {
-                    autoClose: 1000
-                })
+            if (chose === data.answerKey) toast.success('Đáp án đúng')
+            else toast.error('Đáp án sai')
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chose])
@@ -26,9 +20,11 @@ function MultipleChoiceQuestion({ data }) {
             {data && (
                 <>
                     <header className='py-3 px-4 w-[100wh] bg-[#fff2ea] text-xl m-1 rounded rounded-tr-3xl border border-[#6382a3]'>
-                        <span className='bg-[#6382a3] rounded-br-xl text-white font-semibold p-1 -ml-4 mr-2 -translate-y-3 inline-block leading-6'>
-                            {data.question.split(/^Câu (\d+)\./)[1] && `Câu ${data.question.split(/^Câu (\d+)\./)[1]}`}
-                        </span>
+                        {data.question.split(/^Câu (\d+)\./)[1] && (
+                            <span className='bg-[#6382a3] rounded text-white font-semibold p-1 -ml-4 mr-2 -translate-y-2 inline-block leading-6'>
+                                Câu {data.question.split(/^Câu (\d+)\./)[1]}
+                            </span>
+                        )}
                         <Latex>{data.question.split(/^Câu (\d+)\./)[2] || data.question}</Latex>
                     </header>
                     <section className='pb-20 overflow-auto md:p-10'>
@@ -59,7 +55,7 @@ function MultipleChoiceQuestion({ data }) {
                             {chose && data?.answer && (
                                 <div className='md:w-[800px]'>
                                     <p>Lời giải:</p>
-                                    {data?.answer.split(/\n/).map(item => (
+                                    {data?.answer.split(/\.\s\n/).map(item => (
                                         <div key={item}>
                                             <Latex>{item}</Latex>
                                         </div>

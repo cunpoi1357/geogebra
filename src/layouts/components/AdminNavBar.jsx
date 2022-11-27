@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { BookIcon, CheckBoxIcon, CreateIcon, SettingIcon } from '../../components/Icon'
+import { BookIcon, CheckBoxIcon, CreateIcon, DocumentTextIcon, SettingIcon } from '../../components/Icon'
 import AdminNavItem from './AdminNavItem'
 
 function AdminNavBar() {
@@ -14,6 +14,11 @@ function AdminNavBar() {
             name: 'Câu hỏi điền khuyết',
             path: '/admin/defect',
             icon: <CreateIcon className='w-5 h-5 text-white' />
+        },
+        {
+            name: 'Bài kiểm tra',
+            path: '/admin/test',
+            icon: <DocumentTextIcon className='w-5 h-5 text-white' />
         },
         {
             name: 'Quản lí lý thuyết',

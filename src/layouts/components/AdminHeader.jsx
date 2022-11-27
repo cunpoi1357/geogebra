@@ -21,7 +21,7 @@ function AdminHeader({ children }) {
     const handleCloseModal = () => setShowModal(false)
 
     return (
-        <header className='flex justify-between items-center h-[80px] m-4 bg-neutrals-01 px-10 shadow rounded-xl'>
+        <header className='flex items-center justify-between h-20 px-10 m-4 shadow bg-neutrals-01 rounded-xl'>
             <h2 className='font-bold'>{children}</h2>
             <nav className='flex items-center'>
                 <div className='flex items-center cursor-pointer'>

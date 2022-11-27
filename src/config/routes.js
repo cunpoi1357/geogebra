@@ -1,12 +1,13 @@
 const routes = {
     home: '/',
+    list: '/list/:topic',
     question: '/question/:id',
     admin: '/admin',
     structureManagement: '/admin/structure',
-    multipleChoice: '/admin/multipleChoice',
-    defect: '/admin/defect',
+    multipleChoiceManagement: '/admin/multipleChoice',
+    defectManagement: '/admin/defect',
     theoryManagement: '/admin/theory',
-    list: '/list/:topic'
+    testManagement: '/admin/test'
 }
 
 export default routes

@@ -44,7 +44,7 @@ function MultipleChoiceManagement() {
             <AdminHeader>Quản lí câu hỏi trắc nghiệm</AdminHeader>
             <section className='p-16 overflow-auto'>
                 <div className='grid grid-cols-12 gap-8 mb-8'>
-                    <form className='grid grid-cols-12 col-span-10 gap-4' onSubmit={onSubmit} action=''>
+                    <form className='grid grid-cols-12 col-span-10 gap-4' onSubmit={onSubmit}>
                         <Input className='col-span-2' control={control} name='id' type='text' placeholder='ID' />
                         <Input
                             className='col-span-6'
