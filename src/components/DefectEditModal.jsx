@@ -62,7 +62,7 @@ function DefectEditModal({ isOpen, onClose, id }) {
                             name='topic'
                             control={control}
                             options={topics}
-                            placeholder='Loại'
+                            placeholder='Chuyên đề'
                             isRequired='Vui lòng nhập trường này'
                         />
                         <Textarea

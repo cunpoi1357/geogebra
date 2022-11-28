@@ -21,10 +21,7 @@ function DefaultLayout({ children }) {
             <Header />
             <div className='grid w-[100vw] grid-cols-12'>
                 <Navbar className='lg:col-span-3 h-[100vh] hidden lg:flex flex-col bg-white' />
-                <main className='flex-1 bg h-[100vh] overflow-hidden lg:col-span-9 col-span-12 relative'>
-                    {children}
-                    <Footer className='absolute bottom-0 left-0 right-0 h-5' />
-                </main>
+                <main className='relative flex-1 h-[100vh] col-span-12 overflow-auto bg lg:col-span-9'>{children}</main>
             </div>
 
             <button

@@ -16,7 +16,7 @@ function MultipleChoiceQuestion({ data }) {
     useEffect(() => setChose(null), [data])
 
     return (
-        <div className='h-[100vh] flex flex-col relative overflow-hidden'>
+        <div className='relative flex flex-col h-[100vh] overflow-hidden'>
             {data && (
                 <>
                     <header className='py-3 px-4 w-[100wh] bg-[#fff2ea] text-xl m-1 rounded rounded-tr-3xl border border-[#6382a3]'>
@@ -27,7 +27,7 @@ function MultipleChoiceQuestion({ data }) {
                         )}
                         <Latex>{data.question.split(/^Câu (\d+)\./)[2] || data.question}</Latex>
                     </header>
-                    <section className='pb-20 overflow-auto md:p-10'>
+                    <section className='pb-40 overflow-auto md:p-10'>
                         {data.geogebraId && (
                             <div className='flex justify-center mt-10'>
                                 <Geogebra appName='3d' material_id={data.geogebraId} showMenuBar={false} lang='vi' />

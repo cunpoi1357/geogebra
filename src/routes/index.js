@@ -11,7 +11,7 @@ import TheoryManagement from '../Pages/TheoryManagement'
 import MultipleChoiceManagement from '../Pages/MultipleChoiceManagement'
 import DefectManagement from '../Pages/DefectManagement'
 import StructureManagement from '../Pages/StructureManagement'
-import TestManagement from '../Pages/TestManagement'
+import QuestionManagement from '../Pages/QuestionManagement'
 const AdminLayout = lazy(() => import('../layouts/AdminLayout'))
 
 const publicRoutes = [
@@ -48,8 +48,8 @@ const publicRoutes = [
         layout: AdminLayout
     },
     {
-        path: config.routes.testManagement,
-        component: TestManagement,
+        path: config.routes.questionManagement,
+        component: QuestionManagement,
         layout: AdminLayout
     },
     {

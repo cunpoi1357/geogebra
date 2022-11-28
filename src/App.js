@@ -1,11 +1,11 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
-import { Fragment, Suspense } from 'react'
+import { Fragment, lazy, Suspense } from 'react'
 import { publicRoutes } from './routes'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import 'katex/dist/katex.min.css'
 
-import DefaultLayout from './layouts/DefaultLayout'
+const DefaultLayout = lazy(() => import('./layouts/DefaultLayout'))
 function App() {
     return (
         <>

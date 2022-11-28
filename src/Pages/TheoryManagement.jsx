@@ -65,7 +65,7 @@ function TheoryManagement() {
     return (
         <>
             <AdminHeader>Quản lí lý thuyết</AdminHeader>
-            <div className='flex flex-col flex-1 p-10'>
+            <section className='flex flex-col flex-1 p-10'>
                 <form className='flex gap-10 mb-10' onSubmit={onSubmit}>
                     <SelectTree
                         className='flex-1'
@@ -120,7 +120,7 @@ function TheoryManagement() {
                         })}
                     </div>
                 </div>
-            </div>
+            </section>
         </>
     )
 }

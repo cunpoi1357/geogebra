@@ -1,54 +1,66 @@
+import Image from './../components/Image'
+import images from '../assets/images'
+
 function Home() {
     return (
         <main className='overflow-auto'>
-            <section className='h-[350px] w-full bg-[#8187d8] p-10'>
-                <div className='flex justify-between py-3'>
-                    <h3 className='text-2xl text-white'>Surface area and volume of prisms</h3>
-                    <div className='bg-[#bb9525]'>
-                        <button className='flex h-10 rounded border border-[#bb9525] transition-all hover:-translate-y-2 ease-linear'>
-                            <span className='bg-[#fac731] text-white h-full w-32 flex items-center justify-center'>
-                                My button
-                            </span>
-                            <span className='bg-[#e1b32c] text-white h-full w-12 flex items-center justify-center'>
-                                0 / 4
-                            </span>
-                        </button>
-                    </div>
+            <section>
+                <div className='flex items-end px-8 pt-8'>
+                    <Image className='inline-block' src={images.icon} />
+                    <h2 className='text-[#0000cc] text-4xl inline-block font-bold'>StudyGeo3D.com</h2>
                 </div>
-                <div className='grid grid-cols-3 gap-8'>
-                    <div className='col-span-1 h-[170px] bg-white rounded-xl p-4'>
-                        <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore quae quod repellat eos
-                            error nihil accusantium quo minima atque voluptates. Ducimus deleniti omnis nisi minima
-                            aliquid culpa nulla laboriosam? Tempora.
+                <h1 className='text-[#002060] text-4xl text-center p-8'>
+                    Hỗ trợ dạy và học hình học không gian cấp THPT
+                </h1>
+                <div className='grid gap-4 p-4 md:grid-cols-3 md:p-8'>
+                    <div className='col-span-1 border border-[#002060] rounded-lg p-4'>
+                        <p className='text-xl'>
+                            Cung cấp tóm tắt lý thuyết các vấn đề về các mô hình hình học không gian, quan hệ song song
+                            và quan hệ vuông góc trong trong chương trình học THPT.
                         </p>
                     </div>
-                    <div className='col-span-1 h-[170px] bg-white rounded-xl p-4'>
-                        <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore quae quod repellat eos
-                            error nihil accusantium quo minima atque voluptates. Ducimus deleniti omnis nisi minima
-                            aliquid culpa nulla laboriosam? Tempora.
+                    <div className='col-span-1 border border-[#002060] rounded-lg p-4'>
+                        <p className='text-xl'>
+                            Thực hành làm các bài tập cơ bản để nắm vững kiến thức các chuyên đề thông qua hệ thống ví
+                            dụ dưới các hình thức trắc nghiệm, điền khuyết….
                         </p>
                     </div>
-                    <div className='col-span-1 h-[170px] bg-white rounded-xl p-4'>
-                        <p>
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore quae quod repellat eos
-                            error nihil accusantium quo minima atque voluptates. Ducimus deleniti omnis nisi minima
-                            aliquid culpa nulla laboriosam? Tempora.
+                    <div className='col-span-1 border border-[#002060] rounded-lg p-4'>
+                        <p className='text-xl'>
+                            Tự luyện tập thông qua ngân hàng câu hỏi cho từng chuyên đề với bốn cấp độ: Nhận biết, Thông
+                            hiểu, Vận dụng thấp, Vận dụng cao.
                         </p>
                     </div>
                 </div>
-                <h3 className='py-3 text-3xl text-center text-white'>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel, libero?
-                </h3>
+                <div className='grid grid-cols-2 gap-4 p-4 grid-rows-11 md:grid-cols-11 md:p-8'>
+                    <div className='flex flex-col col-span-1 row-span-1 md:col-span-3'>
+                        <Image className='object-contain w-full h-72' src={images.hinhchopHinhlangtru} />
+                        <h3 className='flex-1 text-2xl text-center text-[#002060] font-bold flex items-center justify-center'>
+                            Hình chóp – Hình Lăng trụ
+                        </h3>
+                    </div>
+                    <div className='flex flex-col col-span-1 row-span-1 md:col-span-3'>
+                        <Image className='object-contain w-full h-72' src={images.cacmatcautronxoay} />
+                        <h3 className='flex-1 text-2xl text-center text-[#002060] font-bold flex items-center justify-center'>
+                            Các mặt tròn xoay
+                        </h3>
+                    </div>
+                    <div className='flex flex-col col-span-1 row-span-1 md:col-span-3'>
+                        <Image className='object-contain w-full h-72' src={images.quanheduongthang} />
+                        <h3 className='flex-1 text-2xl text-center text-[#002060] font-bold flex items-center justify-center'>
+                            Quan hệ song song <br /> Quan hệ vuông góc
+                        </h3>
+                    </div>
+                    <div className='flex flex-col col-span-1 row-span-1 md:col-span-2'>
+                        <div className='flex items-end justify-center h-72'>
+                            <Image className='object-contain' src={images.detuluyen} />
+                        </div>
+                        <h3 className='flex-1 text-2xl text-center text-[#002060] font-bold flex items-center justify-center'>
+                            Đề tự luyện
+                        </h3>
+                    </div>
+                </div>
             </section>
-            <section className='grid grid-cols-12 gap-4 p-10'>
-                <div className='col-span-7 bg-white h-80'></div>
-                <div className='col-span-5 bg-[#efefef] h-80 rounded-xl'></div>
-            </section>
-            <footer className='flex justify-center py-4 bg-gray-500'>
-                <small className='text-gray-200'>&copy; Copyright 2022</small>
-            </footer>
         </main>
     )
 }

@@ -38,9 +38,13 @@ function Select({ className, name, control, label, isRequired, options, placehol
                 ))}
             </select>
             {isSelected ? (
-                <ChevronUpIcon className='absolute block w-4 h-4 -translate-y-1/2 top-1/2 right-4' />
+                <ChevronUpIcon
+                    className={`absolute block w-4 h-4 -translate-y-1/2 ${label ? 'top-[60px]' : 'top-1/2'} right-4`}
+                />
             ) : (
-                <ChevronDownIcon className='absolute block w-4 h-4 -translate-y-1/2 top-1/2 right-4' />
+                <ChevronDownIcon
+                    className={`absolute block w-4 h-4 -translate-y-1/2 ${label ? 'top-[60px]' : 'top-1/2'} right-4`}
+                />
             )}
             {fieldState.error && <p className='absolute text-red-400 -bottom-6'>{fieldState.error.message}</p>}
         </div>

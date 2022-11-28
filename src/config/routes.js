@@ -7,7 +7,7 @@ const routes = {
     multipleChoiceManagement: '/admin/multipleChoice',
     defectManagement: '/admin/defect',
     theoryManagement: '/admin/theory',
-    testManagement: '/admin/test'
+    questionManagement: '/admin/question'
 }
 
 export default routes

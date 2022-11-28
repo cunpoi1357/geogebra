@@ -242,15 +242,11 @@ export const SettingIcon = ({ className }) => (
     </svg>
 )
 
-export const DocumentTextIcon = ({ className }) => (
+export const FolderIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
         <path
             fill='currentColor'
-            d='M428 224H288a48 48 0 01-48-48V36a4 4 0 00-4-4h-92a64 64 0 00-64 64v320a64 64 0 0064 64h224a64 64 0 0064-64V228a4 4 0 00-4-4zm-92 160H176a16 16 0 010-32h160a16 16 0 010 32zm0-80H176a16 16 0 010-32h160a16 16 0 010 32z'
-        />
-        <path
-            fill='currentColor'
-            d='M419.22 188.59L275.41 44.78a2 2 0 00-3.41 1.41V176a16 16 0 0016 16h129.81a2 2 0 001.41-3.41z'
+            d='M496 152a56 56 0 00-56-56H220.11a23.89 23.89 0 01-13.31-4L179 73.41A55.77 55.77 0 00147.89 64H72a56 56 0 00-56 56v48a8 8 0 008 8h464a8 8 0 008-8zM16 392a56 56 0 0056 56h368a56 56 0 0056-56V216a8 8 0 00-8-8H24a8 8 0 00-8 8z'
         />
     </svg>
 )

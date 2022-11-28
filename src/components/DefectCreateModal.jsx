@@ -60,8 +60,8 @@ function DefectCreateModal({ onClose, isOpen }) {
                             className='col-span-2'
                             name='topic'
                             control={control}
-                            options={data || []}
-                            placeholder='Loại'
+                            options={data}
+                            placeholder='Chuyên đề'
                             isRequired='Vui lòng nhập trường này'
                         />
                         <Textarea

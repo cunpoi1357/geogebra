@@ -1,5 +1,5 @@
 import { get, ref, set } from 'firebase/database'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import ReactModal from 'react-modal'
 import { toast } from 'react-toastify'
@@ -13,7 +13,7 @@ import Select from './Select'
 import SelectTree from './SelectTree'
 import Textarea from './Textarea'
 
-function MultipleChoiceCreateModal({ onClose, isOpen }) {
+function QuestionCreateModal({ onClose, isOpen }) {
     const { control, handleSubmit, reset } = useForm()
 
     const [data, setData] = useState([])
@@ -23,11 +23,8 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
 
     const onSubmit = handleSubmit(data => {
         const id = uuidv4()
-        set(ref(database, 'examples/' + id), {
-            type: 'multiple-choice',
+        set(ref(database, 'questions/' + id), {
             ...data,
-            question: data.question,
-            answer: data.answer,
             id
         })
             .then(() => {
@@ -62,7 +59,7 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                     <form onSubmit={onSubmit} className='grid grid-cols-2 gap-6 grid-rows-9'>
                         <div className='grid grid-cols-2 col-span-1 grid-rows-4 gap-6'>
                             <SelectTree
-                                className='col-span-2'
+                                className='col-span-1'
                                 name='topic'
                                 control={control}
                                 options={data || []}
@@ -70,7 +67,15 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                                 label='Chuyên đề'
                                 isRequired='Vui lòng nhập trường này'
                             />
-
+                            <Select
+                                className='col-span-1'
+                                name='level'
+                                control={control}
+                                options={['Nhận biết', 'Thông hiểu', 'Vận dụng thấp', 'Vận dụng cao']}
+                                placeholder='Cấp độ'
+                                label='Cấp độ'
+                                isRequired='Vui lòng nhập trường này'
+                            />
                             <Input
                                 className='col-span-1'
                                 name='A'
@@ -151,4 +156,4 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
     )
 }
 
-export default MultipleChoiceCreateModal
+export default QuestionCreateModal
