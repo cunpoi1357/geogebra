@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import Button from '../components/Button'
-import { PlusIcon } from '../components/Icon'
-import QuestionCreateModal from '../components/QuestionCreateModal'
-import QuestionFilter from '../components/QuestionFilter'
+import { useEffect, useState } from 'react'
 import toArray from 'lodash/toArray'
 
+import Button from '../components/Button'
+import { PlusIcon } from '../components/Icon'
 import AdminHeader from '../layouts/components/AdminHeader'
 import { onValue, ref } from 'firebase/database'
+import QuestionFilter from '../components/QuestionFilter'
 import { database } from '../firebase'
-import QuestionTable from '../components/QuestionTable'
+import CreateQuestionModal from '../components/Question/CreateQuestionModal'
+import QuestionTable from '../components/Question/QuestionTable'
 
 function QuestionManagement() {
     const [questions, setQuestions] = useState([])
@@ -39,10 +39,17 @@ function QuestionManagement() {
                     >
                         Tạo
                     </Button>
-                    <QuestionCreateModal isOpen={showModal} onClose={() => setShowModal(false)} />
+                    <CreateQuestionModal isOpen={showModal} onClose={() => setShowModal(false)} />
                 </div>
                 <div className='shadow-xl'>
-                    <QuestionTable data={questions} />
+                    <QuestionTable
+                        data={questions.filter(
+                            item =>
+                                item.id.includes(filters.id) &&
+                                item.question.includes(filters.question) &&
+                                item.topic.includes(filters.topic)
+                        )}
+                    />
                 </div>
             </section>
         </div>

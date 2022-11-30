@@ -1,10 +1,10 @@
 import React from 'react'
-import { EditIcon, EyeIcon, TrashIcon } from './Icon'
+import { EditIcon, EyeIcon, TrashIcon } from '../Icon'
 
-function QuestionItem({ data, index }) {
+function QuestionItem({ data, index, onRemove }) {
     return (
         <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767]'>
-            <td className='px-6 py-4'>{index + 1}</td>
+            <td className='px-6 py-4'>{index}</td>
             <td className='px-6 py-4'>{JSON.parse(data.topic).name}</td>
             <td className='px-6 py-4'>
                 {(() => {
@@ -45,7 +45,7 @@ function QuestionItem({ data, index }) {
                 <label title='Sửa'>
                     <EditIcon className='cursor-pointer' />
                 </label>
-                <label title='Xóa'>
+                <label title='Xóa' onClick={onRemove}>
                     <TrashIcon className='cursor-pointer' />
                 </label>
             </td>

@@ -18,7 +18,9 @@ function Select({ className, name, control, label, isRequired, options, placehol
                 </label>
             )}
             <select
-                className='w-full p-4 border rounded appearance-none placeholder-neutrals-04 border-neutrals-03'
+                className={`w-full p-4 border rounded appearance-none placeholder-neutrals-04 border-neutrals-03 ${
+                    fieldState.error && 'border-primary-red'
+                }`}
                 onClick={() => setIdSelected(!isSelected)}
                 {...field}
                 onBlur={() => {

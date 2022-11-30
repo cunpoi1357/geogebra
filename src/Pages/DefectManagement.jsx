@@ -6,9 +6,9 @@ import { database } from '../firebase'
 import { PlusIcon } from '../components/Icon'
 import Button from '../components/Button'
 import AdminHeader from '../layouts/components/AdminHeader'
-import DefectTable from '../components/DefectTable'
-import DefectCreateModal from '../components/DefectCreateModal'
+import CreateDefectModal from '../components/Defect/CreateDefectModal'
 import QuestionFilter from '../components/QuestionFilter'
+import DefectTable from '../components/Defect/DefectTable'
 
 function DefectManagement() {
     const [examples, setExamples] = useState([])
@@ -40,7 +40,7 @@ function DefectManagement() {
                         Tạo
                     </Button>
                 </div>
-                <DefectCreateModal isOpen={showModal} onClose={() => setShowModal(false)} />
+                <CreateDefectModal isOpen={showModal} onClose={() => setShowModal(false)} />
                 <div className='grid grid-cols-12 gap-16'>
                     <div className='relative col-span-12 shadow-xl'>
                         <DefectTable

@@ -1,33 +1,32 @@
-import { get, ref, set } from 'firebase/database'
+import { get, ref, update } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import ReactModal from 'react-modal'
 import { toast } from 'react-toastify'
-import { v4 as uuidv4 } from 'uuid'
 
-import { database } from '../firebase'
-import Button from './Button'
-import { XIcon } from './Icon'
-import SelectTree from './SelectTree'
-import Textarea from './Textarea'
+import { database } from '../../firebase'
+import Button from '../Button'
+import { XIcon } from '../Icon'
+import SelectTopic from '../SelectTopic'
+import Textarea from '../Textarea'
 
-function DefectCreateModal({ onClose, isOpen }) {
-    const { control, handleSubmit, reset } = useForm()
+function EditDefectModal({ isOpen, onClose, id }) {
+    const { control, handleSubmit, reset, setValue } = useForm()
 
-    const [data, setData] = useState([])
+    const [question, setQuestion] = useState({})
+
     useEffect(() => {
-        get(ref(database, 'structure')).then(snapshot => setData(JSON.parse(snapshot.val())))
-    }, [])
-
-    const onSubmit = handleSubmit(data => {
-        const id = uuidv4()
-        set(ref(database, 'examples/' + id), {
-            type: 'defect',
-            ...data,
-            id
+        get(ref(database, `examples/${id}`)).then(snapshot => {
+            setQuestion(snapshot.val())
         })
+        Array.from(Object.keys(question)).forEach(key => setValue(key, question[key]))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOpen])
+
+    const onSubmit = handleSubmit(dataForm => {
+        update(ref(database, 'examples/' + id), dataForm)
             .then(() => {
-                toast.success('Tạo thành công')
+                toast.success('Cập nhật thành công')
             })
             .catch(error => toast.error(error.message))
         onClose()
@@ -51,16 +50,15 @@ function DefectCreateModal({ onClose, isOpen }) {
                 <div className='flex flex-col w-full align-center'>
                     <header className='flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
-                        <p className='flex-1 inline-block font-bold text-neutrals-07'>Tạo câu hỏi trắc nghiệm mới</p>
+                        <p className='flex-1 inline-block font-bold text-neutrals-07'>Chỉnh sửa câu hỏi</p>
                         <XIcon className='inline-block cursor-pointer text-neutrals-04' onClick={onClose} />
                     </header>
                     <hr className='bg-neutrals-03 w-full h-[1px] my-6'></hr>
                     <form onSubmit={onSubmit} className='grid grid-cols-2 col-span-1 grid-rows-4 gap-6'>
-                        <SelectTree
+                        <SelectTopic
                             className='col-span-2'
                             name='topic'
                             control={control}
-                            options={data}
                             placeholder='Chuyên đề'
                             isRequired='Vui lòng nhập trường này'
                         />
@@ -75,7 +73,7 @@ function DefectCreateModal({ onClose, isOpen }) {
                             className='col-span-2 row-span-1 mt-2 text-black transition-colors border border-blue-500 bg-primary-blue hover:bg-blue-500 hover:text-white'
                             type='submit'
                         >
-                            Tạo
+                            Cập nhật
                         </Button>
                     </form>
                 </div>
@@ -84,4 +82,4 @@ function DefectCreateModal({ onClose, isOpen }) {
     )
 }
 
-export default DefectCreateModal
+export default EditDefectModal

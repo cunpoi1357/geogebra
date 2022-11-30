@@ -5,10 +5,10 @@ import toArray from 'lodash/toArray'
 import { database } from '../firebase'
 import Button from '../components/Button'
 import AdminHeader from '../layouts/components/AdminHeader'
-import MultipleChoiceTable from '../components/MultipleChoiceTable'
-import MultipleChoiceCreateModal from '../components/MultipleChoiceCreateModal'
 import QuestionFilter from '../components/QuestionFilter'
 import { PlusIcon } from '../components/Icon'
+import CreateMultipleChoiceModal from '../components/MultipleChoice/CreateMultipleChoiceModal'
+import MultipleChoiceTable from '../components/MultipleChoice/MultipleChoiceTable'
 
 function MultipleChoiceManagement() {
     const [examples, setExamples] = useState([])
@@ -40,7 +40,7 @@ function MultipleChoiceManagement() {
                         Tạo
                     </Button>
                 </div>
-                <MultipleChoiceCreateModal isOpen={showModal} onClose={() => setShowModal(false)} />
+                <CreateMultipleChoiceModal isOpen={showModal} onClose={() => setShowModal(false)} />
 
                 <div className='shadow-xl'>
                     <MultipleChoiceTable

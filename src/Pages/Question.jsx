@@ -1,9 +1,9 @@
 import { child, get, ref } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import DefectQuestion from '../components/DefectQuestion'
 
-import MultipleChoiceQuestion from '../components/MultipleChoiceQuestion'
+import DefectQuestion from '../components/Defect/DefectQuestion'
+import MultipleChoiceQuestion from '../components/MultipleChoice/MultipleChoiceQuestion'
 import { database } from '../firebase'
 
 function Example() {

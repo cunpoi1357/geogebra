@@ -2,9 +2,9 @@ import { ref, remove } from 'firebase/database'
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { database } from '../firebase'
-import DefectEditModal from './DefectEditModal'
-import { EditIcon, EyeIcon, TrashIcon } from './Icon'
+import { database } from '../../firebase'
+import { EditIcon, EyeIcon, TrashIcon } from '../Icon'
+import EditDefectModal from './EditDefectModal'
 
 function DefectItem({ data, index }) {
     const [showModal, setShowModal] = useState(false)
@@ -31,7 +31,7 @@ function DefectItem({ data, index }) {
                 <label title='Xóa' onClick={handleRemove}>
                     <TrashIcon className='cursor-pointer' />
                 </label>
-                <DefectEditModal isOpen={showModal} onClose={() => setShowModal(false)} id={data.id} />
+                <EditDefectModal isOpen={showModal} onClose={() => setShowModal(false)} id={data.id} />
             </td>
         </tr>
     )

@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import Button from './Button'
+import Button from '../Button'
 
 function DefectQuestion({ data }) {
     const regex =
@@ -13,6 +13,7 @@ function DefectQuestion({ data }) {
     const onSubmit = handleSubmit(data => {
         let count = 0
         let total = (questionSlice.length - 1) / 2
+        console.log(questionSlice)
         if (questionSlice[1].slice(1, -1).toLowerCase() === String(data.slot1).toLowerCase().trim()) count += 1
         if (questionSlice[3].slice(1, -1).toLowerCase() === String(data.slot2).toLowerCase().trim()) count += 1
         if (questionSlice[5].slice(1, -1).toLowerCase() === String(data.slot3).toLowerCase().trim()) count += 1
@@ -42,7 +43,7 @@ function DefectQuestion({ data }) {
                                     {...register(`slot${index}`)}
                                     className='inline-block px-1 py-0 bg-transparent border border-b-2 outline-none border-b-gray-500'
                                     style={{
-                                        width: questionSlice[2 * index - 1].length * 9 + 'px'
+                                        width: questionSlice[2 * index - 1]?.length * 9 + 'px'
                                     }}
                                 />
                                 <span>{questionSlice[2 * index]}</span>

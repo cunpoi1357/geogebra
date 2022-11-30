@@ -1,36 +1,28 @@
-import { get, ref, update } from 'firebase/database'
-import { useEffect, useState } from 'react'
+import { ref, set } from 'firebase/database'
 import { useForm } from 'react-hook-form'
 import ReactModal from 'react-modal'
 import { toast } from 'react-toastify'
+import { v4 as uuidv4 } from 'uuid'
 
-import { database } from '../firebase'
-import Button from './Button'
-import { XIcon } from './Icon'
-import Input from './Input'
-import Select from './Select'
-import SelectTree from './SelectTree'
-import Textarea from './Textarea'
+import { database } from '../../firebase'
+import Button from '../Button'
+import { XIcon } from '../Icon'
+import Input from '../Input'
+import Select from '../Select'
+import SelectTopic from '../SelectTopic'
+import Textarea from '../Textarea'
 
-function MultipleChoiceEditModal({ id, onClose, isOpen }) {
-    const { control, handleSubmit, reset, setValue } = useForm()
+function CreateQuestionModal({ onClose, isOpen }) {
+    const { control, handleSubmit, reset } = useForm()
 
-    const [type, setType] = useState([])
-    const [question, setQuestion] = useState({})
-
-    useEffect(() => {
-        get(ref(database, `examples/${id}`)).then(snapshot => {
-            setQuestion(snapshot.val())
+    const onSubmit = handleSubmit(data => {
+        const id = uuidv4()
+        set(ref(database, 'questions/' + id), {
+            ...data,
+            id
         })
-        get(ref(database, 'structure')).then(snapshot => setType(JSON.parse(snapshot.val())))
-        Array.from(Object.keys(question)).forEach(key => setValue(key, question[key]))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isOpen])
-
-    const onSubmit = handleSubmit(dataForm => {
-        update(ref(database, 'examples/' + id), dataForm)
             .then(() => {
-                toast.success('Cập nhật thành công')
+                toast.success('Tạo thành công')
             })
             .catch(error => toast.error(error.message))
         onClose()
@@ -51,25 +43,32 @@ function MultipleChoiceEditModal({ id, onClose, isOpen }) {
             className='fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-secondary-dark-blue/30'
         >
             <div className='bg-neutrals-01 p-6 min-h-[200px] min-w-[300px] rounded'>
-                <div className='align-center w-[1500px] flex flex-col'>
+                <div className='align-center w-[80vw] flex flex-col'>
                     <header className='flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
-                        <p className='flex-1 inline-block font-bold text-neutrals-07'>Chỉnh sửa bài tập</p>
+                        <p className='flex-1 inline-block font-bold text-neutrals-07'>Tạo câu hỏi trắc nghiệm mới</p>
                         <XIcon className='inline-block cursor-pointer text-neutrals-04' onClick={onClose} />
                     </header>
                     <hr className='bg-neutrals-03 w-full h-[1px] my-6'></hr>
                     <form onSubmit={onSubmit} className='grid grid-cols-2 gap-6 grid-rows-9'>
                         <div className='grid grid-cols-2 col-span-1 grid-rows-4 gap-6'>
-                            <SelectTree
-                                className='col-span-2'
+                            <SelectTopic
+                                className='col-span-1'
                                 name='topic'
                                 control={control}
-                                options={type || []}
                                 placeholder='Chuyên đề'
                                 label='Chuyên đề'
                                 isRequired='Vui lòng nhập trường này'
                             />
-
+                            <Select
+                                className='col-span-1'
+                                name='level'
+                                control={control}
+                                options={['Nhận biết', 'Thông hiểu', 'Vận dụng thấp', 'Vận dụng cao']}
+                                placeholder='Cấp độ'
+                                label='Cấp độ'
+                                isRequired='Vui lòng nhập trường này'
+                            />
                             <Input
                                 className='col-span-1'
                                 name='A'
@@ -141,7 +140,7 @@ function MultipleChoiceEditModal({ id, onClose, isOpen }) {
                             className='col-span-2 row-span-1 mt-2 text-black transition-colors border border-blue-500 bg-primary-blue hover:bg-blue-500 hover:text-white'
                             type='submit'
                         >
-                            Cập nhật
+                            Tạo
                         </Button>
                     </form>
                 </div>
@@ -150,4 +149,4 @@ function MultipleChoiceEditModal({ id, onClose, isOpen }) {
     )
 }
 
-export default MultipleChoiceEditModal
+export default CreateQuestionModal

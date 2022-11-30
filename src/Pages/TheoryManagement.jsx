@@ -4,7 +4,7 @@ import { get, ref, set } from 'firebase/database'
 import AdminHeader from '../layouts/components/AdminHeader'
 import Markdown from '../components/Markdown'
 import { database } from '../firebase'
-import SelectTree from '../components/SelectTree'
+import SelectTopic from '../components/SelectTopic'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import Button from '../components/Button'
@@ -12,11 +12,9 @@ import Button from '../components/Button'
 function TheoryManagement() {
     const [content, setContent] = useState([])
     const [input, setInput] = useState('')
-    const [types, setTypes] = useState([])
     const { control, handleSubmit, watch, getValues } = useForm()
 
     useEffect(() => {
-        get(ref(database, 'structure')).then(snapshot => setTypes(JSON.parse(snapshot.val())))
         watch(data => onSubmit(data.type))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -67,13 +65,7 @@ function TheoryManagement() {
             <AdminHeader>Quản lí lý thuyết</AdminHeader>
             <section className='flex flex-col flex-1 p-10'>
                 <form className='flex gap-10 mb-10' onSubmit={onSubmit}>
-                    <SelectTree
-                        className='flex-1'
-                        name='type'
-                        control={control}
-                        options={types || []}
-                        placeholder='Loại'
-                    />
+                    <SelectTopic className='flex-1' name='type' control={control} placeholder='Loại' />
                     <Button className='w-24 bg-[#2c3a57]' onClick={handleUpdate}>
                         Lưu
                     </Button>

@@ -1,25 +1,19 @@
-import { get, ref, set } from 'firebase/database'
-import { useEffect, useState } from 'react'
+import { ref, set } from 'firebase/database'
 import { useForm } from 'react-hook-form'
 import ReactModal from 'react-modal'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
-import { database } from '../firebase'
-import Button from './Button'
-import { XIcon } from './Icon'
-import Input from './Input'
-import Select from './Select'
-import SelectTree from './SelectTree'
-import Textarea from './Textarea'
+import { database } from '../../firebase'
+import Button from '../Button'
+import { XIcon } from '../Icon'
+import Input from '../Input'
+import Select from '../Select'
+import SelectTopic from '../SelectTopic'
+import Textarea from '../Textarea'
 
-function MultipleChoiceCreateModal({ onClose, isOpen }) {
+function CreateMultipleChoiceModal({ onClose, isOpen }) {
     const { control, handleSubmit, reset } = useForm()
-
-    const [data, setData] = useState([])
-    useEffect(() => {
-        get(ref(database, 'structure')).then(snapshot => setData(JSON.parse(snapshot.val())))
-    }, [])
 
     const onSubmit = handleSubmit(data => {
         const id = uuidv4()
@@ -61,11 +55,10 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
                     <hr className='bg-neutrals-03 w-full h-[1px] my-6'></hr>
                     <form onSubmit={onSubmit} className='grid grid-cols-2 gap-6 grid-rows-9'>
                         <div className='grid grid-cols-2 col-span-1 grid-rows-4 gap-6'>
-                            <SelectTree
+                            <SelectTopic
                                 className='col-span-2'
                                 name='topic'
                                 control={control}
-                                options={data || []}
                                 placeholder='Chuyên đề'
                                 label='Chuyên đề'
                                 isRequired='Vui lòng nhập trường này'
@@ -151,4 +144,4 @@ function MultipleChoiceCreateModal({ onClose, isOpen }) {
     )
 }
 
-export default MultipleChoiceCreateModal
+export default CreateMultipleChoiceModal

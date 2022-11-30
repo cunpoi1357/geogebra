@@ -4,9 +4,9 @@ import { toast } from 'react-toastify'
 import orderBy from 'lodash/orderBy'
 import toArray from 'lodash/toArray'
 
-import { database } from '../firebase'
+import { database } from '../../firebase'
 import MultipleChoiceItem from './MultipleChoiceItem'
-import YesNoModal from './YesNoModal'
+import YesNoModal from '../YesNoModal'
 
 function MultipleChoiceTable({ data = [] }) {
     const [showYesNoModal, setShowYesNoModal] = useState(false)

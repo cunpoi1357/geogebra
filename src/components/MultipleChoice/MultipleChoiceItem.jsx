@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Latex from 'react-latex'
 
-import MultipleChoiceEditModal from './MultipleChoiceEditModal'
-import { EditIcon, EyeIcon, TrashIcon } from './Icon'
+import EditMultipleChoiceModal from './EditMultipleChoiceModal'
+import { EditIcon, EyeIcon, TrashIcon } from '../Icon'
 
 function MultipleChoiceItem({ data, index, onRemove }) {
     const [showModal, setShowModal] = useState(false)
@@ -35,7 +35,7 @@ function MultipleChoiceItem({ data, index, onRemove }) {
                             <TrashIcon className='cursor-pointer' />
                         </label>
                     </td>
-                    <MultipleChoiceEditModal onClose={() => setShowModal(false)} isOpen={showModal} id={data.id} />
+                    <EditMultipleChoiceModal onClose={() => setShowModal(false)} isOpen={showModal} id={data.id} />
                 </>
             )}
         </tr>

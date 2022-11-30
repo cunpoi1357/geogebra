@@ -5,14 +5,15 @@ import config from '../config'
 
 import Question from '../Pages/Question'
 import Home from '../Pages/Home'
-import Admin from '../Pages/Admin'
 import List from '../Pages/List'
 import TheoryManagement from '../Pages/TheoryManagement'
 import MultipleChoiceManagement from '../Pages/MultipleChoiceManagement'
 import DefectManagement from '../Pages/DefectManagement'
 import StructureManagement from '../Pages/StructureManagement'
 import QuestionManagement from '../Pages/QuestionManagement'
+import TestYourSelf from '../Pages/TestYourSelf'
 const AdminLayout = lazy(() => import('../layouts/AdminLayout'))
+const HeaderOnly = lazy(() => import('../layouts/HeaderOnly'))
 
 const publicRoutes = [
     {
@@ -24,9 +25,9 @@ const publicRoutes = [
         component: Question
     },
     {
-        path: config.routes.admin,
-        component: Admin,
-        layout: AdminLayout
+        path: config.routes.testYourSelf,
+        component: TestYourSelf,
+        layout: HeaderOnly
     },
     {
         path: config.routes.list,

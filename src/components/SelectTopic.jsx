@@ -1,9 +1,16 @@
-import { useState } from 'react'
+import { get, ref } from 'firebase/database'
+import { useEffect, useState } from 'react'
 import { useController } from 'react-hook-form'
+
+import { database } from '../firebase'
 import { ChevronDownIcon, ChevronUpIcon } from './Icon'
 
-function SelectTree({ className, name, control, label, isRequired, options, placeholder, ...props }) {
+function SelectTopic({ className, name, control, label, isRequired, placeholder, ...props }) {
     const [isSelected, setIdSelected] = useState(false)
+    const [options, setOptions] = useState([])
+    useEffect(() => {
+        get(ref(database, 'structure')).then(snapshot => setOptions(JSON.parse(snapshot.val())))
+    }, [])
     const { field, fieldState } = useController({
         name,
         control,
@@ -18,7 +25,9 @@ function SelectTree({ className, name, control, label, isRequired, options, plac
                 </label>
             )}
             <select
-                className='w-full p-4 border rounded appearance-none placeholder-neutrals-04 border-neutrals-03'
+                className={`w-full p-4 border rounded appearance-none placeholder-neutrals-04 border-neutrals-03 ${
+                    fieldState.error && 'border-primary-red'
+                }`}
                 onClick={() => setIdSelected(!isSelected)}
                 {...field}
                 onBlur={() => {
@@ -59,4 +68,4 @@ function SelectTree({ className, name, control, label, isRequired, options, plac
     )
 }
 
-export default SelectTree
+export default SelectTopic
