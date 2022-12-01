@@ -4,15 +4,17 @@ import images from '../assets/images'
 
 function Home() {
     return (
-        <main className='pb-20 overflow-auto'>
+        <main className='pb-40 overflow-auto'>
             <section>
                 <div className='bg-[#8087d8] px-6 pb-10 pt-4'>
-                    <div className='flex justify-between'>
+                    <div className='flex flex-col justify-between md:flex-row'>
                         <div className='flex items-center px-8 pt-8'>
                             <Image className='inline-block' src={images.icon} alt='logo' />
-                            <h2 className='inline-block text-4xl font-bold text-white'>StudyGeo3D.com</h2>
+                            <h2 className='inline-block ml-2 overflow-hidden text-4xl font-bold text-white'>
+                                StudyGeo3D.com
+                            </h2>
                         </div>
-                        <nav className='flex gap-4'>
+                        <nav className='flex justify-end gap-4 -mx-3 md:mx-0'>
                             <Button className='bg-[#fac730] h-12 rounded-xl text-xl'>Đăng nhập</Button>
                             <Button className='bg-[#fac730] h-12 rounded-xl text-xl'>Đăng ký</Button>
                             <Button className='bg-[#fac730] h-12 rounded-xl text-xl'>Hỗ trợ</Button>

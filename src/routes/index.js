@@ -6,6 +6,7 @@ import config from '../config'
 import Question from '../Pages/Question'
 import Home from '../Pages/Home'
 import List from '../Pages/List'
+import Admin from '../Pages/Admin'
 import TheoryManagement from '../Pages/TheoryManagement'
 import MultipleChoiceManagement from '../Pages/MultipleChoiceManagement'
 import DefectManagement from '../Pages/DefectManagement'
@@ -32,6 +33,11 @@ const publicRoutes = [
     {
         path: config.routes.list,
         component: List
+    },
+    {
+        path: config.routes.admin,
+        component: Admin,
+        layout: AdminLayout
     },
     {
         path: config.routes.theoryManagement,

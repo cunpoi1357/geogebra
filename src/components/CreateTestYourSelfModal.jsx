@@ -45,7 +45,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
             onRequestClose={onClose}
             className='fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-secondary-dark-blue/30'
         >
-            <div className='bg-neutrals-01 lg:md-0 m-6  p-6 min-h-[200px] lg:w-1/2 w-full rounded'>
+            <div className='bg-neutrals-01 lg:md-0 m-6  p-6 max-h-[80vh] lg:w-1/2 w-full rounded overflow-auto'>
                 <div className='flex flex-col w-full align-center'>
                     <header className='flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
@@ -57,9 +57,12 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                 <form onSubmit={onSubmit} className='grid gap-4'>
                     {fields.map((topic, index) => {
                         return (
-                            <div key={uuidv4()} className='grid grid-cols-12 gap-4'>
+                            <div
+                                key={uuidv4()}
+                                className='grid grid-cols-1 gap-4 pb-4 border border-transparent md:grid-cols-12 border-b-neutrals-04'
+                            >
                                 <SelectTopic
-                                    className='col-span-5'
+                                    className='col-span-1 md:col-span-5'
                                     control={control}
                                     name={`topics.${index}.topic`}
                                     placeholder='Chuyên đề'
@@ -67,7 +70,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                                     isRequired
                                 />
                                 <Select
-                                    className='col-span-3'
+                                    className='col-span-1 md:col-span-3'
                                     control={control}
                                     name={`topics.${index}.level`}
                                     placeholder='Cấp độ'
@@ -76,7 +79,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                                     isRequired
                                 />
                                 <Select
-                                    className='col-span-3'
+                                    className='col-span-1 md:col-span-3'
                                     control={control}
                                     name={`topics.${index}.amount`}
                                     placeholder='Số lượng'

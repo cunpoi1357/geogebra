@@ -7,7 +7,7 @@ function AdminNavBar() {
     const MENU_LIST = [
         {
             name: 'Câu hỏi trắc nghiệm',
-            path: '/admin/multipleChoice',
+            path: '/admin/multiple-choice',
             icon: <CheckBoxIcon className='w-5 h-5 text-white' />
         },
         {
