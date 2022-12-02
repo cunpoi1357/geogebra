@@ -1,12 +1,12 @@
 import { ref, set } from 'firebase/database'
 import { useForm } from 'react-hook-form'
-import ReactModal from 'react-modal'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
 import { XIcon } from '../Icon'
 import { database } from '../../firebase'
 import Button from '../Button'
+import Modal from '../Modal'
 import Textarea from '../Textarea'
 import SelectTopic from '../SelectTopic'
 
@@ -29,18 +29,7 @@ function CreateDefectModal({ onClose, isOpen }) {
     })
 
     return (
-        <ReactModal
-            appElement={document.getElementById('app')}
-            ariaHideApp={false}
-            isOpen={isOpen}
-            style={{
-                overlay: {
-                    backgroundColor: 'transparent'
-                }
-            }}
-            onRequestClose={onClose}
-            className='fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-secondary-dark-blue/30'
-        >
+        <Modal isOpen={isOpen} onRequestClose={onClose}>
             <div className='bg-neutrals-01 p-6 min-h-[200px] w-1/2 rounded'>
                 <div className='flex flex-col w-full align-center'>
                     <header className='flex items-center w-full'>
@@ -73,7 +62,7 @@ function CreateDefectModal({ onClose, isOpen }) {
                     </form>
                 </div>
             </div>
-        </ReactModal>
+        </Modal>
     )
 }
 

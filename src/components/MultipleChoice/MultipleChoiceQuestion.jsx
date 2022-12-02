@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Geogebra from 'react-geogebra'
 import Latex from 'react-latex'
 import { toast } from 'react-toastify'
+import { BookIcon, ChatBubbleIcon } from '../Icon'
 
 function MultipleChoiceQuestion({ data }) {
     const [chose, setChose] = useState(null)
@@ -19,15 +20,16 @@ function MultipleChoiceQuestion({ data }) {
         <div className='relative flex flex-col h-[100vh] overflow-hidden'>
             {data && (
                 <>
-                    <header className='py-3 px-4 w-[100wh] bg-[#fff2ea] text-xl m-1 rounded rounded-tr-3xl border border-[#6382a3]'>
+                    <header className='py-3 px-4 w-[100wh] bg-[#f0f9fe] text-xl m-1 border border-[#00adf1] shadow-[#9897ff] shadow-lg'>
                         {data.question.split(/^Câu (\d+)\./)[1] && (
-                            <span className='bg-[#6382a3] rounded text-white font-semibold p-1 -ml-4 mr-2 -translate-y-2 inline-block leading-6'>
-                                Câu {data.question.split(/^Câu (\d+)\./)[1]}
+                            <span className='inline-flex h-3 p-1 font-semibold leading-6 text-[#08b1ed] items-center justify-center ml-8 relative'>
+                                <BookIcon className='absolute -left-6 w-6 h-6 text-[#08b1ed] mr-1' />
+                                Câu {data.question.split(/^Câu (\d+)\./)[1]}.
                             </span>
                         )}
                         <Latex>{data.question.split(/^Câu (\d+)\./)[2] || data.question}</Latex>
                     </header>
-                    <section className='pb-40 overflow-auto md:p-10'>
+                    <section className='overflow-auto pb-44 md:p-10'>
                         {data.geogebraId && (
                             <div className='flex justify-center mt-10'>
                                 <Geogebra appName='3d' material_id={data.geogebraId} showMenuBar={false} lang='vi' />
@@ -39,13 +41,15 @@ function MultipleChoiceQuestion({ data }) {
                                 {['A', 'B', 'C', 'D'].map(letter => (
                                     <button
                                         key={letter}
-                                        className={`flex text-2xl items-center bg-[#fdfdbd] h-20 rounded-md border-2 border-[#b8b8bb] hover:opacity-50 hover:border-black transition-colors ${
+                                        className={`flex text-2xl items-center bg-[#f0f9fe] h-20 rounded-md border-2 border-[#00adf1] hover:opacity-50 hover:border-black transition-colors ${
                                             chose === letter &&
-                                            (letter === data.answerKey ? 'bg-green-300' : 'bg-red-300')
+                                            (letter === data.answerKey ? 'border-green-300' : 'border-red-300')
                                         }`}
                                         onClick={() => setChose(letter)}
                                     >
-                                        <span className='w-20'>{letter}</span>
+                                        <span className='p-2 w-10 h-10 text-[#08b1ed] font-bold rounded-full border border-[#00adf1] flex items-center justify-center m-6'>
+                                            {letter}
+                                        </span>
                                         <span className='flex-1 -ml-10'>
                                             <Latex>{data[letter]}</Latex>
                                         </span>
@@ -53,13 +57,22 @@ function MultipleChoiceQuestion({ data }) {
                                 ))}
                             </div>
                             {chose && data?.answer && (
-                                <div className='md:w-[800px]'>
-                                    <p>Lời giải:</p>
+                                <div className='md:w-[800px] mt-5'>
+                                    <div className='flex items-center justify-center text-2xl text-[#08b1ed]'>
+                                        <ChatBubbleIcon className='w-6 h-6 mr-2' />
+                                        <span>Lời giải:</span>
+                                    </div>
                                     {data?.answer.split(/\.\s\n/).map(item => (
                                         <div key={item}>
                                             <Latex>{item}</Latex>
                                         </div>
                                     ))}
+                                    <span>
+                                        Chọn đáp án{' '}
+                                        <span className='p-2 w-9 h-9 text-xl text-[#08b1ed] font-bold rounded-full border border-[#00adf1] inline-flex items-center justify-center m-3'>
+                                            {data.answerKey}
+                                        </span>
+                                    </span>
                                 </div>
                             )}
                         </div>

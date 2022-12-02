@@ -61,9 +61,9 @@ function List() {
                                     )
                                 case 'text':
                                     return (
-                                        <Markdown key={line.content} className='w-full md:px-8'>
-                                            {line.content}
-                                        </Markdown>
+                                        <div key={line.content}>
+                                            <Markdown className='w-full md:px-8'>{line.content}</Markdown>
+                                        </div>
                                     )
                                 case 'geogebra':
                                     return (
@@ -84,9 +84,7 @@ function List() {
                                         <div key={line.content} className='flex justify-center mb-8'>
                                             <div className='bg-[#e5f1ff] w-2/3 sd p-2 rounded-md inline-block'>
                                                 <h3 className='bg-[#fffceb] rounded-md px-2'>{content[0]}</h3>
-                                                <p>
-                                                    <Markdown className='w-full'>{content[1]}</Markdown>
-                                                </p>
+                                                <Markdown className='w-full'>{content[1]}</Markdown>
                                             </div>
                                         </div>
                                     )

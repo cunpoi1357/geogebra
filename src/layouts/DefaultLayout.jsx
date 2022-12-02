@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import propsTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
-import ReactModal from 'react-modal'
 import { get, ref } from 'firebase/database'
 
 import Navbar from './components/Navbar'
@@ -11,6 +10,7 @@ import { MenuIcon, XIcon } from '../components/Icon'
 import GetRandomQuestionButton from '../components/GetRandomQuestionButton'
 import CreateTestYourSelfModal from '../components/CreateTestYourSelfModal'
 import { database } from '../firebase'
+import Modal from '../components/Modal'
 
 function DefaultLayout({ children }) {
     const [isNavShow, setIsNavShow] = useState(false)
@@ -48,44 +48,37 @@ function DefaultLayout({ children }) {
             </button>
 
             <GetRandomQuestionButton className='absolute z-10 w-10 h-10 p-2 bg-white border border-gray-600 rounded-full right-6 bottom-10 hover:opacity-50' />
-
-            {isNavShow && (
-                <ReactModal
-                    appElement={document.getElementById('app')}
-                    ariaHideApp={false}
-                    isOpen={isNavShow}
-                    onRequestClose={() => setIsNavShow(false)}
-                    shouldCloseOnOverlayClick
-                    style={{
-                        content: {
-                            top: 0,
-                            bottom: 0,
-                            left: 0,
-                            width: '400px',
-                            maxWidth: '100%',
-                            padding: 0
-                        },
-                        overlay: {
-                            backgroundColor: 'rgba(0,0,0,.2)',
-                            zIndex: 1000
-                        }
-                    }}
-                >
-                    <Navbar
-                        data={data}
-                        className='h-[100vh] w-full flex flex-col bg-white'
-                        isNavOpen={isNavShow}
-                        onCloseNavBar={() => setIsNavShow(false)}
-                        onOpenCreateTestModal={handleOpenCreateTestModal}
-                    />
-                    <button className='absolute right-2 top-2' onClick={() => setIsNavShow(false)}>
-                        <XIcon />
-                    </button>
-                </ReactModal>
-            )}
-            {isCreateTestShow && (
-                <CreateTestYourSelfModal isOpen={isCreateTestShow} onClose={() => setCreateTestShow(false)} />
-            )}
+            <Modal
+                isOpen={isNavShow}
+                onRequestClose={() => setIsNavShow(false)}
+                shouldCloseOnOverlayClick
+                style={{
+                    content: {
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        width: '400px',
+                        maxWidth: '100%',
+                        padding: 0
+                    },
+                    overlay: {
+                        backgroundColor: 'rgba(0,0,0,.2)',
+                        zIndex: 1000
+                    }
+                }}
+            >
+                <Navbar
+                    data={data}
+                    className='h-[100vh] w-full flex flex-col bg-white'
+                    isNavOpen={isNavShow}
+                    onCloseNavBar={() => setIsNavShow(false)}
+                    onOpenCreateTestModal={handleOpenCreateTestModal}
+                />
+                <button className='absolute right-2 top-2' onClick={() => setIsNavShow(false)}>
+                    <XIcon />
+                </button>
+            </Modal>
+            <CreateTestYourSelfModal isOpen={isCreateTestShow} onClose={() => setCreateTestShow(false)} />
         </div>
     )
 }

@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { EditIcon, EyeIcon, TrashIcon } from '../Icon'
+import EditQuestionModal from './EditQuestionModal'
 
 function QuestionItem({ data, index, onRemove }) {
+    const [showModal, setShowModal] = useState(false)
+
     return (
         <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767]'>
             <td className='px-6 py-4'>{index}</td>
@@ -37,18 +40,19 @@ function QuestionItem({ data, index, onRemove }) {
                 })()}
             </td>
             <td className='px-6 py-4'>{data.question}</td>
-            <td className='px-6 py-4'>{data.answer}</td>
+            <td className='px-6 py-4'>{data[data.answerKey]}</td>
             <td className='flex items-center gap-3 px-6 py-4'>
                 <label title='Xem'>
                     <EyeIcon className='cursor-pointer' />
                 </label>
-                <label title='Sửa'>
+                <label title='Sửa' onClick={() => setShowModal(true)}>
                     <EditIcon className='cursor-pointer' />
                 </label>
                 <label title='Xóa' onClick={onRemove}>
                     <TrashIcon className='cursor-pointer' />
                 </label>
             </td>
+            <EditQuestionModal onClose={() => setShowModal(false)} isOpen={showModal} id={data.id} />
         </tr>
     )
 }

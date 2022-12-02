@@ -1,8 +1,9 @@
 import React from 'react'
 import { useEffect } from 'react'
-import ReactModal from 'react-modal'
+
 import Button from './Button'
 import { XIcon } from './Icon'
+import Modal from './Modal'
 
 function YesNoModal({ title, isOpen, onClose, onSubmit }) {
     useEffect(() => {
@@ -16,18 +17,7 @@ function YesNoModal({ title, isOpen, onClose, onSubmit }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
-        <ReactModal
-            appElement={document.getElementById('app')}
-            ariaHideApp={false}
-            isOpen={isOpen}
-            style={{
-                overlay: {
-                    backgroundColor: 'transparent'
-                }
-            }}
-            onRequestClose={onClose}
-            className='fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-secondary-dark-blue/30'
-        >
+        <Modal isOpen={isOpen} onRequestClose={onClose}>
             <div className='bg-neutrals-01 p-6 min-h-[100px] min-w-[300px] rounded'>
                 <div className='flex flex-col w-full align-center'>
                     <XIcon
@@ -51,7 +41,7 @@ function YesNoModal({ title, isOpen, onClose, onSubmit }) {
                     </div>
                 </div>
             </div>
-        </ReactModal>
+        </Modal>
     )
 }
 

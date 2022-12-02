@@ -1,12 +1,12 @@
 import { ref, set } from 'firebase/database'
 import { useForm } from 'react-hook-form'
-import ReactModal from 'react-modal'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
 import { database } from '../../firebase'
 import Button from '../Button'
 import { XIcon } from '../Icon'
+import Modal from '../Modal'
 import Input from '../Input'
 import Select from '../Select'
 import SelectTopic from '../SelectTopic'
@@ -30,18 +30,7 @@ function CreateQuestionModal({ onClose, isOpen }) {
     })
 
     return (
-        <ReactModal
-            appElement={document.getElementById('app')}
-            ariaHideApp={false}
-            isOpen={isOpen}
-            style={{
-                overlay: {
-                    backgroundColor: 'transparent'
-                }
-            }}
-            onRequestClose={onClose}
-            className='fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-secondary-dark-blue/30'
-        >
+        <Modal isOpen={isOpen} onRequestClose={onClose}>
             <div className='bg-neutrals-01 p-6 min-h-[200px] min-w-[300px] rounded'>
                 <div className='align-center w-[80vw] flex flex-col'>
                     <header className='flex items-center w-full'>
@@ -145,7 +134,7 @@ function CreateQuestionModal({ onClose, isOpen }) {
                     </form>
                 </div>
             </div>
-        </ReactModal>
+        </Modal>
     )
 }
 

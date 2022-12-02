@@ -1,13 +1,13 @@
 import React from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import ReactModal from 'react-modal'
 import { v4 as uuidv4 } from 'uuid'
 
 import { PlusIcon, XIcon } from './Icon'
 import Select from './Select'
 import SelectTopic from './SelectTopic'
 import Button from './Button'
+import Modal from './Modal'
 
 function CreateTestYourSelfModal({ isOpen, onClose }) {
     const navigate = useNavigate()
@@ -27,23 +27,20 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
 
     const onSubmit = handleSubmit(data =>
         navigate('/test-your-self', {
-            state: data
+            state: data.topics
         })
     )
 
     return (
-        <ReactModal
-            id='TestYourSelfCreateModal'
-            appElement={document.getElementById('app')}
-            ariaHideApp={false}
+        <Modal
             isOpen={isOpen}
             style={{
                 overlay: {
-                    backgroundColor: 'transparent'
+                    backgroundColor: 'transparent',
+                    zIndex: 1000
                 }
             }}
             onRequestClose={onClose}
-            className='fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-secondary-dark-blue/30'
         >
             <div className='bg-neutrals-01 lg:md-0 m-6  p-6 max-h-[80vh] lg:w-1/2 w-full rounded overflow-auto'>
                 <div className='flex flex-col w-full align-center'>
@@ -116,7 +113,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                     </Button>
                 </form>
             </div>
-        </ReactModal>
+        </Modal>
     )
 }
 

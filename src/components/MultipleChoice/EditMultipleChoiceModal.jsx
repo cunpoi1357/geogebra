@@ -1,13 +1,13 @@
 import { get, ref, update } from 'firebase/database'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import ReactModal from 'react-modal'
 import { toast } from 'react-toastify'
 
 import { database } from '../../firebase'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import Input from '../Input'
+import Modal from '../Modal'
 import Select from '../Select'
 import SelectTopic from '../SelectTopic'
 import Textarea from '../Textarea'
@@ -35,18 +35,7 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
     })
 
     return (
-        <ReactModal
-            appElement={document.getElementById('app')}
-            ariaHideApp={false}
-            isOpen={isOpen}
-            style={{
-                overlay: {
-                    backgroundColor: 'transparent'
-                }
-            }}
-            onRequestClose={onClose}
-            className='fixed top-0 bottom-0 left-0 right-0 flex items-center justify-center bg-secondary-dark-blue/30'
-        >
+        <Modal isOpen={isOpen} onRequestClose={onClose}>
             <div className='bg-neutrals-01 p-6 min-h-[200px] min-w-[300px] rounded'>
                 <div className='align-center w-[1500px] flex flex-col'>
                     <header className='flex items-center w-full'>
@@ -142,7 +131,7 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
                     </form>
                 </div>
             </div>
-        </ReactModal>
+        </Modal>
     )
 }
 
