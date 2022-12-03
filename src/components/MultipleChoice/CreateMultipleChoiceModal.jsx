@@ -1,9 +1,11 @@
 import { ref, set } from 'firebase/database'
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
-import { database } from '../../firebase'
+import { database, storage } from '../../firebase'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import Input from '../Input'
@@ -15,6 +17,8 @@ import Textarea from '../Textarea'
 function CreateMultipleChoiceModal({ onClose, isOpen }) {
     const { control, handleSubmit, reset } = useForm()
 
+    const [imageUrl, setImageUrl] = useState('')
+
     const onSubmit = handleSubmit(data => {
         const id = uuidv4()
         set(ref(database, 'examples/' + id), {
@@ -22,6 +26,7 @@ function CreateMultipleChoiceModal({ onClose, isOpen }) {
             ...data,
             question: data.question,
             answer: data.answer,
+            image: imageUrl || '',
             id
         })
             .then(() => {
@@ -31,6 +36,22 @@ function CreateMultipleChoiceModal({ onClose, isOpen }) {
         onClose()
         reset()
     })
+
+    const handleInputFileChange = e => {
+        toast.info('Đang tải ảnh lên.')
+        const file = e.target.files[0]
+        if (file) {
+            const imagesRef = storageRef(storage, file.name)
+            uploadBytes(imagesRef, file)
+                .then(() => {
+                    toast.success('Tải ảnh lên thành công.')
+                    getDownloadURL(imagesRef)
+                        .then(url => setImageUrl(url))
+                        .catch(error => toast.error(error))
+                })
+                .catch(() => toast.error('Tải ảnh lên thất bại.'))
+        }
+    }
 
     return (
         <Modal isOpen={isOpen} onRequestClose={onClose}>
@@ -100,6 +121,22 @@ function CreateMultipleChoiceModal({ onClose, isOpen }) {
                                 control={control}
                                 placeholder='Geogebra ID'
                                 label='Geogebra ID'
+                            />
+                            <Input
+                                type='file'
+                                className='col-span-1'
+                                name='image'
+                                control={control}
+                                onChange={handleInputFileChange}
+                                placeholder='Ảnh minh họa'
+                                label='Ảnh minh họa'
+                            />
+                            <Input
+                                className='col-span-1'
+                                name='youtube'
+                                control={control}
+                                placeholder='Link video'
+                                label='Video'
                             />
                         </div>
                         <div className='grid grid-cols-2 col-span-1 grid-rows-4 gap-6'>

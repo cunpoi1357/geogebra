@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import { useController } from 'react-hook-form'
 
-function Input({ className, name, control, label, isRequired, ...props }) {
+function Input({ className, name, control, label, isRequired, onChange, ...props }) {
     const inputId = useId()
     const { field, fieldState } = useController({
         name,
@@ -23,8 +23,14 @@ function Input({ className, name, control, label, isRequired, ...props }) {
                     fieldState.error && 'border-primary-red'
                 }`}
                 id={inputId}
-                {...props}
                 {...field}
+                onChange={e => {
+                    field.onChange(e)
+                    if (onChange) {
+                        onChange(e)
+                    }
+                }}
+                {...props}
             />
             {fieldState.error && <p className='absolute text-red-400 -bottom-6'>{fieldState.error.message}</p>}
         </div>

@@ -1,9 +1,10 @@
 import { get, ref, update } from 'firebase/database'
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { database } from '../../firebase'
+import { database, storage } from '../../firebase'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import Input from '../Input'
@@ -15,17 +16,24 @@ import Textarea from '../Textarea'
 function EditMultipleChoiceModal({ id, onClose, isOpen }) {
     const { control, handleSubmit, reset, setValue } = useForm()
     const [question, setQuestion] = useState({})
+    const [imageUrl, setImageUrl] = useState('')
 
     useEffect(() => {
         get(ref(database, `examples/${id}`)).then(snapshot => {
             setQuestion(snapshot.val())
         })
-        Array.from(Object.keys(question)).forEach(key => setValue(key, question[key]))
+        Array.from(Object.keys(question))
+            .filter(key => key !== 'image')
+            .forEach(key => setValue(key, question[key]))
+        setImageUrl(question.image)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen])
 
     const onSubmit = handleSubmit(dataForm => {
-        update(ref(database, 'examples/' + id), dataForm)
+        update(ref(database, 'examples/' + id), {
+            ...dataForm,
+            image: imageUrl || ''
+        })
             .then(() => {
                 toast.success('Cập nhật thành công')
             })
@@ -33,6 +41,24 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
         onClose()
         reset()
     })
+
+    const handleInputFileChange = e => {
+        toast.info('Đang tải ảnh lên.')
+        const file = e.target.files[0]
+        if (file) {
+            const imagesRef = storageRef(storage, file.name)
+            uploadBytes(imagesRef, file)
+                .then(() =>
+                    getDownloadURL(imagesRef)
+                        .then(url => {
+                            toast.success('Tải ảnh lên thành công.')
+                            setImageUrl(url)
+                        })
+                        .catch(error => toast.error(error))
+                )
+                .catch(() => toast.error('Tải ảnh lên thất bại.'))
+        }
+    }
 
     return (
         <Modal isOpen={isOpen} onRequestClose={onClose}>
@@ -102,6 +128,34 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
                                 control={control}
                                 placeholder='Geogebra ID'
                                 label='Geogebra ID'
+                            />
+                            <div className='relative'>
+                                <Input
+                                    type='file'
+                                    className='col-span-1'
+                                    name='image'
+                                    control={control}
+                                    placeholder='Ảnh minh họa'
+                                    label='Ảnh minh họa'
+                                    onChange={handleInputFileChange}
+                                />
+                                <button
+                                    type='button'
+                                    className='absolute translate-y-1 right-3 top-1/2 bg-[#efefef] border border-[#767676] px-1 hover:bg-[#e5e5e5] transition-colors'
+                                    onClick={() => {
+                                        setImageUrl('')
+                                        toast.success('Đã xóa ảnh.')
+                                    }}
+                                >
+                                    Xóa ảnh
+                                </button>
+                            </div>
+                            <Input
+                                className='col-span-1'
+                                name='youtube'
+                                control={control}
+                                placeholder='Link video'
+                                label='Video'
                             />
                         </div>
                         <div className='grid grid-cols-2 col-span-1 grid-rows-4 gap-6'>

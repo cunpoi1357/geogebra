@@ -3,6 +3,7 @@ import Geogebra from 'react-geogebra'
 import Latex from 'react-latex'
 import { toast } from 'react-toastify'
 import { BookIcon, ChatBubbleIcon } from '../Icon'
+import Image from '../Image'
 
 function MultipleChoiceQuestion({ data }) {
     const [chose, setChose] = useState(null)
@@ -33,6 +34,11 @@ function MultipleChoiceQuestion({ data }) {
                         {data.geogebraId && (
                             <div className='flex justify-center mt-10'>
                                 <Geogebra appName='3d' material_id={data.geogebraId} showMenuBar={false} lang='vi' />
+                            </div>
+                        )}
+                        {data.image && (
+                            <div className='flex justify-center mt-3'>
+                                <Image src={data.image} className='object-cover h-[400px]' />
                             </div>
                         )}
 
