@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
@@ -8,10 +8,16 @@ import Select from './Select'
 import SelectTopic from './SelectTopic'
 import Button from './Button'
 import Modal from './Modal'
+import Input from './Input'
+import { get, ref } from 'firebase/database'
+import { database } from '../firebase'
+import toArray from 'lodash/toArray'
+import filter from 'lodash/filter'
 
 function CreateTestYourSelfModal({ isOpen, onClose }) {
+    const [questions, setQuestions] = useState([])
     const navigate = useNavigate()
-    const { control, handleSubmit } = useForm({
+    const { control, handleSubmit, getValues } = useForm({
         defaultValues: {
             topics: [
                 {
@@ -30,6 +36,12 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
             state: data.topics
         })
     )
+
+    useEffect(() => {
+        get(ref(database, 'questions')).then(snapshot => {
+            setQuestions(toArray(snapshot.val()).filter(item => !!item && JSON.parse(item.topic)))
+        })
+    }, [])
 
     return (
         <Modal
@@ -53,35 +65,58 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                 </div>
                 <form onSubmit={onSubmit} className='grid gap-4'>
                     {fields.map((topic, index) => {
+                        let lengthOfQuestion = 0
+                        const handleChange = () => {
+                            const topic = getValues(`topics.${index}.topic`)
+                            const level = getValues(`topics.${index}.level`)
+                            console.log({ topic, level })
+                            const result = filter(questions, {
+                                topic: topic,
+                                level: level
+                            })
+                            lengthOfQuestion = result.length
+                        }
                         return (
                             <div
                                 key={uuidv4()}
-                                className='grid grid-cols-1 gap-4 pb-4 border border-transparent md:grid-cols-12 border-b-neutrals-04'
+                                className='grid grid-cols-1 gap-4 pb-8 border border-transparent md:grid-cols-12 border-b-neutrals-04'
                             >
                                 <SelectTopic
-                                    className='col-span-1 md:col-span-5'
+                                    className='col-span-1 md:col-span-5 place-self-end'
                                     control={control}
                                     name={`topics.${index}.topic`}
                                     placeholder='Chuyên đề'
                                     label='Chuyên đề'
+                                    onChange={handleChange}
                                     isRequired
                                 />
                                 <Select
-                                    className='col-span-1 md:col-span-3'
+                                    className='col-span-1 md:col-span-3 place-self-end'
                                     control={control}
                                     name={`topics.${index}.level`}
                                     placeholder='Cấp độ'
                                     options={['Nhận biết', 'Thông hiểu', 'Vận dụng thấp', 'Vận dụng cao']}
                                     label='Cấp độ'
+                                    onChange={handleChange}
                                     isRequired
                                 />
-                                <Select
+                                <Input
                                     className='col-span-1 md:col-span-3'
                                     control={control}
+                                    type='number'
+                                    rules={{
+                                        min: {
+                                            value: 1,
+                                            message: 'Số câu phải lớn hơn 1'
+                                        },
+                                        max: {
+                                            value: lengthOfQuestion,
+                                            message: `Số câu hỏi tối đa là ${lengthOfQuestion}`
+                                        }
+                                    }}
                                     name={`topics.${index}.amount`}
                                     placeholder='Số lượng'
-                                    options={[5, 10, 15]}
-                                    label='Số lượng câu hỏi'
+                                    label={`Số lượng (hiện có ${lengthOfQuestion})`}
                                     isRequired
                                 />
                                 {index !== 0 && (

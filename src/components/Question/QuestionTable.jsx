@@ -27,7 +27,7 @@ function QuestionTable({ data }) {
                     <th scope='col' className='w-2/12 px-6 py-3'>
                         Chuyên đề
                     </th>
-                    <th scope='col' className='px-6 py-3'>
+                    <th scope='col' className='px-6 py-3 w-[150px]'>
                         Cấp độ
                     </th>
                     <th scope='col' className='px-6 py-3'>

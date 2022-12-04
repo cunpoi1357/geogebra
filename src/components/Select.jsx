@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useController } from 'react-hook-form'
 import { ChevronDownIcon, ChevronUpIcon } from './Icon'
 
-function Select({ className, name, control, label, isRequired, options, placeholder, ...props }) {
+function Select({ className, name, control, label, isRequired, options, onChange, placeholder, ...props }) {
     const [isSelected, setIdSelected] = useState(false)
     const { field, fieldState } = useController({
         name,
@@ -27,7 +27,12 @@ function Select({ className, name, control, label, isRequired, options, placehol
                     field.onBlur()
                     setIdSelected(false)
                 }}
-                onChange={e => field.onChange(e)}
+                onChange={e => {
+                    field.onChange(e)
+                    if (onChange) {
+                        onChange(e)
+                    }
+                }}
                 {...props}
             >
                 <option value='' disabled>

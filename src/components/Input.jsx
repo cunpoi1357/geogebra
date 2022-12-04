@@ -1,12 +1,12 @@
 import { useId } from 'react'
 import { useController } from 'react-hook-form'
 
-function Input({ className, name, control, label, isRequired, onChange, ...props }) {
+function Input({ className, name, control, label, isRequired, onChange, rules, ...props }) {
     const inputId = useId()
     const { field, fieldState } = useController({
         name,
         control,
-        rules: { required: isRequired },
+        rules: { required: isRequired, ...rules },
         defaultValue: ''
     })
 

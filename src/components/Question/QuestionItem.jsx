@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import Latex from 'react-latex'
+
 import { EditIcon, EyeIcon, TrashIcon } from '../Icon'
 import EditQuestionModal from './EditQuestionModal'
 
@@ -39,8 +41,12 @@ function QuestionItem({ data, index, onRemove }) {
                     }
                 })()}
             </td>
-            <td className='px-6 py-4'>{data.question}</td>
-            <td className='px-6 py-4'>{data[data.answerKey]}</td>
+            <td className='px-6 py-4'>
+                <Latex>{data.question}</Latex>
+            </td>
+            <td className='px-6 py-4'>
+                <Latex>{data[data.answerKey]}</Latex>
+            </td>
             <td className='flex items-center gap-3 px-6 py-4'>
                 <label title='Xem'>
                     <EyeIcon className='cursor-pointer' />

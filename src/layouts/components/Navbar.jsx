@@ -10,7 +10,7 @@ function Navbar({ className, data, expandedMenu, onOpenCreateTestModal, onOpenMe
                 ))}
             </div>
             <button
-                className='text-[#92a6e2] h-[72px] flex cursor-pointer hover:bg-[#4360b5] hover:text-white transition-colors ease-linear'
+                className='text-[#92a6e2] h-[72px] flex cursor-pointer hover:bg-[#4360b5] hover:text-white transition-colors ease-linear outline-none'
                 onClick={onOpenCreateTestModal}
             >
                 <span

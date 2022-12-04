@@ -5,7 +5,7 @@ import { useController } from 'react-hook-form'
 import { database } from '../firebase'
 import { ChevronDownIcon, ChevronUpIcon } from './Icon'
 
-function SelectTopic({ className, name, control, label, isRequired, placeholder, ...props }) {
+function SelectTopic({ className, name, control, label, isRequired, onChange, placeholder, ...props }) {
     const [isSelected, setIdSelected] = useState(false)
     const [options, setOptions] = useState([])
     useEffect(() => {
@@ -34,7 +34,12 @@ function SelectTopic({ className, name, control, label, isRequired, placeholder,
                     field.onBlur()
                     setIdSelected(false)
                 }}
-                onChange={e => field.onChange(e)}
+                onChange={e => {
+                    field.onChange(e)
+                    if (onChange) {
+                        onChange(e)
+                    }
+                }}
                 {...props}
             >
                 <option value='' disabled>
@@ -43,14 +48,18 @@ function SelectTopic({ className, name, control, label, isRequired, placeholder,
                 {options.map(
                     parent =>
                         parent.children &&
-                        parent.children.map(
-                            child =>
-                                child.children &&
+                        parent.children.map(child =>
+                            child.children ? (
                                 child.children.map(item => (
                                     <option key={item.name} value={JSON.stringify(item)}>
                                         {item.name}
                                     </option>
                                 ))
+                            ) : (
+                                <option key={child.name} value={JSON.stringify(child)}>
+                                    {child.name}
+                                </option>
+                            )
                         )
                 )}
             </select>
