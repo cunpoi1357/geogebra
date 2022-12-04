@@ -17,6 +17,7 @@ function SelectTopic({ className, name, control, label, isRequired, onChange, pl
         rules: { required: isRequired },
         defaultValue: ''
     })
+
     return (
         <div className={`${className} relative`}>
             {label && (

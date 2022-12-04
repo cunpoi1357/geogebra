@@ -1,8 +1,6 @@
 import { lazy } from 'react'
 import config from '../config'
 
-// import AdminLayout from '../layouts/AdminLayout'
-
 import Question from '../Pages/Question'
 import Home from '../Pages/Home'
 import List from '../Pages/List'
@@ -14,7 +12,6 @@ import StructureManagement from '../Pages/StructureManagement'
 import QuestionManagement from '../Pages/QuestionManagement'
 import TestYourSelf from '../Pages/TestYourSelf'
 const AdminLayout = lazy(() => import('../layouts/AdminLayout'))
-const HeaderOnly = lazy(() => import('../layouts/HeaderOnly'))
 
 const publicRoutes = [
     {
@@ -27,8 +24,7 @@ const publicRoutes = [
     },
     {
         path: config.routes.testYourSelf,
-        component: TestYourSelf,
-        layout: HeaderOnly
+        component: TestYourSelf
     },
     {
         path: config.routes.list,

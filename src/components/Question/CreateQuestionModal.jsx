@@ -54,8 +54,8 @@ function CreateQuestionModal({ onClose, isOpen }) {
                                 name='level'
                                 control={control}
                                 options={['Nhận biết', 'Thông hiểu', 'Vận dụng thấp', 'Vận dụng cao']}
-                                placeholder='Cấp độ'
-                                label='Cấp độ'
+                                placeholder='Mức độ'
+                                label='Mức độ'
                                 isRequired='Vui lòng nhập trường này'
                             />
                             <Input

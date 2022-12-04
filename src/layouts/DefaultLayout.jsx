@@ -22,6 +22,7 @@ function DefaultLayout({ children }) {
 
     useEffect(() => {
         setExpandedMenu(false)
+        setCreateTestShow(false)
     }, [location])
 
     return (

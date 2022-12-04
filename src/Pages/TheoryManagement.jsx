@@ -46,7 +46,6 @@ function TheoryManagement() {
                     content: data[2]
                 })
         })
-        console.log(result)
         setContent(result)
     }, [input])
 

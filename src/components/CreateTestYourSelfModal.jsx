@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
@@ -9,15 +8,10 @@ import SelectTopic from './SelectTopic'
 import Button from './Button'
 import Modal from './Modal'
 import Input from './Input'
-import { get, ref } from 'firebase/database'
-import { database } from '../firebase'
-import toArray from 'lodash/toArray'
-import filter from 'lodash/filter'
 
 function CreateTestYourSelfModal({ isOpen, onClose }) {
-    const [questions, setQuestions] = useState([])
     const navigate = useNavigate()
-    const { control, handleSubmit, getValues } = useForm({
+    const { control, handleSubmit } = useForm({
         defaultValues: {
             topics: [
                 {
@@ -31,30 +25,25 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
         name: 'topics'
     })
 
-    const onSubmit = handleSubmit(data =>
+    const onSubmit = handleSubmit(data => {
         navigate('/test-your-self', {
             state: data.topics
         })
-    )
-
-    useEffect(() => {
-        get(ref(database, 'questions')).then(snapshot => {
-            setQuestions(toArray(snapshot.val()).filter(item => !!item && JSON.parse(item.topic)))
-        })
-    }, [])
+        onClose()
+    })
 
     return (
         <Modal
             isOpen={isOpen}
             style={{
                 overlay: {
-                    backgroundColor: 'transparent',
+                    backgroundColor: 'rgba(0,0,0,.6)',
                     zIndex: 1000
                 }
             }}
             onRequestClose={onClose}
         >
-            <div className='bg-neutrals-01 lg:md-0 m-6  p-6 max-h-[80vh] lg:w-1/2 w-full rounded overflow-auto'>
+            <div className='bg-neutrals-01 lg:md-0 m-6  p-6 max-h-[80vh] lg:w-1/2 w-full rounded overflow-auto shadow-2xl'>
                 <div className='flex flex-col w-full align-center'>
                     <header className='flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
@@ -65,41 +54,30 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                 </div>
                 <form onSubmit={onSubmit} className='grid gap-4'>
                     {fields.map((topic, index) => {
-                        let lengthOfQuestion = 0
-                        const handleChange = () => {
-                            const topic = getValues(`topics.${index}.topic`)
-                            const level = getValues(`topics.${index}.level`)
-                            console.log({ topic, level })
-                            const result = filter(questions, {
-                                topic: topic,
-                                level: level
-                            })
-                            lengthOfQuestion = result.length
-                        }
                         return (
                             <div
                                 key={uuidv4()}
                                 className='grid grid-cols-1 gap-4 pb-8 border border-transparent md:grid-cols-12 border-b-neutrals-04'
                             >
                                 <SelectTopic
-                                    className='col-span-1 md:col-span-5 place-self-end'
+                                    className='w-full col-span-1 md:col-span-5 place-self-end'
                                     control={control}
                                     name={`topics.${index}.topic`}
                                     placeholder='Chuyên đề'
                                     label='Chuyên đề'
-                                    onChange={handleChange}
                                     isRequired
                                 />
+
                                 <Select
                                     className='col-span-1 md:col-span-3 place-self-end'
                                     control={control}
                                     name={`topics.${index}.level`}
-                                    placeholder='Cấp độ'
                                     options={['Nhận biết', 'Thông hiểu', 'Vận dụng thấp', 'Vận dụng cao']}
-                                    label='Cấp độ'
-                                    onChange={handleChange}
+                                    placeholder='Mức độ'
+                                    label='Mức độ'
                                     isRequired
                                 />
+
                                 <Input
                                     className='col-span-1 md:col-span-3'
                                     control={control}
@@ -108,17 +86,14 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                                         min: {
                                             value: 1,
                                             message: 'Số câu phải lớn hơn 1'
-                                        },
-                                        max: {
-                                            value: lengthOfQuestion,
-                                            message: `Số câu hỏi tối đa là ${lengthOfQuestion}`
                                         }
                                     }}
                                     name={`topics.${index}.amount`}
                                     placeholder='Số lượng'
-                                    label={`Số lượng (hiện có ${lengthOfQuestion})`}
+                                    label={`Số lượng`}
                                     isRequired
                                 />
+
                                 {index !== 0 && (
                                     <button
                                         className='flex items-center justify-center w-full col-span-1'
