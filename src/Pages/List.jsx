@@ -46,7 +46,7 @@ function List() {
     const sortFn = item => Number(toArray(item.question.match(/^Câu (\d+)\./))[1])
 
     return (
-        <div className='h-[100vh] md:p-6 overflow-auto p-1 pb-28'>
+        <div className='h-full p-1 p-6 overflow-auto pb-28'>
             <section className='border border-[#6382a3] rounded-lg bg-white'>
                 <header className='text-white bg-[#6382a3] w-full text-3xl px-4'>{content?.name}</header>
                 <div className='block py-1 text-2xl md:p-2'>

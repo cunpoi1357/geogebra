@@ -1,5 +1,5 @@
 import { get, ref, update } from 'firebase/database'
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -17,6 +17,7 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
     const { control, handleSubmit, reset, setValue } = useForm()
     const [question, setQuestion] = useState({})
     const [imageUrl, setImageUrl] = useState('')
+    const [oldImageUrl, setOldImageUrl] = useState('')
 
     useEffect(() => {
         get(ref(database, `examples/${id}`)).then(snapshot => {
@@ -30,6 +31,11 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
     }, [isOpen])
 
     const onSubmit = handleSubmit(dataForm => {
+        if (oldImageUrl !== '') {
+            const imagesRef = storageRef(storage, oldImageUrl)
+            deleteObject(imagesRef)
+            console.log('remove old image')
+        }
         update(ref(database, 'examples/' + id), {
             ...dataForm,
             image: imageUrl || ''
@@ -43,6 +49,7 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
     })
 
     const handleInputFileChange = e => {
+        setOldImageUrl(imageUrl)
         toast.info('Đang tải ảnh lên.')
         const file = e.target.files[0]
         if (file) {
@@ -60,14 +67,16 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
         }
     }
 
+    const handleClose = () => onClose()
+
     return (
-        <Modal isOpen={isOpen} onRequestClose={onClose}>
+        <Modal isOpen={isOpen} onRequestClose={handleClose}>
             <div className='bg-neutrals-01 p-6 min-h-[200px] min-w-[300px] rounded'>
                 <div className='align-center w-[1500px] flex flex-col'>
                     <header className='flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
                         <p className='flex-1 inline-block font-bold text-neutrals-07'>Chỉnh sửa bài tập</p>
-                        <XIcon className='inline-block cursor-pointer text-neutrals-04' onClick={onClose} />
+                        <XIcon className='inline-block cursor-pointer text-neutrals-04' onClick={handleClose} />
                     </header>
                     <hr className='bg-neutrals-03 w-full h-[1px] my-6'></hr>
                     <form onSubmit={onSubmit} className='grid grid-cols-2 gap-6 grid-rows-9'>

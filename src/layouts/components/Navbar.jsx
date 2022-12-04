@@ -1,17 +1,32 @@
+import { PriceTagIcon } from '../../components/Icon'
 import NavParent from './NavParent'
 
-function Navbar({ className, data, onOpenCreateTestModal }) {
+function Navbar({ className, data, expandedMenu, onOpenCreateTestModal, onOpenMenu }) {
     return (
-        <aside className={className}>
-            <div className='h-10 px-10 text-2xl leading-10 border-b'>Chủ đề</div>
-            <div className='overflow-auto bg-[#f7f8fa]'>
+        <aside className={className} onClick={onOpenMenu}>
+            <div className={`overflow-auto ${expandedMenu ? 'w-[400px]' : 'w-16'} transition-all ease-linear`}>
                 {data.map(item => (
-                    <NavParent key={item.name} {...item} />
+                    <NavParent key={item.name} expandedMenu={expandedMenu} {...item} />
                 ))}
             </div>
-            <div className='h-10 px-10 text-2xl leading-10 border-b'>Luyện tập</div>
-            <button className='menu-item bg-[#f7f8faư border border-b-[#dedfe0]' onClick={onOpenCreateTestModal}>
-                Đề tự luyện
+            <button
+                className='text-[#92a6e2] h-[72px] flex cursor-pointer hover:bg-[#4360b5] hover:text-white transition-colors ease-linear'
+                onClick={onOpenCreateTestModal}
+            >
+                <span
+                    className={`${
+                        expandedMenu ? 'h-[72px] w-[72px]' : 'h-[72px] w-16'
+                    } transition-all ease-linear flex items-center justify-center`}
+                >
+                    <PriceTagIcon className={`h-6 mr-1`} />
+                </span>
+                <span
+                    className={`py-6 pr-6 ${
+                        expandedMenu ? 'inline-block' : 'hidden'
+                    } ease-linear transition-all whitespace-nowrap overflow-hidden`}
+                >
+                    Đề tự luyện
+                </span>
             </button>
         </aside>
     )
