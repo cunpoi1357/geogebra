@@ -6,7 +6,7 @@ import Image from '../../components/Image'
 
 function Header({ expandedMenu, onToggle }) {
     return (
-        <header className='flex h-16 overflow-hidden rounded-tl-3xl rounded-tr-3xl'>
+        <header className='flex h-16 m-4 mb-0 overflow-hidden md:m-0 rounded-tl-3xl rounded-tr-3xl'>
             <button className='flex items-center justify-center w-16 h-16 bg-[#0060a7]' onClick={onToggle}>
                 <MenuIcon className={`w-8 h-8 text-white ${expandedMenu && 'text-[#8da6e5]'}`} />
             </button>
@@ -17,7 +17,7 @@ function Header({ expandedMenu, onToggle }) {
                 <Image className='inline-block h-6 mr-3' src={images.icon} alt='logo' />
                 <h2 className='inline-block font-bold text-[#0060a7] truncate'>
                     StudyGeo3D.com{' '}
-                    <span className='hidden sm:inline-block'>- Website hỗ trợ học hình học không gian</span>
+                    <span className='hidden lg:inline-block'>- Website hỗ trợ học hình học không gian</span>
                 </h2>
             </Link>
         </header>

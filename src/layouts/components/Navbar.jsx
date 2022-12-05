@@ -4,7 +4,7 @@ import NavParent from './NavParent'
 function Navbar({ className, data, expandedMenu, onOpenCreateTestModal, onOpenMenu }) {
     return (
         <aside className={className} onClick={onOpenMenu}>
-            <div className={`overflow-auto ${expandedMenu ? 'w-[400px]' : 'w-16'} transition-all ease-linear pb-40`}>
+            <div className={`${expandedMenu ? 'w-[400px]' : 'w-16'} transition-all ease-linear pb-40`}>
                 {data.map(item => (
                     <NavParent key={item.name} expandedMenu={expandedMenu} {...item} />
                 ))}

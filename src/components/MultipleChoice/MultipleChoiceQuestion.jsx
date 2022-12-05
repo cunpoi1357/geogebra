@@ -18,7 +18,7 @@ function MultipleChoiceQuestion({ data }) {
     useEffect(() => setChose(null), [data])
 
     return (
-        <div className='relative flex flex-col h-[100vh] overflow-hidden'>
+        <div className='relative flex flex-col h-[calc(100vh-72px)] overflow-hidden'>
             {data && (
                 <>
                     <header className='py-3 px-4 w-[100wh] bg-[#f0f9fe] text-xl m-1 border border-[#00adf1] shadow-[#9897ff] shadow-lg'>
