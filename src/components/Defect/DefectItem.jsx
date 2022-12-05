@@ -22,14 +22,14 @@ function DefectItem({ data, index }) {
             <td className='flex items-center gap-3 px-6 py-4'>
                 <label title='Xem'>
                     <a href={`/question/${data.id}`} target='_blank' rel='noopener noreferrer'>
-                        <EyeIcon className='cursor-pointer' />
+                        <EyeIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                     </a>
                 </label>
                 <label title='Sửa' onClick={() => setShowModal(true)}>
-                    <EditIcon className='cursor-pointer' />
+                    <EditIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                 </label>
                 <label title='Xóa' onClick={handleRemove}>
-                    <TrashIcon className='cursor-pointer' />
+                    <TrashIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                 </label>
                 <EditDefectModal isOpen={showModal} onClose={() => setShowModal(false)} id={data.id} />
             </td>

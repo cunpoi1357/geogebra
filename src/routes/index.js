@@ -11,6 +11,7 @@ import DefectManagement from '../Pages/DefectManagement'
 import StructureManagement from '../Pages/StructureManagement'
 import QuestionManagement from '../Pages/QuestionManagement'
 import TestYourSelf from '../Pages/TestYourSelf'
+import ImageManagement from '../Pages/ImageManagement'
 const AdminLayout = lazy(() => import('../layouts/AdminLayout'))
 
 const publicRoutes = [
@@ -58,6 +59,11 @@ const publicRoutes = [
     {
         path: config.routes.structureManagement,
         component: StructureManagement,
+        layout: AdminLayout
+    },
+    {
+        path: config.routes.imageManagement,
+        component: ImageManagement,
         layout: AdminLayout
     }
 ]

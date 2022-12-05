@@ -41,7 +41,7 @@ function CreateMultipleChoiceModal({ onClose, isOpen }) {
         toast.info('Đang tải ảnh lên.')
         const file = e.target.files[0]
         if (file) {
-            const imagesRef = storageRef(storage, file.name)
+            const imagesRef = storageRef(storage, `multiple_choice/${file.name}`)
             uploadBytes(imagesRef, file)
                 .then(() => {
                     toast.success('Tải ảnh lên thành công.')

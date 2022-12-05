@@ -1,26 +1,24 @@
-import { useState } from 'react'
 import { ref, remove } from 'firebase/database'
-import { toast } from 'react-toastify'
-import orderBy from 'lodash/orderBy'
-import toArray from 'lodash/toArray'
+import { ref as storageRef, deleteObject } from 'firebase/storage'
+import { useState } from 'react'
 
-import { database } from '../../firebase'
-import MultipleChoiceItem from './MultipleChoiceItem'
+import ImageItem from './ImageItem'
 import YesNoModal from '../YesNoModal'
+import { database, storage } from '../../firebase'
+import { toast } from 'react-toastify'
 
-function MultipleChoiceTable({ data = [] }) {
+function ImageTable({ data }) {
     const [showYesNoModal, setShowYesNoModal] = useState(false)
-    const [removeID, setRemoveID] = useState(null)
+    const [imageRemove, setImageRemove] = useState(null)
 
-    const handleRemove = id => {
-        remove(ref(database, 'examples/' + id))
+    const handleRemove = image => {
+        const imagesRef = storageRef(storage, image.image)
+        deleteObject(imagesRef)
+        remove(ref(database, 'images/' + image.id))
             .then(() => toast.success('Xóa thành công'))
             .catch(error => toast.error(error.message))
         setShowYesNoModal(false)
     }
-
-    const sortFn = item => Number(toArray(item.question.match(/^Câu (\d+)\./))[1])
-
     return (
         <table className='w-full text-sm text-left border border-[#a3a3a3]'>
             <thead className='text-xs text-[#a3a6b8] uppercase bg-[#fcfcfd] border  border-[#a3a3a3]'>
@@ -29,16 +27,10 @@ function MultipleChoiceTable({ data = [] }) {
                         STT
                     </th>
                     <th scope='col' className='w-2/12 px-6 py-3'>
-                        Chủ đề
+                        Chuyên đề
                     </th>
-                    <th scope='col' className='px-6 py-3'>
-                        Đề bài
-                    </th>
-                    <th scope='col' className='px-6 py-3'>
-                        Đáp án
-                    </th>
-                    <th scope='col' className='px-6 py-3'>
-                        Lời giải
+                    <th scope='col' className='w-2/12 px-6 py-3'>
+                        Tên
                     </th>
                     <th scope='col' className='px-6 py-3'>
                         Hành động
@@ -46,26 +38,26 @@ function MultipleChoiceTable({ data = [] }) {
                 </tr>
             </thead>
             <tbody>
-                {orderBy(data, ['topic', sortFn], ['esc', 'esc']).map((item, index) => (
-                    <MultipleChoiceItem
+                {data.map((item, index) => (
+                    <ImageItem
                         key={item.id}
-                        index={index + 1}
+                        index={index}
                         data={item}
                         onRemove={() => {
                             setShowYesNoModal(true)
-                            setRemoveID(item.id)
+                            setImageRemove(item)
                         }}
                     />
                 ))}
             </tbody>
             <YesNoModal
-                title='Cảnh báo! bạn đang xóa một câu hỏi.'
+                title='Cảnh báo! bạn đang xóa một hình ảnh.'
                 isOpen={showYesNoModal}
                 onClose={() => setShowYesNoModal(false)}
-                onSubmit={() => handleRemove(removeID)}
+                onSubmit={() => handleRemove(imageRemove)}
             />
         </table>
     )
 }
 
-export default MultipleChoiceTable
+export default ImageTable

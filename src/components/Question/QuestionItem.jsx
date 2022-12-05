@@ -49,13 +49,13 @@ function QuestionItem({ data, index, onRemove }) {
             </td>
             <td className='flex items-center gap-3 px-6 py-4'>
                 <label title='Xem'>
-                    <EyeIcon className='cursor-pointer' />
+                    <EyeIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                 </label>
                 <label title='Sửa' onClick={() => setShowModal(true)}>
-                    <EditIcon className='cursor-pointer' />
+                    <EditIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                 </label>
                 <label title='Xóa' onClick={onRemove}>
-                    <TrashIcon className='cursor-pointer' />
+                    <TrashIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                 </label>
             </td>
             <EditQuestionModal onClose={() => setShowModal(false)} isOpen={showModal} id={data.id} />
