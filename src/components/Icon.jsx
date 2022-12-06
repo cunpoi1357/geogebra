@@ -323,3 +323,25 @@ export const CloudUploadIcon = ({ className }) => (
         />
     </svg>
 )
+
+export const MarkdownIcon = ({ className }) => (
+    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+        <path
+            fill='currentColor'
+            d='M475 64H37C16.58 64 0 81.38 0 102.77v306.42C0 430.59 16.58 448 37 448h438c20.38 0 37-17.41 37-38.81V102.77C512 81.38 495.42 64 475 64zM288 368h-64V256l-48 64-48-64v112H64V144h64l48 80 48-80h64zm96 0l-80-112h48.05L352 144h64v112h48z'
+        />
+    </svg>
+)
+
+export const PrismIcon = ({ className }) => (
+    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+        <path
+            d='M229.73 45.88L37.53 327.79a31.79 31.79 0 0011.31 46L241 476.26a31.77 31.77 0 0029.92 0l192.2-102.51a31.79 31.79 0 0011.31-46L282.27 45.88a31.8 31.8 0 00-52.54 0zM256 32v448'
+            fill='none'
+            stroke='currentColor'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            stroke-width='32'
+        />
+    </svg>
+)
