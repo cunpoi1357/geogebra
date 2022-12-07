@@ -14,9 +14,9 @@ export default class addGeogebra extends PluginComponent {
     handleClick() {
         const geogebraId = prompt('Geogebra Id')
         if (geogebraId) {
-            this.editor.insertText(
-                `<div class='content-center'><iframe src="https://www.geogebra.org/calculator/${geogebraId}?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe></div>`
-            )
+            this.editor.insertText(`:::div{.content-center}
+::geo{#${geogebraId}}
+:::`)
         }
     }
 

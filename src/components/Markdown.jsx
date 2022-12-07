@@ -14,10 +14,29 @@ function myRemarkPlugin() {
         visit(tree, node => {
             if (node.type === 'textDirective' || node.type === 'leafDirective' || node.type === 'containerDirective') {
                 const data = node.data || (node.data = {})
-                const hast = h(node.name, node.attributes)
-
-                data.hName = hast.tagName
-                data.hProperties = hast.properties
+                const attributes = node.attributes || {}
+                const id = attributes?.id
+                switch (node.name) {
+                    case 'geo':
+                        console.log('attributes', attributes)
+                        if (node.type === 'textDirective')
+                            console.log('Text directives for `geogebra` not supported', node)
+                        if (!id) console.log('Missing geogebra id', node)
+                        data.hName = 'iframe'
+                        data.hProperties = {
+                            src: `https://www.geogebra.org/calculator/${id}?embed`,
+                            width: 800,
+                            height: 600,
+                            frameBorder: 0,
+                            style: 'border:1px solid #e4e4e4;border-radius: 4px;',
+                            allowFullScreen: true
+                        }
+                        break
+                    default:
+                        const hast = h(node.name, attributes)
+                        data.hName = hast.tagName
+                        data.hProperties = hast.properties
+                }
             }
         })
     }
