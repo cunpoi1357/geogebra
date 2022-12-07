@@ -10,9 +10,18 @@
         @apply w-full mb-4 md:flex md:justify-center;
     }
     .content-block {
-        @apply bg-[#e5f1ff] md:w-2/3 sd p-2 rounded-md block mb-4;
+        @apply bg-[#f0f9fe] md:w-2/3 p-2 rounded-tr-lg rounded-br-lg block mb-4 border border-blue-400 border-l-8 border-l-blue-400;
     }
-
+    .content-block h1,
+    .content-block h2,
+    .content-block h3,
+    .content-block h4,
+    .content-block h5 {
+        @apply text-[#e34752] rounded-md my-0;
+    }
+    .content-break {
+        @apply md:w-2/3 block;
+    }
     .admin-bar-bg {
         background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
     }
@@ -32,6 +41,18 @@
     .sd {
         box-shadow: 4px 4px 3px #262b34;
     }
+    do {
+        color: #f90201;
+    }
+    xanhdam {
+        color: #08255d;
+    }
+    xanhduong {
+        color: #0400cf;
+    }
+    hongsam {
+        color: #d3036d;
+    }
 }
 
 @layer base {
@@ -42,6 +63,18 @@
     }
     html {
         @apply font-UTM;
+    }
+    body h2 {
+        @apply text-4xl;
+    }
+    body h3 {
+        @apply text-xl;
+    }
+    body h4 {
+        @apply text-lg;
+    }
+    body h5 {
+        @apply text-sm;
     }
 }
 

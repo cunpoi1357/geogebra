@@ -10,10 +10,11 @@ export default class block extends PluginComponent {
     }
 
     handleClick() {
-        this.editor.insertText(`<div class='content-block'>
-   <h3 className='bg-[#fffceb] rounded-md px-2'>Title</h3>
-    Content
- </div>`)
+        this.editor.insertText(`:::div{.content-center}
+:::div{.content-block}
+::h3[Heading]{.content-heading.font-bold}
+Content
+:::`)
     }
 
     render() {

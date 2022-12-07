@@ -8,10 +8,13 @@ import Markdown from '../components/Markdown'
 import addGeogebra from '../plugins/addGeogebra'
 import center from '../plugins/center'
 import block from '../plugins/block'
+import breakLine from '../plugins/break'
 
 MdEditor.use(addGeogebra)
 MdEditor.use(center)
 MdEditor.use(block)
+MdEditor.use(block)
+MdEditor.use(breakLine)
 
 const handleImageUpload = async file => {
     const imagesRef = ref(storage, `images/${file.name}`)

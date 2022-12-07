@@ -1,7 +1,7 @@
 import { PluginComponent } from 'react-markdown-editor-lite'
 
-export default class center extends PluginComponent {
-    static pluginName = 'center'
+export default class block extends PluginComponent {
+    static pluginName = 'color'
     static align = 'left'
 
     constructor(props) {
@@ -10,15 +10,16 @@ export default class center extends PluginComponent {
     }
 
     handleClick() {
-        this.editor.insertText(`:::div{.content-center}
-Content
-:::`)
+        this.editor.insertText(`<div class='content-block'>
+   <h3 className='bg-[#fffceb] rounded-md px-2'>Title</h3>
+    <p>Content</p>
+ </div>`)
     }
 
     render() {
         return (
             <span className='justify-center button' title='Center' onClick={this.handleClick}>
-                Center
+                block
             </span>
         )
     }
