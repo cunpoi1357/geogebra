@@ -35,7 +35,6 @@ function CreateMultipleChoiceModal({ onClose, isOpen }) {
                 id
             })
             toast.success('Tạo thành công')
-            imageUrl = ''
             onClose()
             reset()
             setImage(null)
