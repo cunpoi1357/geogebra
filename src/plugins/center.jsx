@@ -1,4 +1,5 @@
 import { PluginComponent } from 'react-markdown-editor-lite'
+import { TextCenterIcon } from '../components/Icon'
 
 export default class center extends PluginComponent {
     static pluginName = 'center'
@@ -18,7 +19,7 @@ Content
     render() {
         return (
             <span className='justify-center button' title='Center' onClick={this.handleClick}>
-                Center
+                <TextCenterIcon className='h-6 mt-1' />
             </span>
         )
     }

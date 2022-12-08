@@ -22,7 +22,7 @@ function AdminHeader({ children }) {
 
     return (
         <header className='flex items-center justify-between h-20 px-10 m-4 shadow bg-neutrals-01 rounded-xl'>
-            <h2 className='font-bold'>{children}</h2>
+            <h1 className='text-xl font-bold'>{children}</h1>
             <nav className='flex items-center'>
                 <div className='flex items-center cursor-pointer'>
                     {user ? (

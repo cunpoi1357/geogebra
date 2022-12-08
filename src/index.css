@@ -35,6 +35,12 @@
             hsla(214, 100%, 90%, 100%) 100%
         );
     }
+    .geo {
+        @apply h-[500px] w-full md:h-[600px] md:w-[800px];
+    }
+    .ytb {
+        @apply h-[500px] w-full md:h-[600px] md:w-[800px];
+    }
     body {
         @apply overflow-hidden;
     }

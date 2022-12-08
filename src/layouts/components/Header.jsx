@@ -12,10 +12,10 @@ function Header({ expandedMenu, onToggle }) {
             </button>
             <Link
                 to='/'
-                className='flex-1 flex items-center w-full h-full px-8 py-4 text-xl font-bold bg-white border border-b-[#cdd5d8]'
+                className='flex-1 flex items-center w-full h-full px-8 py-4 md:text-xl text-sm font-bold bg-white border border-b-[#cdd5d8]'
             >
                 <Image className='inline-block h-6 mr-3' src={images.icon} alt='logo' />
-                <h2 className='inline-block font-bold text-[#0060a7] truncate'>
+                <h2 className='inline-block text-xl font-bold text-[#0060a7] truncate'>
                     StudyGeo3D.com{' '}
                     <span className='hidden lg:inline-block'>- Website hỗ trợ học hình học không gian</span>
                 </h2>

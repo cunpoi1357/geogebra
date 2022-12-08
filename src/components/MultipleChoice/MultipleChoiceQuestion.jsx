@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Geogebra from 'react-geogebra'
 import Latex from 'react-latex'
 import { toast } from 'react-toastify'
 import { BookIcon, ChatBubbleIcon } from '../Icon'
 import Image from '../Image'
+import Geogebra from '../Geogebra'
 
 function MultipleChoiceQuestion({ data }) {
     const [chose, setChose] = useState(null)
@@ -32,8 +32,8 @@ function MultipleChoiceQuestion({ data }) {
                     </header>
                     <section className='overflow-auto pb-44 md:p-10'>
                         {data.geogebraId && (
-                            <div className='flex justify-center mt-10'>
-                                <Geogebra appName='3d' material_id={data.geogebraId} showMenuBar={false} lang='vi' />
+                            <div className='flex justify-center mt-10 md:h-[600px] h-[500px]'>
+                                <Geogebra id={data.geogebraId} />
                             </div>
                         )}
                         {data.image && (

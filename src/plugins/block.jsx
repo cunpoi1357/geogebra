@@ -1,4 +1,5 @@
 import { PluginComponent } from 'react-markdown-editor-lite'
+import { SubTitleIcon } from '../components/Icon'
 
 export default class block extends PluginComponent {
     static pluginName = 'block'
@@ -19,8 +20,8 @@ Content
 
     render() {
         return (
-            <span className='justify-center button' title='Center' onClick={this.handleClick}>
-                block
+            <span className='justify-center button' title='Block' onClick={this.handleClick}>
+                <SubTitleIcon className='h-6 mt-1' />
             </span>
         )
     }
