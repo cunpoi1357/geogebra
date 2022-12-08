@@ -16,42 +16,33 @@ import Textarea from '../Textarea'
 
 function CreateMultipleChoiceModal({ onClose, isOpen }) {
     const { control, handleSubmit, reset } = useForm()
+    const [image, setImage] = useState(null)
 
-    const [imageUrl, setImageUrl] = useState('')
-
-    const onSubmit = handleSubmit(data => {
+    const onSubmit = handleSubmit(async data => {
         const id = uuidv4()
-        set(ref(database, 'examples/' + id), {
-            type: 'multiple-choice',
-            ...data,
-            question: data.question,
-            answer: data.answer,
-            image: imageUrl || '',
-            id
-        })
-            .then(() => {
-                toast.success('Tạo thành công')
+        let imageUrl = ''
+        try {
+            if (image) {
+                toast.info('Đang tải ảnh lên....')
+                const imagesRef = storageRef(storage, `multiple_choice/${image.name}`)
+                await uploadBytes(imagesRef, image)
+                imageUrl = await getDownloadURL(imagesRef)
+            }
+            await set(ref(database, 'examples/' + id), {
+                type: 'multiple-choice',
+                ...data,
+                image: imageUrl || '',
+                id
             })
-            .catch(error => toast.error(error.message))
-        onClose()
-        reset()
-    })
-
-    const handleInputFileChange = e => {
-        toast.info('Đang tải ảnh lên.')
-        const file = e.target.files[0]
-        if (file) {
-            const imagesRef = storageRef(storage, `multiple_choice/${file.name}`)
-            uploadBytes(imagesRef, file)
-                .then(() => {
-                    toast.success('Tải ảnh lên thành công.')
-                    getDownloadURL(imagesRef)
-                        .then(url => setImageUrl(url))
-                        .catch(error => toast.error(error))
-                })
-                .catch(() => toast.error('Tải ảnh lên thất bại.'))
+            toast.success('Tạo thành công')
+            imageUrl = ''
+            onClose()
+            reset()
+            setImage(null)
+        } catch (error) {
+            toast.error(error?.message || error)
         }
-    }
+    })
 
     return (
         <Modal isOpen={isOpen} onRequestClose={onClose}>
@@ -127,7 +118,7 @@ function CreateMultipleChoiceModal({ onClose, isOpen }) {
                                 className='col-span-1'
                                 name='image'
                                 control={control}
-                                onChange={handleInputFileChange}
+                                onChange={e => setImage(e.target.files[0])}
                                 placeholder='Ảnh minh họa'
                                 label='Ảnh minh họa'
                             />

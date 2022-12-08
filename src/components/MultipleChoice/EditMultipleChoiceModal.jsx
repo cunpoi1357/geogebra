@@ -1,5 +1,5 @@
 import { get, ref, update } from 'firebase/database'
-import { ref as storageRef, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage'
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -16,8 +16,8 @@ import Textarea from '../Textarea'
 function EditMultipleChoiceModal({ id, onClose, isOpen }) {
     const { control, handleSubmit, reset, setValue } = useForm()
     const [question, setQuestion] = useState({})
-    const [imageUrl, setImageUrl] = useState('')
-    const [oldImageUrl, setOldImageUrl] = useState('')
+    const [image, setImage] = useState(null)
+    const [isRemove, setIsRemove] = useState(false)
 
     useEffect(() => {
         get(ref(database, `examples/${id}`)).then(snapshot => {
@@ -26,46 +26,30 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
         Array.from(Object.keys(question))
             .filter(key => key !== 'image')
             .forEach(key => setValue(key, question[key]))
-        setImageUrl(question.image)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen])
 
-    const onSubmit = handleSubmit(dataForm => {
-        if (oldImageUrl !== '') {
-            const imagesRef = storageRef(storage, oldImageUrl)
-            deleteObject(imagesRef)
-            console.log('remove old image')
-        }
-        update(ref(database, 'examples/' + id), {
-            ...dataForm,
-            image: imageUrl || ''
-        })
-            .then(() => {
-                toast.success('Cập nhật thành công')
+    const onSubmit = handleSubmit(async dataForm => {
+        let url = ''
+        try {
+            if (image) {
+                toast.info('Đang tải ảnh lên....')
+                const imagesRef = storageRef(storage, `multiple_choice/${image.name}`)
+                await uploadBytes(imagesRef, image)
+                url = await getDownloadURL(imagesRef)
+            }
+            await update(ref(database, 'examples/' + id), {
+                ...dataForm,
+                image: isRemove ? '' : url || ''
             })
-            .catch(error => toast.error(error.message))
-        onClose()
-        reset()
-    })
-
-    const handleInputFileChange = e => {
-        setOldImageUrl(imageUrl)
-        toast.info('Đang tải ảnh lên.')
-        const file = e.target.files[0]
-        if (file) {
-            const imagesRef = storageRef(storage, file.name)
-            uploadBytes(imagesRef, file)
-                .then(() =>
-                    getDownloadURL(imagesRef)
-                        .then(url => {
-                            toast.success('Tải ảnh lên thành công.')
-                            setImageUrl(url)
-                        })
-                        .catch(error => toast.error(error))
-                )
-                .catch(() => toast.error('Tải ảnh lên thất bại.'))
+            toast.success('Cập nhật thành công')
+            onClose()
+            reset()
+            setImage(null)
+        } catch (error) {
+            toast.error(error?.message || error)
         }
-    }
+    })
 
     const handleClose = () => onClose()
 
@@ -146,13 +130,13 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
                                     control={control}
                                     placeholder='Ảnh minh họa'
                                     label='Ảnh minh họa'
-                                    onChange={handleInputFileChange}
+                                    onChange={e => setImage(e.target.files[0])}
                                 />
                                 <button
                                     type='button'
                                     className='absolute translate-y-1 right-3 top-1/2 bg-[#efefef] border border-[#767676] px-1 hover:bg-[#e5e5e5] transition-colors'
                                     onClick={() => {
-                                        setImageUrl('')
+                                        setIsRemove(true)
                                         toast.success('Đã xóa ảnh.')
                                     }}
                                 >

@@ -22,9 +22,10 @@ const handleImageUpload = async file => {
     return url
 }
 
-function MarkdownEditor({ value, onChange }) {
+function MarkdownEditor({ className, value, onChange }) {
     return (
         <MdEditor
+            className={className}
             style={{ height: '100%' }}
             renderHTML={text => <Markdown>{text}</Markdown>}
             onImageUpload={handleImageUpload}

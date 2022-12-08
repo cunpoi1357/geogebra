@@ -45,9 +45,7 @@ function UploadImageModal({ isOpen, onClose }) {
         }
     })
 
-    const handleInputFileChange = e => {
-        setImage(e.target.files[0])
-    }
+    const handleInputFileChange = e => setImage(e.target.files[0])
 
     return (
         <Modal isOpen={isOpen} onRequestClose={onClose}>
