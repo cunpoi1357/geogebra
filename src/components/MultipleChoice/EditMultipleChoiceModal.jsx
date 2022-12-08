@@ -17,7 +17,6 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
     const { control, handleSubmit, reset, setValue } = useForm()
     const [question, setQuestion] = useState({})
     const [image, setImage] = useState(null)
-    const [isRemove, setIsRemove] = useState(false)
 
     useEffect(() => {
         get(ref(database, `examples/${id}`)).then(snapshot => {
@@ -40,7 +39,7 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
             }
             await update(ref(database, 'examples/' + id), {
                 ...dataForm,
-                image: isRemove ? '' : url || ''
+                image: url || ''
             })
             toast.success('Cập nhật thành công')
             onClose()
@@ -136,8 +135,7 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
                                     type='button'
                                     className='absolute translate-y-1 right-3 top-1/2 bg-[#efefef] border border-[#767676] px-1 hover:bg-[#e5e5e5] transition-colors'
                                     onClick={() => {
-                                        setIsRemove(true)
-                                        toast.success('Đã xóa ảnh.')
+                                        toast.success('Chưa cập nhật tính năng này.')
                                     }}
                                 >
                                     Xóa ảnh
