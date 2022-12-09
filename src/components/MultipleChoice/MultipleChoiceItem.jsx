@@ -3,24 +3,25 @@ import Latex from 'react-latex'
 
 import EditMultipleChoiceModal from './EditMultipleChoiceModal'
 import { EditIcon, EyeIcon, TrashIcon } from '../Icon'
+import Markdown from '../Markdown'
 
 function MultipleChoiceItem({ data, index, onRemove }) {
     const [showModal, setShowModal] = useState(false)
 
     return (
-        <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767]'>
+        <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767] w-[1000px]'>
             {data && (
                 <>
                     <td className='px-6 py-4 font-medium whitespace-nowrap'>{index}</td>
                     <td className='px-6 py-4'>{JSON.parse(data.topic).name}</td>
                     <td className='px-6 py-4'>
-                        <Latex>{data.question}</Latex>
+                        <Markdown className='w-[400px]'>{data.question}</Markdown>
                     </td>
                     <td className='px-6 py-4'>
                         <Latex>{data[data.answerKey]}</Latex>
                     </td>
                     <td className='px-6 py-4'>
-                        <Latex>{data.answer}</Latex>
+                        <Markdown className='w-[400px]'>{data.answer}</Markdown>
                     </td>
                     <td className='flex items-center gap-3 px-6 py-4'>
                         <label title='Xem'>

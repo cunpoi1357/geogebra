@@ -33,7 +33,7 @@ function AdminHeader({ children }) {
                                 alt='F8'
                             />
                             <div className='mr-4 w-44'>
-                                <h4 className='font-semibold'>{user.email}</h4>
+                                <h5 className='font-semibold'>{user.email}</h5>
                                 <button className='text-x text-neutrals-05 hover:underline' onClick={handleLogout}>
                                     Đăng xuất
                                 </button>

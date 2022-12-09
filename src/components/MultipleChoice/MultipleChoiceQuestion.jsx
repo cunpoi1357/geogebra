@@ -3,6 +3,7 @@ import Latex from 'react-latex'
 import { toast } from 'react-toastify'
 import { BookIcon, ChatBubbleIcon } from '../Icon'
 import Image from '../Image'
+import Markdown from '../Markdown'
 import Geogebra from '../Geogebra'
 
 function MultipleChoiceQuestion({ data }) {
@@ -68,11 +69,7 @@ function MultipleChoiceQuestion({ data }) {
                                         <ChatBubbleIcon className='w-6 h-6 mr-2' />
                                         <span>Lời giải:</span>
                                     </div>
-                                    {data?.answer.split(/\.\s\n/).map(item => (
-                                        <div key={item}>
-                                            <Latex>{item}</Latex>
-                                        </div>
-                                    ))}
+                                    <Markdown>{data?.answer}</Markdown>
                                     <span>
                                         Chọn đáp án{' '}
                                         <span className='p-2 w-9 h-9 text-xl text-[#08b1ed] font-bold rounded-full border border-[#00adf1] inline-flex items-center justify-center m-3'>

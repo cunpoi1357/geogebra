@@ -28,7 +28,7 @@ function MultipleChoiceTable({ data = [] }) {
                     <th scope='col' className='px-6 py-3'>
                         STT
                     </th>
-                    <th scope='col' className='w-2/12 px-6 py-3'>
+                    <th scope='col' className='px-6 py-3'>
                         Chủ đề
                     </th>
                     <th scope='col' className='px-6 py-3'>
