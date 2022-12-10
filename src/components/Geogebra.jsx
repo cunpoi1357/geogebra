@@ -11,6 +11,7 @@ function Geogebra({ id }) {
                 border: '1px solid #e4e4e4',
                 borderRadius: '4px'
             }}
+            onLoad={() => console.log('iframe loaded')}
             frameborder='0'
             lang='vi-vn'
         />

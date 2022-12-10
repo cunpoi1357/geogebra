@@ -26,7 +26,8 @@ function myRemarkPlugin() {
                             src: `https://www.geogebra.org/calculator/${id}?embed`,
                             frameBorder: 0,
                             style: 'border:1px solid #e4e4e4;border-radius: 4px;',
-                            allowFullScreen: true
+                            allowFullScreen: true,
+                            loading: 'lazy'
                         }
                         break
                     case 'youtube':
