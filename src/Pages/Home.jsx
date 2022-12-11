@@ -4,7 +4,7 @@ import images from '../assets/images'
 
 function Home() {
     return (
-        <main className='pb-40 overflow-auto'>
+        <main className='pb-40 h-[calc(100vh-100px)] overflow-auto'>
             <section>
                 <div className='bg-[#8087d8] px-6 pb-10 pt-4'>
                     <div className='flex flex-col justify-between md:flex-row'>

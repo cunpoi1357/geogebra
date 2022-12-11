@@ -269,61 +269,6 @@ export const PriceTagIcon = ({ className }) => (
     </svg>
 )
 
-export const ImageIcon = ({ className }) => (
-    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
-        <path
-            fill='currentColor'
-            d='M416 64H96a64.07 64.07 0 00-64 64v256a64.07 64.07 0 0064 64h320a64.07 64.07 0 0064-64V128a64.07 64.07 0 00-64-64zm-80 64a48 48 0 11-48 48 48.05 48.05 0 0148-48zM96 416a32 32 0 01-32-32v-67.63l94.84-84.3a48.06 48.06 0 0165.8 1.9l64.95 64.81L172.37 416zm352-32a32 32 0 01-32 32H217.63l121.42-121.42a47.72 47.72 0 0161.64-.16L448 333.84z'
-        />
-    </svg>
-)
-
-export const CopyIcon = ({ className }) => (
-    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
-        <rect
-            x='128'
-            y='128'
-            width='336'
-            height='336'
-            rx='57'
-            ry='57'
-            fill='none'
-            stroke='currentColor'
-            strokeLinejoin='round'
-            strokeWidth='32'
-        />
-        <path
-            d='M383.5 128l.5-24a56.16 56.16 0 00-56-56H112a64.19 64.19 0 00-64 64v216a56.16 56.16 0 0056 56h24'
-            fill='none'
-            stroke='currentColor'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='32'
-        />
-    </svg>
-)
-
-export const CloudUploadIcon = ({ className }) => (
-    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
-        <path
-            d='M320 367.79h76c55 0 100-29.21 100-83.6s-53-81.47-96-83.6c-8.89-85.06-71-136.8-144-136.8-69 0-113.44 45.79-128 91.2-60 5.7-112 43.88-112 106.4s54 106.4 120 106.4h56'
-            fill='none'
-            stroke='currentColor'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='32'
-        />
-        <path
-            fill='none'
-            stroke='currentColor'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            strokeWidth='32'
-            d='M320 255.79l-64-64-64 64M256 448.21V207.79'
-        />
-    </svg>
-)
-
 export const MarkdownIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
         <path

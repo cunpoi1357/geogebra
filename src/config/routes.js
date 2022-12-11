@@ -8,8 +8,7 @@ const routes = {
     multipleChoiceManagement: '/admin/multiple-choice',
     defectManagement: '/admin/defect',
     theoryManagement: '/admin/theory',
-    questionManagement: '/admin/question',
-    imageManagement: '/admin/image'
+    questionManagement: '/admin/question'
 }
 
 export default routes

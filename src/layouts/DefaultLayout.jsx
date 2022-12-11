@@ -38,7 +38,7 @@ function DefaultLayout({ children }) {
                     onOpenCreateTestModal={() => setCreateTestShow(true)}
                 />
                 <main
-                    className={`relative flex-1 h-[calc(100vh-80px)] overflow-auto bg lg:pl-4 pt-4 lg:block ${
+                    className={`relative flex-1 h-[calc(100vh-80px)] overflow-hidden bg lg:pl-4 pt-4 lg:block ${
                         expandedMenu ? 'hidden' : ''
                     }`}
                 >

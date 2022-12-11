@@ -7,19 +7,19 @@ import { get, ref } from 'firebase/database'
 import { database } from '../firebase'
 
 function useCreateTest(patten) {
-    const [questions, setQuestions] = useState([])
-    const data = []
+    const [data, setData] = useState([])
 
     useEffect(() => {
         get(ref(database, 'questions')).then(snapshot => {
-            setQuestions(toArray(snapshot.val()).filter(item => !!item && JSON.parse(item.topic)))
+            setData(toArray(snapshot.val()).filter(item => !!item && JSON.parse(item.topic)))
         })
     }, [])
 
+    const result = []
     patten.forEach(item =>
-        data.push(
+        result.push(
             ...sampleSize(
-                filter(questions, {
+                filter(data, {
                     topic: item.topic,
                     level: item.level
                 }).map(question => question.id),
@@ -27,8 +27,9 @@ function useCreateTest(patten) {
             )
         )
     )
+    console.log(result)
 
-    return data
+    return result
 }
 
 export default useCreateTest
