@@ -1,11 +1,13 @@
 import { ref, set } from 'firebase/database'
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
+import { useState } from 'react'
 
-import { database } from '../../firebase'
+import { database, storage } from '../../firebase'
 import Button from '../Button'
-import { XIcon } from '../Icon'
+import { ClipBoardIcon, XIcon } from '../Icon'
 import Modal from '../Modal'
 import Input from '../Input'
 import Select from '../Select'
@@ -13,30 +15,55 @@ import SelectTopic from '../SelectTopic'
 import Textarea from '../Textarea'
 
 function CreateQuestionModal({ onClose, isOpen }) {
-    const { control, handleSubmit, reset } = useForm()
+    const { control, handleSubmit, reset, setValue } = useForm()
+    const [image, setImage] = useState(null)
+    const [imageUrl, setImageUrl] = useState(null)
 
-    const onSubmit = handleSubmit(data => {
+    const onSubmit = handleSubmit(async data => {
         const id = uuidv4()
-        set(ref(database, 'questions/' + id), {
-            ...data,
-            id
-        })
-            .then(() => {
-                toast.success('Tạo thành công')
+        let url = ''
+        try {
+            if (image) {
+                toast.info('Đang tải ảnh lên....')
+                const imagesRef = storageRef(storage, `multiple_choice/${image.name}`)
+                await uploadBytes(imagesRef, image)
+                url = await getDownloadURL(imagesRef)
+            }
+            await set(ref(database, 'questions/' + id), {
+                ...data,
+                image: url || imageUrl || '',
+                id
             })
-            .catch(error => toast.error(error.message))
-        onClose()
-        reset()
+            toast.success('Tạo thành công')
+            onClose()
+            reset()
+            setImage(null)
+        } catch (error) {
+            toast.error(error?.message || error)
+        }
     })
+
+    const handlePaste = () => {
+        window.navigator.clipboard.readText().then(text => {
+            const data = JSON.parse(text)
+            Array.from(Object.keys(data)).forEach(key => setValue(key, data[key]))
+            if (data.image) {
+                setImageUrl(data.image)
+            }
+        })
+    }
 
     return (
         <Modal isOpen={isOpen} onRequestClose={onClose}>
             <div className='bg-neutrals-01 p-6 min-h-[200px] min-w-[300px] rounded'>
                 <div className='align-center w-[80vw] flex flex-col'>
-                    <header className='flex items-center w-full'>
+                    <header className='relative flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
                         <p className='flex-1 inline-block font-bold text-neutrals-07'>Tạo câu hỏi trắc nghiệm mới</p>
                         <XIcon className='inline-block cursor-pointer text-neutrals-04' onClick={onClose} />
+                        <button className='absolute -bottom-[52px] right-0' onClick={handlePaste}>
+                            <ClipBoardIcon className='w-6 h-6 hover:bg-[#00000010] border hover:border-neutrals-07 transition-all cursor-pointer rounded' />
+                        </button>
                     </header>
                     <hr className='bg-neutrals-03 w-full h-[1px] my-6'></hr>
                     <form onSubmit={onSubmit} className='grid grid-cols-2 gap-6 grid-rows-9'>
@@ -105,6 +132,22 @@ function CreateQuestionModal({ onClose, isOpen }) {
                                 control={control}
                                 placeholder='Geogebra ID'
                                 label='Geogebra ID'
+                            />
+                            <Input
+                                type='file'
+                                className='col-span-1'
+                                name='image'
+                                control={control}
+                                onChange={e => setImage(e.target.files[0])}
+                                placeholder='Ảnh minh họa'
+                                label='Ảnh minh họa'
+                            />
+                            <Input
+                                className='col-span-1'
+                                name='youtube'
+                                control={control}
+                                placeholder='Link video'
+                                label='Video'
                             />
                         </div>
                         <div className='grid grid-cols-2 col-span-1 grid-rows-4 gap-6'>

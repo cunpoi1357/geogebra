@@ -1,8 +1,9 @@
 import { get, ref, update } from 'firebase/database'
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { database } from '../../firebase'
+import { database, storage } from '../../firebase'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import Modal from '../Modal'
@@ -16,6 +17,7 @@ import { useEffect } from 'react'
 function EditQuestionModal({ id, onClose, isOpen }) {
     const { control, handleSubmit, reset, setValue } = useForm()
     const [question, setQuestion] = useState({})
+    const [image, setImage] = useState(null)
 
     useEffect(() => {
         get(ref(database, `questions/${id}`)).then(snapshot => {
@@ -25,14 +27,26 @@ function EditQuestionModal({ id, onClose, isOpen }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen])
 
-    const onSubmit = handleSubmit(dataForm => {
-        update(ref(database, 'questions/' + id), dataForm)
-            .then(() => {
-                toast.success('Cập nhật thành công')
+    const onSubmit = handleSubmit(async dataForm => {
+        let url = ''
+        try {
+            if (image) {
+                toast.info('Đang tải ảnh lên....')
+                const imagesRef = storageRef(storage, `question/${image.name}`)
+                await uploadBytes(imagesRef, image)
+                url = await getDownloadURL(imagesRef)
+            }
+            await update(ref(database, 'questions/' + id), {
+                ...dataForm,
+                image: url || ''
             })
-            .catch(error => toast.error(error.message))
-        onClose()
-        reset()
+            toast.success('Cập nhật thành công')
+            onClose()
+            reset()
+            setImage(null)
+        } catch (error) {
+            toast.error(error?.message || error)
+        }
     })
 
     return (
@@ -111,6 +125,22 @@ function EditQuestionModal({ id, onClose, isOpen }) {
                                 control={control}
                                 placeholder='Geogebra ID'
                                 label='Geogebra ID'
+                            />
+                            <Input
+                                type='file'
+                                className='col-span-1'
+                                name='image'
+                                control={control}
+                                onChange={e => setImage(e.target.files[0])}
+                                placeholder='Ảnh minh họa'
+                                label='Ảnh minh họa'
+                            />
+                            <Input
+                                className='col-span-1'
+                                name='youtube'
+                                control={control}
+                                placeholder='Link video'
+                                label='Video'
                             />
                         </div>
                         <div className='grid grid-cols-2 col-span-1 grid-rows-4 gap-6'>

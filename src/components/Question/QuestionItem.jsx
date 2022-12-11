@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Latex from 'react-latex'
 
 import { EditIcon, EyeIcon, TrashIcon } from '../Icon'
+import Markdown from '../Markdown'
 import EditQuestionModal from './EditQuestionModal'
+import PreviewQuestionModal from './PreviewQuestionModal'
 
 function QuestionItem({ data, index, onRemove }) {
-    const [showModal, setShowModal] = useState(false)
+    const [showEditModal, setShowEditModal] = useState(false)
+    const [showPreviewModal, setShowPreviewModal] = useState(false)
 
     return (
         <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767]'>
@@ -42,23 +45,24 @@ function QuestionItem({ data, index, onRemove }) {
                 })()}
             </td>
             <td className='px-6 py-4'>
-                <Latex>{data.question}</Latex>
+                <Markdown className='w-[400px]'>{data.question}</Markdown>
             </td>
             <td className='px-6 py-4'>
                 <Latex>{data[data.answerKey]}</Latex>
             </td>
             <td className='flex items-center gap-3 px-6 py-4'>
-                <label title='Xem'>
+                <label title='Xem' onClick={() => setShowPreviewModal(true)}>
                     <EyeIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                 </label>
-                <label title='Sửa' onClick={() => setShowModal(true)}>
+                <label title='Sửa' onClick={() => setShowEditModal(true)}>
                     <EditIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                 </label>
                 <label title='Xóa' onClick={onRemove}>
                     <TrashIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                 </label>
             </td>
-            <EditQuestionModal onClose={() => setShowModal(false)} isOpen={showModal} id={data.id} />
+            <EditQuestionModal onClose={() => setShowEditModal(false)} isOpen={showEditModal} id={data.id} />
+            <PreviewQuestionModal onClose={() => setShowPreviewModal(false)} isOpen={showPreviewModal} data={data} />
         </tr>
     )
 }

@@ -339,3 +339,52 @@ export const SubTitleIcon = ({ className }) => (
         <path d='M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6zm0 4h8v2H6zm10 0h2v2h-2zm-6-4h8v2h-8z'></path>
     </svg>
 )
+
+export const CopyIcon = ({ className }) => (
+    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+        <rect
+            x='128'
+            y='128'
+            width='336'
+            height='336'
+            rx='57'
+            ry='57'
+            fill='none'
+            stroke='currentColor'
+            stroke-linejoin='round'
+            stroke-width='32'
+        />
+        <path
+            d='M383.5 128l.5-24a56.16 56.16 0 00-56-56H112a64.19 64.19 0 00-64 64v216a56.16 56.16 0 0056 56h24'
+            fill='none'
+            stroke='currentColor'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            stroke-width='32'
+        />
+    </svg>
+)
+
+export const ClipBoardIcon = ({ className }) => (
+    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+        <path
+            d='M336 64h32a48 48 0 0148 48v320a48 48 0 01-48 48H144a48 48 0 01-48-48V112a48 48 0 0148-48h32'
+            fill='none'
+            stroke='currentColor'
+            stroke-linejoin='round'
+            stroke-width='32'
+        />
+        <rect
+            x='176'
+            y='32'
+            width='160'
+            height='64'
+            rx='26.13'
+            ry='26.13'
+            fill='none'
+            stroke='currentColor'
+            stroke-linejoin='round'
+            stroke-width='32'
+        />
+    </svg>
+)

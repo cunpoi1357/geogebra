@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import toArray from 'lodash/toArray'
 
 import Button from '../components/Button'
@@ -25,10 +25,21 @@ function QuestionManagement() {
         })
     }, [])
 
+    const questionMemo = useMemo(
+        () =>
+            questions.filter(
+                item =>
+                    item.id.includes(filters.id) &&
+                    item.question.includes(filters.question) &&
+                    item.topic.includes(filters.topic)
+            ),
+        [questions, filters.id, filters.question, filters.topic]
+    )
+
     return (
         <div className='h-[100vh] flex flex-col overflow-hidden'>
             <AdminHeader>Ngân hàng đề</AdminHeader>
-            <section className='p-16 overflow-auto'>
+            <section className='p-16 h-[calc(100vh-128px)] overflow-auto'>
                 <div className='grid grid-cols-12 gap-8 mb-8'>
                     <QuestionFilter onChange={setFilters} />
                     <Button
@@ -42,14 +53,7 @@ function QuestionManagement() {
                     <CreateQuestionModal isOpen={showModal} onClose={() => setShowModal(false)} />
                 </div>
                 <div className='shadow-xl'>
-                    <QuestionTable
-                        data={questions.filter(
-                            item =>
-                                item.id.includes(filters.id) &&
-                                item.question.includes(filters.question) &&
-                                item.topic.includes(filters.topic)
-                        )}
-                    />
+                    <QuestionTable data={questionMemo} />
                 </div>
             </section>
         </div>

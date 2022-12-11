@@ -28,7 +28,7 @@ function MultipleChoiceManagement() {
     return (
         <section className='h-[100vh] flex flex-col overflow-hidden'>
             <AdminHeader>Quản lí câu hỏi trắc nghiệm</AdminHeader>
-            <div className='p-16 overflow-auto'>
+            <div className='p-16 h-[calc(100vh-128px)] overflow-auto'>
                 <div className='grid grid-cols-12 gap-8 mb-8'>
                     <QuestionFilter onChange={setFilters} />
                     <Button

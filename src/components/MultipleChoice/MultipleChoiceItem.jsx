@@ -2,11 +2,21 @@ import React, { useState } from 'react'
 import Latex from 'react-latex'
 
 import EditMultipleChoiceModal from './EditMultipleChoiceModal'
-import { EditIcon, EyeIcon, TrashIcon } from '../Icon'
+import { CopyIcon, EditIcon, EyeIcon, TrashIcon } from '../Icon'
 import Markdown from '../Markdown'
+import { memo } from 'react'
+import { toast } from 'react-toastify'
 
 function MultipleChoiceItem({ data, index, onRemove }) {
     const [showModal, setShowModal] = useState(false)
+
+    const handleCopy = () => {
+        const question = { ...data }
+        delete question.id
+        const string = JSON.stringify(question)
+        window.navigator.clipboard.writeText(string)
+        toast.success('Đã sao chép câu hỏi')
+    }
 
     return (
         <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767] w-[1000px]'>
@@ -29,6 +39,9 @@ function MultipleChoiceItem({ data, index, onRemove }) {
                                 <EyeIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                             </a>
                         </label>
+                        <label title='Xem' onClick={handleCopy}>
+                            <CopyIcon className='cursor-pointer h-6 w-6 hover:text-[#247dea] transition-colors' />
+                        </label>
                         <label title='Sửa' onClick={() => setShowModal(true)}>
                             <EditIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                         </label>
@@ -43,4 +56,4 @@ function MultipleChoiceItem({ data, index, onRemove }) {
     )
 }
 
-export default MultipleChoiceItem
+export default memo(MultipleChoiceItem, (prevState, nextState) => prevState.data.id === nextState.data.id)
