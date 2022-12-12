@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { useState } from 'react'
 import { ref, remove } from 'firebase/database'
 import { toast } from 'react-toastify'
 import orderBy from 'lodash/orderBy'
@@ -68,4 +68,4 @@ function MultipleChoiceTable({ data }) {
     )
 }
 
-export default memo(MultipleChoiceTable, (prevState, nextState) => prevState.data.length === nextState.data.length)
+export default MultipleChoiceTable

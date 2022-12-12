@@ -1,5 +1,7 @@
+import { memo } from 'react'
 import { useState } from 'react'
 import Latex from 'react-latex'
+import isEqual from 'lodash/isEqual'
 
 import { EditIcon, EyeIcon, TrashIcon } from '../Icon'
 import Markdown from '../Markdown'
@@ -67,4 +69,4 @@ function QuestionItem({ data, index, onRemove }) {
     )
 }
 
-export default QuestionItem
+export default memo(QuestionItem, (prevState, nextState) => isEqual(prevState.data, nextState.data))

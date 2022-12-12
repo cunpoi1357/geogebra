@@ -6,6 +6,7 @@ import { CopyIcon, EditIcon, EyeIcon, TrashIcon } from '../Icon'
 import Markdown from '../Markdown'
 import { memo } from 'react'
 import { toast } from 'react-toastify'
+import isEqual from 'lodash/isEqual'
 
 function MultipleChoiceItem({ data, index, onRemove }) {
     const [showModal, setShowModal] = useState(false)
@@ -39,7 +40,7 @@ function MultipleChoiceItem({ data, index, onRemove }) {
                                 <EyeIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                             </a>
                         </label>
-                        <label title='Xem' onClick={handleCopy}>
+                        <label title='Sao chép' onClick={handleCopy}>
                             <CopyIcon className='cursor-pointer h-6 w-6 hover:text-[#247dea] transition-colors' />
                         </label>
                         <label title='Sửa' onClick={() => setShowModal(true)}>
@@ -56,4 +57,4 @@ function MultipleChoiceItem({ data, index, onRemove }) {
     )
 }
 
-export default memo(MultipleChoiceItem, (prevState, nextState) => prevState.data.id === nextState.data.id)
+export default memo(MultipleChoiceItem, (prevState, nextState) => isEqual(prevState.data, nextState.data))

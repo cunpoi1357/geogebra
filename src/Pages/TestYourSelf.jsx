@@ -13,6 +13,7 @@ function TestYourSelf() {
     const location = useLocation()
     const [question, setQuestion] = useState([])
     const [answer, setAnswer] = useState([])
+    const [isAnswered, setIsAnswered] = useState(false)
     const contentRef = useRef(null)
 
     useEffect(() => {
@@ -58,12 +59,13 @@ function TestYourSelf() {
                 correct += 1
             }
         })
+        setIsAnswered(true)
         toast.success(`Bạn đã chọn đúng ${correct}/${answerKey.length}`)
     }
 
     return (
         <div className='grid grid-cols-12 gap-4 h-[calc(100vh-100px)]'>
-            <div ref={contentRef} className='col-span-9 h-[calc(100vh-100px)] overflow-auto'>
+            <div ref={contentRef} className='col-span-12 overflow-auto lg:col-span-9'>
                 {question &&
                     question.map((item, index) => (
                         <TestYourSelfQuestion
@@ -72,10 +74,23 @@ function TestYourSelf() {
                             data={item}
                             choose={answer[index]}
                             onChoose={handleChoose}
+                            isAnswered={isAnswered}
                         />
                     ))}
+                {question.length === 0 && (
+                    <p>
+                        Chuyên đề bạn chọn hiện đang trong gian đoạn cập nhật câu hỏi. Bạn vui lòng chọn chuyên đề khác
+                    </p>
+                )}
             </div>
-            <TestYourSelfNavBar data={answer} onClick={handleScrollToQuestion} onSubmit={handleSubmit} />
+            <TestYourSelfNavBar
+                className='col-span-12 lg:col-span-3'
+                data={answer}
+                answer={question.map(item => item.answerKey)}
+                isAnswered={isAnswered}
+                onClick={handleScrollToQuestion}
+                onSubmit={handleSubmit}
+            />
         </div>
     )
 }

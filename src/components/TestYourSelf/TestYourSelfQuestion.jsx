@@ -1,12 +1,12 @@
 import max from 'lodash/max'
 
-import { BookIcon } from '../Icon'
+import { BookIcon, ChatBubbleIcon } from '../Icon'
 import Geogebra from '../Geogebra'
 import Image from '../Image'
 import Markdown from '../Markdown'
 import Latex from 'react-latex'
 
-function TestYourSelfQuestion({ index, data, choose, onChoose }) {
+function TestYourSelfQuestion({ index, data, choose, isAnswered, onChoose }) {
     const lengthMaxOfQuestions = max([data.A.length, data.B.length, data.C.length, data.D.length])
     const handleChoose = letter => onChoose(index, letter)
     return (
@@ -37,16 +37,19 @@ function TestYourSelfQuestion({ index, data, choose, onChoose }) {
                                 key={letter}
                                 className={`flex ${
                                     lengthMaxOfQuestions >= 80
-                                        ? 'col-span-4'
+                                        ? 'md:col-span-4'
                                         : lengthMaxOfQuestions <= 10
-                                        ? 'col-span-1'
-                                        : 'col-span-2'
+                                        ? 'md:col-span-1'
+                                        : 'md:col-span-2'
                                 } ${
-                                    choose === letter ? 'border-yellow-300' : ''
-                                } text-2xl items-center bg-[#f0f9fe] rounded-md border-2 border-[#00adf1] hover:opacity-50 hover:border-black transition-colors`}
+                                    choose === letter ? 'bg-[#fedada]' : ''
+                                } col-span-4 text-2xl items-center bg-[#f0f9fe] rounded-md border-2 border-[#00adf1] hover:opacity-50 hover:border-black transition-colors`}
                                 onClick={() => handleChoose(letter)}
+                                disabled={isAnswered}
                             >
-                                <span className='p-2 w-10 text-[#08b1ed] font-bold rounded-full border border-[#00adf1] flex items-center justify-center m-6'>
+                                <span
+                                    className={`p-2 w-10 h-10 text-[#08b1ed] font-bold rounded-full border border-[#00adf1] flex items-center justify-center m-6`}
+                                >
                                     {letter}
                                 </span>
                                 <span className='flex items-start flex-1'>
@@ -56,6 +59,21 @@ function TestYourSelfQuestion({ index, data, choose, onChoose }) {
                         ))}
                     </div>
                 </div>
+                {isAnswered && data?.answer && (
+                    <div className='mt-5'>
+                        <div className='flex items-center justify-center text-2xl text-[#08b1ed]'>
+                            <ChatBubbleIcon className='w-6 h-6 mr-2' />
+                            <span>Lời giải:</span>
+                        </div>
+                        <Markdown>{data?.answer}</Markdown>
+                        <span>
+                            Chọn đáp án{' '}
+                            <span className='p-2 w-9 h-9 text-xl text-[#08b1ed] font-bold rounded-full border border-[#00adf1] inline-flex items-center justify-center m-3'>
+                                {data.answerKey}
+                            </span>
+                        </span>
+                    </div>
+                )}
             </div>
         </section>
     )
