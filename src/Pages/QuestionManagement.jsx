@@ -22,11 +22,38 @@ function QuestionManagement() {
         topic: '',
         level: ''
     })
+    const [statistics, setStatistics] = useState({
+        'Nhận biết': 0,
+        'Thông hiểu': 0,
+        'Vận dụng thấp': 0,
+        'Vận dụng cao': 0,
+        'Tất cả': 0
+    })
+    // Filter
+    const { control, handleSubmit, reset, watch } = useForm()
+    const onSubmit = handleSubmit(data => {
+        setFilters(data)
+        reset()
+    })
 
     useEffect(() => {
         onValue(ref(database, 'questions'), snapshot => {
             setQuestions(toArray(snapshot.val()).filter(item => !!item))
         })
+    }, [])
+
+    useEffect(() => {
+        watch(data => {
+            const questionsFiltered = questions.filter(item => item.topic.includes(data.topic))
+            setStatistics({
+                'Nhận biết': questionsFiltered.filter(item => item.level === 'Nhận biết').length,
+                'Thông hiểu': questionsFiltered.filter(item => item.level === 'Thông hiểu').length,
+                'Vận dụng thấp': questionsFiltered.filter(item => item.level === 'Vận dụng thấp').length,
+                'Vận dụng cao': questionsFiltered.filter(item => item.level === 'Vận dụng cao').length,
+                'Tất cả': questionsFiltered.length
+            })
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const questionMemo = useMemo(
@@ -40,13 +67,6 @@ function QuestionManagement() {
             ),
         [questions, filters.id, filters.question, filters.topic, filters.level]
     )
-
-    // Filter
-    const { control, handleSubmit, reset } = useForm()
-    const onSubmit = handleSubmit(data => {
-        setFilters(data)
-        reset()
-    })
 
     return (
         <div className='h-[100vh] flex flex-col overflow-hidden'>
@@ -86,28 +106,27 @@ function QuestionManagement() {
                 </div>
                 <div className='flex items-center gap-4 mb-6'>
                     <span className='text-lg underline'>Thống kê: </span>
+                    <div className={`bg-blue-200 p-2 rounded-lg border border-blue-400 mr-1 h-9 flex items-center`}>
+                        Nhận biết:
+                        <span className='ml-1 font-bold'>{statistics['Nhận biết']} câu.</span>
+                    </div>
                     <div className={`bg-green-200 p-2 rounded-lg border border-green-400 h-9 flex items-center`}>
                         Thông hiểu:
-                        <span className='ml-1 font-bold'>
-                            {questionMemo.filter(item => item.level === 'Thông hiểu').length} câu.
-                        </span>
-                    </div>
-                    <div className={`bg-blue-200 p-2 rounded-lg border border-blue-400 mr-1 h-9 flex items-center`}>
-                        Nhận biết{' '}
-                        <span className='ml-1 font-bold'>
-                            {questionMemo.filter(item => item.level === 'Nhận biết').length} câu.
-                        </span>
+                        <span className='ml-1 font-bold'>{statistics['Thông hiểu']} câu.</span>
                     </div>
                     <div className={`bg-orange-200 p-2 rounded-lg border border-orange-400 mr-1 h-9 flex items-center`}>
-                        Vận dụng thấp
-                        <span className='ml-1 font-bold'>
-                            {questionMemo.filter(item => item.level === 'Vận dụng thấp').length} câu.
-                        </span>
+                        Vận dụng thấp:
+                        <span className='ml-1 font-bold'>{statistics['Vận dụng thấp']} câu.</span>
                     </div>
                     <div className={`bg-red-200 p-2 rounded-lg border border-red-400 mr-1  h-9 flex items-center`}>
-                        <span className='ml-1 font-bold'>
-                            {questionMemo.filter(item => item.level === 'Vận dụng cao').length} câu.
-                        </span>
+                        Vận dụng cao:
+                        <span className='ml-1 font-bold'>{statistics['Vận dụng cao']} câu.</span>
+                    </div>
+                    <div
+                        className={`bg-yellow-200 p-2 rounded-lg border border-yellow-400 mr-1  h-9 flex items-center`}
+                    >
+                        Tổng cộng:
+                        <span className='ml-1 font-bold'>{statistics['Tất cả']} câu.</span>
                     </div>
                 </div>
                 <div className='shadow-xl'>
