@@ -15,6 +15,7 @@ function TestYourSelf() {
     const [answer, setAnswer] = useState([])
     const [isAnswered, setIsAnswered] = useState(false)
     const contentRef = useRef(null)
+    const answerKeys = question.map(item => item.answerKey)
 
     useEffect(() => {
         const patten = location.state
@@ -52,25 +53,25 @@ function TestYourSelf() {
             return question
         })
     const handleSubmit = () => {
-        const answerKey = question.map(item => item.answerKey)
         let correct = 0
-        answerKey.forEach((key, index) => {
+        answerKeys.forEach((key, index) => {
             if (key === answer[index]) {
                 correct += 1
             }
         })
         setIsAnswered(true)
-        toast.success(`Bạn đã chọn đúng ${correct}/${answerKey.length}`)
+        toast.success(`Bạn đã chọn đúng ${correct}/${answerKeys.length}`)
     }
 
     return (
-        <div className='grid grid-cols-12 gap-4 h-[calc(100vh-100px)]'>
-            <div ref={contentRef} className='col-span-12 overflow-auto lg:col-span-9'>
+        <div className='lg:grid flex flex-col grid-cols-12 gap-4 h-[calc(100vh-100px)]'>
+            <div ref={contentRef} className='flex-1 col-span-12 overflow-auto lg:col-span-9'>
                 {question &&
                     question.map((item, index) => (
                         <TestYourSelfQuestion
                             key={item.id}
                             index={index}
+                            answerKey={answerKeys[index]}
                             data={item}
                             choose={answer[index]}
                             onChoose={handleChoose}
@@ -83,14 +84,16 @@ function TestYourSelf() {
                     </p>
                 )}
             </div>
-            <TestYourSelfNavBar
-                className='col-span-12 lg:col-span-3'
-                data={answer}
-                answer={question.map(item => item.answerKey)}
-                isAnswered={isAnswered}
-                onClick={handleScrollToQuestion}
-                onSubmit={handleSubmit}
-            />
+            {question.length > 0 && (
+                <TestYourSelfNavBar
+                    className='lg:col-span-3'
+                    data={answer}
+                    answer={answerKeys}
+                    isAnswered={isAnswered}
+                    onClick={handleScrollToQuestion}
+                    onSubmit={handleSubmit}
+                />
+            )}
         </div>
     )
 }

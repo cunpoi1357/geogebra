@@ -6,7 +6,7 @@ import Image from '../Image'
 import Markdown from '../Markdown'
 import Latex from 'react-latex'
 
-function TestYourSelfQuestion({ index, data, choose, isAnswered, onChoose }) {
+function TestYourSelfQuestion({ index, data, choose, answerKey, isAnswered, onChoose }) {
     const lengthMaxOfQuestions = max([data.A.length, data.B.length, data.C.length, data.D.length])
     const handleChoose = letter => onChoose(index, letter)
     return (
@@ -35,14 +35,17 @@ function TestYourSelfQuestion({ index, data, choose, isAnswered, onChoose }) {
                         {['A', 'B', 'C', 'D'].map(letter => (
                             <button
                                 key={letter}
-                                className={`flex ${
+                                className={`flex 
+                                ${
                                     lengthMaxOfQuestions >= 80
                                         ? 'md:col-span-4'
                                         : lengthMaxOfQuestions <= 10
                                         ? 'md:col-span-1'
                                         : 'md:col-span-2'
-                                } ${
-                                    choose === letter ? 'bg-[#fedada]' : ''
+                                } 
+                                ${choose === letter ? 'bg-[#fedada]' : ''} 
+                                ${
+                                    isAnswered ? (letter === answerKey ? 'bg-[#78dc92]' : '') : ''
                                 } col-span-4 text-2xl items-center bg-[#f0f9fe] rounded-md border-2 border-[#00adf1] hover:opacity-50 hover:border-black transition-colors`}
                                 onClick={() => handleChoose(letter)}
                                 disabled={isAnswered}
