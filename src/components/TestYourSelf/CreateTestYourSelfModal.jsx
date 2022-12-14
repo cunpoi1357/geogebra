@@ -15,6 +15,7 @@ import InputNoControl from '../InputNoControl'
 function CreateTestYourSelfModal({ isOpen, onClose }) {
     const navigate = useNavigate()
     const [data, setData] = useState([])
+    const [total, setTotal] = useState(0)
     const [formData, setFormData] = useState([
         {
             topic: '',
@@ -85,6 +86,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                 )
 
             setData(result)
+            setTotal(questions.length)
         }
         fetchData()
     }, [])
@@ -168,9 +170,12 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                 <div className='grid gap-4'>
                     {formData.map((item, index) => {
                         return (
-                            <div key={index} className='grid grid-cols-8 gap-4'>
+                            <div
+                                key={index}
+                                className='grid grid-cols-8 gap-4 pb-4 border border-transparent border-b-1 border-b-neutrals-04'
+                            >
                                 <SelectNoControl
-                                    className='col-span-3'
+                                    className='col-span-8 lg:col-span-3'
                                     name='topic'
                                     value={item.topic}
                                     options={Object.keys(data)}
@@ -179,7 +184,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                                     onChange={e => handleChange(index, e)}
                                 />
                                 <SelectNoControl
-                                    className='col-span-2'
+                                    className='col-span-4 lg:col-span-2'
                                     name='level'
                                     value={item.level}
                                     options={
@@ -196,14 +201,18 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                                     onChange={e => handleChange(index, e)}
                                 />
                                 <InputNoControl
-                                    className='col-span-2'
+                                    className='col-span-4 lg:col-span-2'
                                     type='number'
                                     name='amount'
                                     min={1}
                                     max={data[item.topic]?.levels[item.level]?.length || data[item.topic]?.amount}
                                     value={item.amount}
                                     onChange={e => handleChange(index, e)}
-                                    label='Số câu hỏi'
+                                    label={`Số câu hỏi (hiện có ${
+                                        data[item.topic]?.levels[item.level]?.length ||
+                                        data[item.topic]?.amount ||
+                                        total
+                                    })`}
                                 />
                                 {index !== 0 && (
                                     <button
