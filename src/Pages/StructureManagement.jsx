@@ -28,7 +28,7 @@ function StructureManagement() {
     return (
         <div className='h-[100vh] flex flex-col overflow-hidden'>
             <AdminHeader>Quản lí menu</AdminHeader>
-            <section className='p-16 overflow-auto'>
+            <section className='p-16 h-[calc(100vh-128px)] overflow-auto'>
                 <div className='p-8'>{data.length > 0 && <Editor value={data} onChange={setData} ajv={ajv} />}</div>
                 <Button className='col-span-2 bg-[#247dea] w-20 mx-auto' onClick={handleUpdate}>
                     Cập nhật

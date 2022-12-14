@@ -74,7 +74,7 @@ function TestYourSelf() {
             </div>
             {question.length > 0 && (
                 <TestYourSelfNavBar
-                    className='col-span-3 lg:col-span-1'
+                    className='col-span-3 h-28 lg:col-span-1'
                     data={answer}
                     answer={answerKeys}
                     isAnswered={isAnswered}

@@ -205,7 +205,11 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                                     type='number'
                                     name='amount'
                                     min={1}
-                                    max={data[item.topic]?.levels[item.level]?.length || data[item.topic]?.amount}
+                                    max={
+                                        data[item.topic]?.levels[item.level]?.length ||
+                                        data[item.topic]?.amount ||
+                                        total
+                                    }
                                     value={item.amount}
                                     onChange={e => handleChange(index, e)}
                                     label={`Số câu hỏi (hiện có ${
