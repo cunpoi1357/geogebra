@@ -2,8 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { get, ref } from 'firebase/database'
 import toArray from 'lodash/toArray'
-import filter from 'lodash/filter'
-import sampleSize from 'lodash/sampleSize'
+import shuffle from 'lodash/shuffle'
 
 import { database } from '../firebase'
 import TestYourSelfNavBar from '../components/TestYourSelf/TestYourSelfNavBar'
@@ -24,19 +23,8 @@ function TestYourSelf() {
             const val = await snapshot.val()
             const questions = toArray(val).filter(item => !!item && JSON.parse(item.topic))
 
-            const result = []
-            patten.forEach(item =>
-                result.push(
-                    ...sampleSize(
-                        filter(questions, {
-                            topic: item.topic,
-                            level: item.level
-                        }),
-                        item.amount
-                    )
-                )
-            )
-            setQuestion(result)
+            const result = questions.filter(item => patten.includes(item.id))
+            setQuestion(shuffle(result))
             setAnswer(Array(result.length).fill(null))
         }
         fetchData()
@@ -64,8 +52,8 @@ function TestYourSelf() {
     }
 
     return (
-        <div className='lg:grid flex flex-col grid-cols-12 gap-4 h-[calc(100vh-100px)]'>
-            <div ref={contentRef} className='flex-1 col-span-12 overflow-auto lg:col-span-9'>
+        <div className='lg:grid flex flex-col grid-cols-4 gap-4 lg:h-[calc(100vh-100px)] overflow-auto h-full'>
+            <div ref={contentRef} className='flex-1 lg:overflow-auto lg:col-span-3'>
                 {question &&
                     question.map((item, index) => (
                         <TestYourSelfQuestion
@@ -86,7 +74,7 @@ function TestYourSelf() {
             </div>
             {question.length > 0 && (
                 <TestYourSelfNavBar
-                    className='lg:col-span-3'
+                    className='col-span-3 lg:col-span-1'
                     data={answer}
                     answer={answerKeys}
                     isAnswered={isAnswered}

@@ -42,19 +42,16 @@ function QuestionManagement() {
         })
     }, [])
 
-    useEffect(() => {
-        watch(data => {
-            const questionsFiltered = questions.filter(item => item.topic.includes(data.topic))
-            setStatistics({
-                'Nhận biết': questionsFiltered.filter(item => item.level === 'Nhận biết').length,
-                'Thông hiểu': questionsFiltered.filter(item => item.level === 'Thông hiểu').length,
-                'Vận dụng thấp': questionsFiltered.filter(item => item.level === 'Vận dụng thấp').length,
-                'Vận dụng cao': questionsFiltered.filter(item => item.level === 'Vận dụng cao').length,
-                'Tất cả': questionsFiltered.length
-            })
+    watch(data => {
+        const questionsFiltered = questions.filter(item => item.topic === data.topic)
+        setStatistics({
+            'Nhận biết': questionsFiltered.filter(item => item.level === 'Nhận biết').length,
+            'Thông hiểu': questionsFiltered.filter(item => item.level === 'Thông hiểu').length,
+            'Vận dụng thấp': questionsFiltered.filter(item => item.level === 'Vận dụng thấp').length,
+            'Vận dụng cao': questionsFiltered.filter(item => item.level === 'Vận dụng cao').length,
+            'Tất cả': questionsFiltered.length
         })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    })
 
     const questionMemo = useMemo(
         () =>

@@ -1,14 +1,19 @@
+import { useNavigate } from 'react-router-dom'
 import { get, ref } from 'firebase/database'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import toArray from 'lodash/toArray'
+import sampleSize from 'lodash/sampleSize'
 
-import { database } from '../firebase'
-import AdminHeader from '../layouts/components/AdminHeader'
-import SelectNoControl from '../components/SelectNoControl'
-import InputNoControl from '../components/InputNoControl'
+import { database } from '../../firebase'
+import { PlusIcon, XIcon } from '../Icon'
+import Button from '../Button'
+import Modal from '../Modal'
+import SelectNoControl from '../SelectNoControl'
+import InputNoControl from '../InputNoControl'
 
-function Admin() {
+function CreateTestYourSelfModal({ isOpen, onClose }) {
+    const navigate = useNavigate()
     const [data, setData] = useState([])
     const [formData, setFormData] = useState([
         {
@@ -65,7 +70,8 @@ function Admin() {
                     return {
                         topic: topic.name,
                         amount: questionsFiltered.length,
-                        levels: levels
+                        levels: levels,
+                        questions: questionsFiltered.map(question => question.id)
                     }
                 })
                 .filter(item => item.amount > 0)
@@ -73,7 +79,8 @@ function Admin() {
                     item =>
                         (result[item.topic] = {
                             amount: item.amount,
-                            levels: item.levels
+                            levels: item.levels,
+                            questions: item.questions
                         })
                 )
 
@@ -118,16 +125,47 @@ function Admin() {
         })
     }
 
-    const handleSubmit = () => {
-        console.log(formData)
+    const onSubmit = () => {
+        const formFiltered = formData.filter(item => item.topic)
+        const questions = []
+        // get question id by form data
+        formFiltered.forEach(item => {
+            if (item.level) {
+                questions.push(...sampleSize(data[item.topic].levels[item.level], item.amount))
+            } else {
+                questions.push(...sampleSize(data[item.topic].questions, item.amount))
+            }
+        })
+
+        if (questions.length > 0) {
+            navigate('/test-your-self', {
+                state: questions
+            })
+            onClose()
+        }
     }
 
     return (
-        <section>
-            <AdminHeader>Trang quản lí</AdminHeader>
-            <div className='p-4'>
-                <h3>Tạo đề tự luyện</h3>
-                <div className='w-[800px] grid gap-4'>
+        <Modal
+            isOpen={isOpen}
+            style={{
+                overlay: {
+                    backgroundColor: 'rgba(0,0,0,.6)',
+                    zIndex: 1000
+                }
+            }}
+            onRequestClose={onClose}
+        >
+            <div className='bg-neutrals-01 lg:md-0 m-6  p-6 max-h-[80vh] lg:w-1/2 w-full rounded overflow-auto shadow-2xl'>
+                <div className='flex flex-col w-full align-center'>
+                    <header className='flex items-center w-full'>
+                        <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
+                        <p className='flex-1 inline-block font-bold text-neutrals-07'>Tạo đề tự luyện</p>
+                        <XIcon className='inline-block cursor-pointer text-neutrals-04' onClick={onClose} />
+                    </header>
+                    <hr className='bg-neutrals-03 w-full h-[1px] my-6'></hr>
+                </div>
+                <div className='grid gap-4'>
                     {formData.map((item, index) => {
                         return (
                             <div key={index} className='grid grid-cols-8 gap-4'>
@@ -167,19 +205,33 @@ function Admin() {
                                     onChange={e => handleChange(index, e)}
                                     label='Số câu hỏi'
                                 />
-                                <button className='col-span-1' onClick={() => handleRemove(index)}>
-                                    x
-                                </button>
+                                {index !== 0 && (
+                                    <button
+                                        className='flex items-center justify-center w-full col-span-1'
+                                        onClick={() => handleRemove(index)}
+                                    >
+                                        <XIcon className='w-6 h-6 text-neutrals-04 hover:text-neutrals-06' />
+                                    </button>
+                                )}
                             </div>
                         )
                     })}
+                    <button
+                        className='flex items-center justify-between p-4 text-xl text-primary-blue w-46 place-self-end hover:underline'
+                        type='button'
+                        onClick={handleAdd}
+                    >
+                        <PlusIcon />
+                        Thêm chuyên đề
+                    </button>
 
-                    <button onClick={handleAdd}>Thêm</button>
-                    <button onClick={handleSubmit}>Submit</button>
+                    <Button onClick={onSubmit} className='text-white bg-primary-blue'>
+                        Tạo
+                    </Button>
                 </div>
             </div>
-        </section>
+        </Modal>
     )
 }
 
-export default Admin
+export default CreateTestYourSelfModal

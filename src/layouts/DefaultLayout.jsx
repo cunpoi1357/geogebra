@@ -6,7 +6,7 @@ import { get, ref } from 'firebase/database'
 
 import Navbar from './components/Navbar'
 import Header from './components/Header'
-import CreateTestYourSelfModal from '../components/CreateTestYourSelfModal'
+import CreateTestYourSelfModal from '../components/TestYourSelf/CreateTestYourSelfModal'
 import { database } from '../firebase'
 
 function DefaultLayout({ children }) {
