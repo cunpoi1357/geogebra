@@ -165,7 +165,7 @@ function EditQuestionModal({ id, onClose, isOpen }) {
                             className='col-span-2 row-span-1 mt-2 text-black transition-colors border border-blue-500 bg-primary-blue hover:bg-blue-500 hover:text-white'
                             type='submit'
                         >
-                            Tạo
+                            Cập nhật
                         </Button>
                     </form>
                 </div>

@@ -72,16 +72,17 @@ function TestYourSelf() {
                     </p>
                 )}
             </div>
-            {question.length > 0 && (
-                <TestYourSelfNavBar
-                    className='col-span-3 h-28 lg:col-span-1'
-                    data={answer}
-                    answer={answerKeys}
-                    isAnswered={isAnswered}
-                    onClick={handleScrollToQuestion}
-                    onSubmit={handleSubmit}
-                />
-            )}
+            <div className='col-span-3 h-28 lg:col-span-1'>
+                {question.length > 0 && (
+                    <TestYourSelfNavBar
+                        data={answer}
+                        answer={answerKeys}
+                        isAnswered={isAnswered}
+                        onClick={handleScrollToQuestion}
+                        onSubmit={handleSubmit}
+                    />
+                )}
+            </div>
         </div>
     )
 }
