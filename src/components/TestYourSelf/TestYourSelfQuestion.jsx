@@ -10,7 +10,7 @@ function TestYourSelfQuestion({ index, data, choose, answerKey, isAnswered, onCh
     const lengthMaxOfQuestions = max([data.A.length, data.B.length, data.C.length, data.D.length])
     const handleChoose = letter => onChoose(index, letter)
     return (
-        <section className='border border-transparent border-b-[#0060a7] p-4' id={`question-${index}`}>
+        <div className='border border-transparent border-b-[#0060a7] p-4' id={`question-${index}`}>
             <div className='py-3 px-4 w-[100wh] bg-[#f0f9fe] text-xl m-1 border border-[#00adf1] shadow-[#9897ff] shadow-lg'>
                 <span className='inline-flex h-3 p-1 font-semibold leading-6 text-[#08b1ed] items-center justify-center ml-8 relative'>
                     <BookIcon className='absolute -left-6 w-6 h-6 text-[#08b1ed] mr-1' />
@@ -78,7 +78,7 @@ function TestYourSelfQuestion({ index, data, choose, answerKey, isAnswered, onCh
                     </div>
                 )}
             </div>
-        </section>
+        </div>
     )
 }
 

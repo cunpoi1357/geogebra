@@ -52,8 +52,8 @@ function TestYourSelf() {
     }
 
     return (
-        <div className='lg:grid flex flex-col grid-cols-4 gap-4 lg:h-[calc(100vh-100px)] overflow-auto h-full'>
-            <div ref={contentRef} className='flex-1 lg:overflow-auto lg:col-span-3'>
+        <div className='lg:grid flex flex-col grid-cols-4 gap-4 h-[calc(100vh-100px)]'>
+            <div ref={contentRef} className='flex-1 overflow-auto h-[calc(100vh-100px)] lg:col-span-3 lg:h-full'>
                 {question &&
                     question.map((item, index) => (
                         <TestYourSelfQuestion
@@ -66,23 +66,25 @@ function TestYourSelf() {
                             isAnswered={isAnswered}
                         />
                     ))}
-                {question.length === 0 && (
-                    <p>
-                        Chuyên đề bạn chọn hiện đang trong gian đoạn cập nhật câu hỏi. Bạn vui lòng chọn chuyên đề khác
-                    </p>
-                )}
-            </div>
-            <div className='col-span-3 h-28 lg:col-span-1'>
-                {question.length > 0 && (
+                <div>
                     <TestYourSelfNavBar
+                        className='block lg:hidden'
                         data={answer}
                         answer={answerKeys}
                         isAnswered={isAnswered}
                         onClick={handleScrollToQuestion}
                         onSubmit={handleSubmit}
                     />
-                )}
+                </div>
             </div>
+            <TestYourSelfNavBar
+                className='hidden lg:col-span-1 lg:block'
+                data={answer}
+                answer={answerKeys}
+                isAnswered={isAnswered}
+                onClick={handleScrollToQuestion}
+                onSubmit={handleSubmit}
+            />
         </div>
     )
 }
