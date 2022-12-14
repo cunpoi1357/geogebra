@@ -95,7 +95,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
         const newState = [...formData]
         newState[index][e.target.name] = e.target.value
         if (e.target.name === 'amount') {
-            newState[index]['amount'] = Number(e.target.value)
+            newState[index]['amount'] = e.target.value
         }
 
         if (e.target.name === 'topic') {
