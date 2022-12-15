@@ -7,7 +7,7 @@ import orderBy from 'lodash/orderBy'
 import { database } from '../firebase'
 import Markdown from '../components/Markdown'
 
-function List() {
+function Topic() {
     const { topic } = useParams()
     const [examples, setExamples] = useState([])
     const [content, setContent] = useState('')
@@ -51,4 +51,4 @@ function List() {
     )
 }
 
-export default List
+export default Topic

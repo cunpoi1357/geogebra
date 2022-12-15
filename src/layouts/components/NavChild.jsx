@@ -5,7 +5,7 @@ import { PriceTagIcon } from '../../components/Icon'
 function NavChild({ data, className, expandedMenu }) {
     return (
         <NavLink
-            to={`/list/${data.path}`}
+            to={`/topic/${data.path}`}
             className={({ isActive }) =>
                 `text-[#92a6e2] h-[72px] flex cursor-pointer hover:bg-[#4360b5] hover:text-white transition-colors ease-linear ${className} ${
                     isActive && 'font-bold'

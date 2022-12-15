@@ -1,6 +1,6 @@
 const routes = {
     home: '/',
-    list: '/list/:topic',
+    topic: '/topic/:topic',
     question: '/question/:id',
     testYourSelf: '/test-your-self',
     admin: '/admin',

@@ -3,7 +3,7 @@ import config from '../config'
 
 import Question from '../Pages/Question'
 import Home from '../Pages/Home'
-import List from '../Pages/List'
+import Topic from '../Pages/Topic'
 import Admin from '../Pages/Admin'
 import TheoryManagement from '../Pages/TheoryManagement'
 import MultipleChoiceManagement from '../Pages/MultipleChoiceManagement'
@@ -27,8 +27,8 @@ const publicRoutes = [
         component: TestYourSelf
     },
     {
-        path: config.routes.list,
-        component: List
+        path: config.routes.topic,
+        component: Topic
     },
     {
         path: config.routes.admin,

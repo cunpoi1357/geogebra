@@ -68,7 +68,7 @@ function TestYourSelf() {
                     ))}
                 <div>
                     <TestYourSelfNavBar
-                        className='block lg:hidden'
+                        className='block lg:hidden h-28'
                         data={answer}
                         answer={answerKeys}
                         isAnswered={isAnswered}
