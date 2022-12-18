@@ -1,13 +1,15 @@
 import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import { get, ref } from 'firebase/database'
+import { toast } from 'react-toastify'
 import toArray from 'lodash/toArray'
 import shuffle from 'lodash/shuffle'
 
 import { database } from '../firebase'
 import TestYourSelfNavBar from '../components/TestYourSelf/TestYourSelfNavBar'
 import TestYourSelfQuestion from '../components/TestYourSelf/TestYourSelfQuestion'
-import { toast } from 'react-toastify'
+import Footer from '../layouts/components/Footer'
+
 function TestYourSelf() {
     const location = useLocation()
     const [question, setQuestion] = useState([])
@@ -69,16 +71,15 @@ function TestYourSelf() {
                             isAnswered={isAnswered}
                         />
                     ))}
-                <div>
-                    <TestYourSelfNavBar
-                        className='block lg:hidden h-28'
-                        data={answer}
-                        answer={answerKeys}
-                        isAnswered={isAnswered}
-                        onClick={handleScrollToQuestion}
-                        onSubmit={handleSubmit}
-                    />
-                </div>
+                <TestYourSelfNavBar
+                    className='block mt-4 lg:hidden h-28'
+                    data={answer}
+                    answer={answerKeys}
+                    isAnswered={isAnswered}
+                    onClick={handleScrollToQuestion}
+                    onSubmit={handleSubmit}
+                />
+                <Footer />
             </div>
             <TestYourSelfNavBar
                 className='hidden lg:col-span-1 lg:block'

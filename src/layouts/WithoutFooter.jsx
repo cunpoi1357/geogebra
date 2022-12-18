@@ -42,7 +42,7 @@ function WithoutFooter({ children }) {
                     onOpenCreateTestModal={() => setCreateTestShow(true)}
                 />
                 <section
-                    className={`relative flex-1 h-full overflow-auto lg:overflow-hidden bg lg:pl-4 pt-4 lg:block ${
+                    className={`relative flex-1 h-[calc(100vh-80px)] overflow-auto lg:overflow-hidden bg lg:pl-4 pt-4 lg:block ${
                         expandedMenu ? 'hidden' : ''
                     }`}
                 >
