@@ -24,9 +24,7 @@ function Home() {
                         </Link>
                     </nav>
                 </div>
-                <h1 className='pt-6 pb-4 text-4xl text-center text-white'>
-                    Hỗ trợ dạy và học hình học không gian cấp THPT
-                </h1>
+                <h1 className='pt-6 pb-8 text-4xl text-center text-white'>WEBSITE HỖ TRỢ HỌC HÌNH HỌC KHÔNG GIAN</h1>
                 <div className='grid gap-8 md:grid-cols-3'>
                     <div className='col-span-1 p-4 bg-white border rounded-3xl'>
                         <p className='text-xl'>

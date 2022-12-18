@@ -37,7 +37,8 @@ const publicRoutes = [
     },
     {
         path: config.routes.about,
-        component: About
+        component: About,
+        layout: WithoutFooter
     },
     {
         path: config.routes.contact,

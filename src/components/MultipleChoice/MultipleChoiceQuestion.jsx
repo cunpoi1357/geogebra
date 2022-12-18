@@ -36,7 +36,7 @@ function MultipleChoiceQuestion({ data }) {
                         )}
                         <Latex>{data.question.split(/^Câu (\d+)\./)[2] || data.question}</Latex>
                     </header>
-                    <section className='overflow-auto pb-44 md:p-10'>
+                    <section className='overflow-auto md:p-10'>
                         {data.geogebraId && (
                             <div className='flex justify-center mt-10 md:h-[600px] h-[500px]'>
                                 <Geogebra id={data.geogebraId} />

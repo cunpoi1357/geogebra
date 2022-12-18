@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import Button from '../Button'
+import Footer from '../../layouts/components/Footer'
 
 function DefectQuestion({ data }) {
     const regex =
@@ -23,35 +24,38 @@ function DefectQuestion({ data }) {
     })
 
     return (
-        <div className='relative flex flex-col mt-48 overflow-hidden mb-80'>
-            <div className='py-3 px-4 w-[100wh] text-xl m-1 rounded rounded-tr-3xl border border-[#00adf1] bg-[#f0f9fe]'>
-                {data.question.split(/^Câu (\d+)\./)[1] && (
-                    <span className='bg-[#6382a3] rounded text-white font-semibold p-1 -ml-4 mr-2 -translate-y-2 inline-block leading-6'>
-                        Câu {data.question.split(/^Câu (\d+)\./)[1]}
-                    </span>
-                )}
-
-                <form onSubmit={onSubmit}>
-                    {questionSlice.map((item, index) =>
-                        index % 2 === 0 ? (
-                            <span key={item}>{item}</span>
-                        ) : (
-                            <input
-                                key={item}
-                                {...register(`slot-${(index + 1) / 2}`)}
-                                className='inline-block px-1 py-0 bg-transparent border border-b-2 outline-none border-b-gray-500'
-                                style={{
-                                    width: item.length * 24 + 'px'
-                                }}
-                            />
-                        )
+        <>
+            <div className='flex flex-col min-h-[calc(100vh-236px)]'>
+                <div className='py-3 px-4 w-[100wh] text-xl m-1 rounded rounded-tr-3xl border border-[#00adf1] bg-[#f0f9fe]'>
+                    {data.question.split(/^Câu (\d+)\./)[1] && (
+                        <span className='bg-[#6382a3] rounded text-white font-semibold p-1 -ml-4 mr-2 -translate-y-2 inline-block leading-6'>
+                            Câu {data.question.split(/^Câu (\d+)\./)[1]}
+                        </span>
                     )}
-                    <Button className='float-right mt-8 bg-primary-blue' type='submit'>
-                        Kiểm tra
-                    </Button>
-                </form>
+
+                    <form onSubmit={onSubmit}>
+                        {questionSlice.map((item, index) =>
+                            index % 2 === 0 ? (
+                                <span key={item}>{item}</span>
+                            ) : (
+                                <input
+                                    key={item}
+                                    {...register(`slot-${(index + 1) / 2}`)}
+                                    className='inline-block px-1 py-0 bg-transparent border border-b-2 outline-none border-b-gray-500'
+                                    style={{
+                                        width: item.length * 24 + 'px'
+                                    }}
+                                />
+                            )
+                        )}
+                        <Button className='float-right mt-8 bg-primary-blue' type='submit'>
+                            Kiểm tra
+                        </Button>
+                    </form>
+                </div>
             </div>
-        </div>
+            <Footer />
+        </>
     )
 }
 

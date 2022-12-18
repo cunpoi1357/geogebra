@@ -27,14 +27,14 @@ function Topic() {
 
     return (
         <>
-            <div className='p-6 pb-28'>
+            <div className='p-6 min-h-[calc(100vh-236px)]'>
                 <section className='border border-[#6382a3] rounded-lg bg-white'>
                     <header className='text-white bg-[#6382a3] w-full text-3xl px-4'>{content?.name}</header>
                     <div className='block py-1 text-2xl md:p-2'>
                         <Markdown>{content}</Markdown>
                     </div>
                 </section>
-                <ul className='grid grid-cols-2 gap-8 p-6 md:grid-cols-4'>
+                <ul className='grid grid-cols-1 gap-8 p-6 md:grid-cols-4'>
                     {orderBy(examples, [sortFn], ['esc']).map((item, index) => (
                         <li key={item.id} className='relative justify-center col-span-1 cursor-pointer rounded-xl'>
                             <Link className='flex items-center w-full' to={`/question/${item.id}`}>
