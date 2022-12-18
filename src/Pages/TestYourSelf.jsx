@@ -52,8 +52,11 @@ function TestYourSelf() {
     }
 
     return (
-        <div className='lg:grid flex flex-col grid-cols-4 gap-4 h-[calc(100vh-100px)]'>
-            <div ref={contentRef} className='flex-1 overflow-auto h-[calc(100vh-100px)] lg:col-span-3 lg:h-full'>
+        <div className='flex flex-col grid-cols-4 gap-4 lg:grid'>
+            <div
+                ref={contentRef}
+                className='flex-1 overflow-auto lg:col-span-3 lg:overflow-auto lg:h-[calc(100vh-100px)]'
+            >
                 {question &&
                     question.map((item, index) => (
                         <TestYourSelfQuestion

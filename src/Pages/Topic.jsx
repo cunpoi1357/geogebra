@@ -26,28 +26,30 @@ function Topic() {
     const sortFn = item => Number(toArray(item.question.match(/^Câu (\d+)\./))[1])
 
     return (
-        <div className='h-full p-6 overflow-auto pb-28'>
-            <section className='border border-[#6382a3] rounded-lg bg-white'>
-                <header className='text-white bg-[#6382a3] w-full text-3xl px-4'>{content?.name}</header>
-                <div className='block py-1 text-2xl md:p-2'>
-                    <Markdown>{content}</Markdown>
-                </div>
-            </section>
-            <ul className='grid grid-cols-2 gap-8 p-6 md:grid-cols-4'>
-                {orderBy(examples, [sortFn], ['esc']).map((item, index) => (
-                    <li key={item.id} className='relative justify-center col-span-1 cursor-pointer rounded-xl'>
-                        <Link className='flex items-center w-full' to={`/question/${item.id}`}>
-                            <span className='bg-[#6382a3] px-4 text-2xl rounded-l-xl text-white pr-6 inline-block'>
-                                Ví dụ
-                            </span>
-                            <span className='inline-block h-10 text-2xl w-10 text-center border-[#6382a3] border-2 rounded-full bg-white -translate-x-2'>
-                                {index + 1}
-                            </span>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+            <div className='p-6 pb-28'>
+                <section className='border border-[#6382a3] rounded-lg bg-white'>
+                    <header className='text-white bg-[#6382a3] w-full text-3xl px-4'>{content?.name}</header>
+                    <div className='block py-1 text-2xl md:p-2'>
+                        <Markdown>{content}</Markdown>
+                    </div>
+                </section>
+                <ul className='grid grid-cols-2 gap-8 p-6 md:grid-cols-4'>
+                    {orderBy(examples, [sortFn], ['esc']).map((item, index) => (
+                        <li key={item.id} className='relative justify-center col-span-1 cursor-pointer rounded-xl'>
+                            <Link className='flex items-center w-full' to={`/question/${item.id}`}>
+                                <span className='bg-[#6382a3] px-4 text-2xl rounded-l-xl text-white pr-6 inline-block'>
+                                    Ví dụ
+                                </span>
+                                <span className='inline-block h-10 text-2xl w-10 text-center border-[#6382a3] border-2 rounded-full bg-white -translate-x-2'>
+                                    {index + 1}
+                                </span>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </>
     )
 }
 

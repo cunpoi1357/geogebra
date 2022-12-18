@@ -8,9 +8,8 @@ import Navbar from './components/Navbar'
 import Header from './components/Header'
 import CreateTestYourSelfModal from '../components/TestYourSelf/CreateTestYourSelfModal'
 import { database } from '../firebase'
-import Footer from './components/Footer'
 
-function DefaultLayout({ children }) {
+function WithoutFooter({ children }) {
     const [isCreateTestShow, setCreateTestShow] = useState(false)
     const [expandedMenu, setExpandedMenu] = useState(false)
     const location = useLocation()
@@ -43,22 +42,20 @@ function DefaultLayout({ children }) {
                     onOpenCreateTestModal={() => setCreateTestShow(true)}
                 />
                 <section
-                    className={`relative flex-1 h-full overflow-auto bg lg:pl-4 pt-4 lg:block ${
+                    className={`relative flex-1 h-full overflow-auto lg:overflow-hidden bg lg:pl-4 pt-4 lg:block ${
                         expandedMenu ? 'hidden' : ''
                     }`}
                 >
                     {children}
-                    <Footer />
                 </section>
             </main>
-            {/* <GetRandomQuestionButton className='absolute z-10 w-10 h-10 p-2 bg-white border border-gray-600 rounded-full right-6 bottom-10 hover:opacity-50' /> */}
             <CreateTestYourSelfModal isOpen={isCreateTestShow} onClose={() => setCreateTestShow(false)} />
         </div>
     )
 }
 
-DefaultLayout.propsType = {
+WithoutFooter.propsType = {
     children: propsTypes.node.isRequired
 }
 
-export default DefaultLayout
+export default WithoutFooter

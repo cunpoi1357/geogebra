@@ -23,7 +23,7 @@ function DefectQuestion({ data }) {
     })
 
     return (
-        <div className='h-[100vh] flex flex-col relative overflow-hidden mt-48'>
+        <div className='relative flex flex-col mt-48 overflow-hidden mb-80'>
             <div className='py-3 px-4 w-[100wh] text-xl m-1 rounded rounded-tr-3xl border border-[#00adf1] bg-[#f0f9fe]'>
                 {data.question.split(/^Câu (\d+)\./)[1] && (
                     <span className='bg-[#6382a3] rounded text-white font-semibold p-1 -ml-4 mr-2 -translate-y-2 inline-block leading-6'>

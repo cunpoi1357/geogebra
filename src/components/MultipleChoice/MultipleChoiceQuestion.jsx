@@ -7,6 +7,7 @@ import { BookIcon, ChatBubbleIcon } from '../Icon'
 import Image from '../Image'
 import Markdown from '../Markdown'
 import Geogebra from '../Geogebra'
+import Footer from '../../layouts/components/Footer'
 
 function MultipleChoiceQuestion({ data }) {
     const [chose, setChose] = useState(null)
@@ -85,6 +86,7 @@ function MultipleChoiceQuestion({ data }) {
                                 </div>
                             )}
                         </div>
+                        <Footer />
                     </section>
                 </>
             )}
