@@ -203,6 +203,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                                 <InputNoControl
                                     className='col-span-4 lg:col-span-2'
                                     type='number'
+                                    inputmode='decimal'
                                     name='amount'
                                     min={1}
                                     max={

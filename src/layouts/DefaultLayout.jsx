@@ -23,6 +23,10 @@ function DefaultLayout({ children }) {
     useEffect(() => {
         setExpandedMenu(false)
         setCreateTestShow(false)
+        if (location.hash === '#nav') {
+            setExpandedMenu(true)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location])
 
     return (
