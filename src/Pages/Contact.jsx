@@ -1,7 +1,7 @@
 function Contact() {
     return (
-        <section className=''>
-            <div className='inline-block mr-10 bg-white shadow-2xl rounded-xl w-80'>
+        <section className='flex flex-wrap justify-center gap-10'>
+            <div className='inline-block bg-white shadow-2xl rounded-xl w-80'>
                 <div className='flex flex-col items-center py-4 border-b border-b-neutrals-03'>
                     <div className='w-24 h-24 bg-orange-300 rounded-full'></div>
                     <h3 className='mt-3 font-bold'>Nguyễn Việt Hoàng</h3>
