@@ -1,12 +1,12 @@
-import React from 'react'
+import TimerCounter from '../TimerCounter'
 
 function TestYourSelfNavBar({ className, data, answer, isAnswered, onClick, onSubmit }) {
     return (
         <div className={className}>
             <div className='rounded-3xl border border-[#0060a7] bg-[#0060a750] overflow-hidden'>
-                <h3 className='py-2 text-center text-white font-bold border border-transparent bg-[#0060a7]'>
-                    Phiếu trả lời
-                </h3>
+                <span className='py-2 text-center text-white font-bold border border-transparent bg-[#0060a7] block'>
+                    Phiếu trả lời (thời gian: <TimerCounter isActive={!isAnswered} />)
+                </span>
                 <div className='flex lg:flex-col'>
                     <ul className='flex flex-1 w-full gap-4 p-4 overflow-x-auto h-22 lg:flex-wrap flex-nowrap'>
                         {data &&

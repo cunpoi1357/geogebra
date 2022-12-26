@@ -4,6 +4,8 @@ import { publicRoutes } from './routes'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import 'katex/dist/katex.min.css'
+import AuthProvider from './Context/AuthProvider'
+import AppProvider from './Context/AppProvider'
 
 const DefaultLayout = lazy(() => import('./layouts/DefaultLayout'))
 function App() {
@@ -11,30 +13,34 @@ function App() {
         <>
             <BrowserRouter>
                 <Suspense>
-                    <Routes>
-                        {publicRoutes.map((route, index) => {
-                            const Page = route.component
-                            let Layout = DefaultLayout
+                    <AppProvider>
+                        <AuthProvider>
+                            <Routes>
+                                {publicRoutes.map((route, index) => {
+                                    const Page = route.component
+                                    let Layout = DefaultLayout
 
-                            if (route.layout) {
-                                Layout = route.layout
-                            } else if (route.layout === null) {
-                                Layout = Fragment
-                            }
-
-                            return (
-                                <Route
-                                    key={index}
-                                    path={route.path}
-                                    element={
-                                        <Layout>
-                                            <Page />
-                                        </Layout>
+                                    if (route.layout) {
+                                        Layout = route.layout
+                                    } else if (route.layout === null) {
+                                        Layout = Fragment
                                     }
-                                />
-                            )
-                        })}
-                    </Routes>
+
+                                    return (
+                                        <Route
+                                            key={index}
+                                            path={route.path}
+                                            element={
+                                                <Layout>
+                                                    <Page />
+                                                </Layout>
+                                            }
+                                        />
+                                    )
+                                })}
+                            </Routes>
+                        </AuthProvider>
+                    </AppProvider>
                 </Suspense>
             </BrowserRouter>
             <ToastContainer limit={1} autoClose={1000} />

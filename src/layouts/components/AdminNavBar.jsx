@@ -26,7 +26,7 @@ function AdminNavBar() {
             icon: <BookIcon className='w-5 h-5 text-white' />
         },
         {
-            name: 'Quản lí menu',
+            name: 'Quản lí chuyên đề',
             path: '/admin/structure',
             icon: <SettingIcon className='w-5 h-5 text-white' />
         }

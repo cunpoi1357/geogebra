@@ -1,9 +1,24 @@
+import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { signOut } from 'firebase/auth'
+import { toast } from 'react-toastify'
+
 import Image from './../components/Image'
 import Button from './../components/Button'
 import images from '../assets/images'
-import { Link } from 'react-router-dom'
+import { AuthContext } from '../Context/AuthProvider'
+import { auth } from '../firebase'
 
 function Home() {
+    const {
+        user: { email }
+    } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        signOut(auth)
+            .then(() => toast.success('Đăng xuất thành công!'))
+            .catch(error => toast.error(error.message))
+    }
     return (
         <section>
             <div className='bg-[#8087d8] px-6 pb-10 pt-4'>
@@ -18,10 +33,18 @@ function Home() {
                         <Link to='/about'>
                             <Button className='bg-[#fac730] h-12 rounded-xl text-xl'>Giới thiệu</Button>
                         </Link>
-                        <Button className='bg-[#fac730] h-12 rounded-xl text-xl'>Đăng nhập</Button>
                         <Link to='/contact'>
                             <Button className='bg-[#fac730] h-12 rounded-xl text-xl'>Liên hệ</Button>
                         </Link>
+                        {email ? (
+                            <Button className='bg-[#fac730] h-12 rounded-xl text-xl' onClick={handleLogout}>
+                                Đăng xuất
+                            </Button>
+                        ) : (
+                            <Link to='/login'>
+                                <Button className='bg-[#fac730] h-12 rounded-xl text-xl'>Đăng nhập</Button>
+                            </Link>
+                        )}
                     </nav>
                 </div>
                 <h1 className='pt-6 pb-8 text-4xl text-center text-white'>WEBSITE HỖ TRỢ HỌC HÌNH HỌC KHÔNG GIAN</h1>

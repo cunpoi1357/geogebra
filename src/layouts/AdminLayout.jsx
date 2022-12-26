@@ -1,29 +1,23 @@
-import React from 'react'
+import { useContext } from 'react'
 import propsTypes from 'prop-types'
 import AdminNavBar from './components/AdminNavBar'
 import AdminHeader from './components/AdminHeader'
 
-import { useEffect, useState } from 'react'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { AuthContext } from '../Context/AuthProvider'
 
 function AdminLayout({ children }) {
-    const [user, setUser] = useState(null)
-
-    useEffect(() => {
-        const auth = getAuth()
-        onAuthStateChanged(auth, user => (user ? setUser(user) : setUser(null)))
-    }, [user])
+    const { user } = useContext(AuthContext)
 
     return (
-        <div className='flex bg-[#f4f5f6] h-[100vh]'>
+        <div className='flex bg-[#f4f5f6] h-screen'>
             <AdminNavBar />
             <main className='flex flex-col flex-1'>
-                {user ? (
+                {user?.role?.admin ? (
                     children
                 ) : (
                     <>
                         <AdminHeader>Trang quản lí</AdminHeader>
-                        <p className='p-10'>Vui lòng đăng nhập tài khoản!</p>
+                        <p className='p-10'>Vui lòng đăng nhập tài khoản quản trị!</p>
                     </>
                 )}
             </main>

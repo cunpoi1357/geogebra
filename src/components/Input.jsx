@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import { useController } from 'react-hook-form'
 
-function Input({ className, name, control, label, isRequired, onChange, rules, ...props }) {
+function Input({ className, inputClassName, name, control, label, isRequired, onChange, rules, ...props }) {
     const inputId = useId()
     const { field, fieldState } = useController({
         name,
@@ -21,7 +21,7 @@ function Input({ className, name, control, label, isRequired, onChange, rules, .
             <input
                 className={`w-full p-4 outline-neutral-600 placeholder-neutrals-04 border border-neutral-400 rounded ${
                     fieldState.error && 'border-primary-red'
-                }`}
+                } ${inputClassName}`}
                 id={inputId}
                 {...field}
                 onChange={e => {

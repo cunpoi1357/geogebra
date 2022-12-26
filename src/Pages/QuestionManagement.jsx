@@ -1,11 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
-import toArray from 'lodash/toArray'
+import { useEffect, useContext, useState } from 'react'
 
 import Button from '../components/Button'
+import { AppContext } from '../Context/AppProvider'
 import { PlusIcon, SearchIcon } from '../components/Icon'
 import AdminHeader from '../layouts/components/AdminHeader'
-import { onValue, ref } from 'firebase/database'
-import { database } from '../firebase'
 import CreateQuestionModal from '../components/Question/CreateQuestionModal'
 import QuestionTable from '../components/Question/QuestionTable'
 import { useForm } from 'react-hook-form'
@@ -14,7 +12,8 @@ import SelectTopic from '../components/SelectTopic'
 import Select from '../components/Select'
 
 function QuestionManagement() {
-    const [questions, setQuestions] = useState([])
+    const { questions } = useContext(AppContext)
+    const [dataRender, setDataRender] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [filters, setFilters] = useState({
         id: '',
@@ -37,10 +36,15 @@ function QuestionManagement() {
     })
 
     useEffect(() => {
-        onValue(ref(database, 'questions'), snapshot => {
-            setQuestions(toArray(snapshot.val()).filter(item => !!item))
-        })
-    }, [])
+        const data = questions.filter(
+            item =>
+                item.id.includes(filters.id) &&
+                item.question.includes(filters.question) &&
+                item.topic.includes(filters.topic) &&
+                item.level.includes(filters.level)
+        )
+        setDataRender(data)
+    }, [questions, filters.id, filters.question, filters.topic, filters.level])
 
     watch(data => {
         const questionsFiltered = questions.filter(item => item.topic === data.topic)
@@ -53,20 +57,8 @@ function QuestionManagement() {
         })
     })
 
-    const questionMemo = useMemo(
-        () =>
-            questions.filter(
-                item =>
-                    item.id.includes(filters.id) &&
-                    item.question.includes(filters.question) &&
-                    item.topic.includes(filters.topic) &&
-                    item.level.includes(filters.level)
-            ),
-        [questions, filters.id, filters.question, filters.topic, filters.level]
-    )
-
     return (
-        <div className='h-[100vh] flex flex-col overflow-hidden'>
+        <div className='flex flex-col h-screen overflow-hidden'>
             <AdminHeader>Ngân hàng đề</AdminHeader>
             <section className='p-16 h-[calc(100vh-128px)] overflow-auto'>
                 <div className='grid grid-cols-12 gap-8 mb-8'>
@@ -127,7 +119,7 @@ function QuestionManagement() {
                     </div>
                 </div>
                 <div className='shadow-xl'>
-                    <QuestionTable data={questionMemo} />
+                    <QuestionTable data={dataRender} />
                 </div>
             </section>
         </div>

@@ -30,7 +30,7 @@ function DefaultLayout({ children }) {
     }, [location])
 
     return (
-        <div className='flex flex-col bg-[#cce2ff] md:p-4 md:pb-0 h-[100vh]'>
+        <div className='flex flex-col bg-[#cce2ff] md:p-4 md:pb-0 h-screen'>
             <Header onToggle={() => setExpandedMenu(!expandedMenu)} expandedMenu={expandedMenu} />
             <main
                 className={`flex w-full ${
@@ -41,7 +41,7 @@ function DefaultLayout({ children }) {
                     data={data}
                     expandedMenu={expandedMenu}
                     onOpenMenu={() => setExpandedMenu(true)}
-                    className={`h-[100vh] flex-col lg:flex lg:mx-0 ${
+                    className={`h-screen flex-col lg:flex lg:mx-0 ${
                         expandedMenu ? 'mx-4' : 'mx-0'
                     } bg-[#0060a7] overflow-auto ${expandedMenu ? 'w-full lg:w-auto' : 'w-0 lg:w-auto'}`}
                     onOpenCreateTestModal={() => setCreateTestShow(true)}

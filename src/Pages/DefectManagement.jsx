@@ -1,32 +1,35 @@
-import { onValue, ref } from 'firebase/database'
-import React, { useEffect, useState } from 'react'
-import toArray from 'lodash/toArray'
+import { useContext, useState, useEffect } from 'react'
 
-import { database } from '../firebase'
 import { PlusIcon } from '../components/Icon'
 import Button from '../components/Button'
 import AdminHeader from '../layouts/components/AdminHeader'
 import CreateDefectModal from '../components/Defect/CreateDefectModal'
 import QuestionFilter from '../components/QuestionFilter'
 import DefectTable from '../components/Defect/DefectTable'
+import { AppContext } from '../Context/AppProvider'
 
 function DefectManagement() {
-    const [examples, setExamples] = useState([])
+    const { examples } = useContext(AppContext)
+    const [dataRender, setDataRender] = useState([])
     const [showModal, setShowModal] = useState(false)
     const [filters, setFilters] = useState({
         id: '',
         question: '',
         topic: ''
     })
-
     useEffect(() => {
-        onValue(ref(database, 'examples'), snapshot => {
-            setExamples(toArray(snapshot.val()).filter(item => !!item))
-        })
-    }, [])
+        const data = examples.filter(
+            item =>
+                item.type === 'defect' &&
+                item.id.includes(filters.id) &&
+                item.question.includes(filters.question) &&
+                item.topic.includes(filters.topic)
+        )
+        setDataRender(data)
+    }, [examples, filters.id, filters.question, filters.topic, filters.level])
 
     return (
-        <div className='h-[100vh] flex flex-col overflow-hidden'>
+        <div className='flex flex-col h-screen overflow-hidden'>
             <AdminHeader>Quản lí câu hỏi điền khuyết</AdminHeader>
             <section className='p-16 overflow-auto'>
                 <div className='grid grid-cols-12 gap-8 mb-8'>
@@ -43,15 +46,7 @@ function DefectManagement() {
                 <CreateDefectModal isOpen={showModal} onClose={() => setShowModal(false)} />
                 <div className='grid grid-cols-12 gap-16'>
                     <div className='relative col-span-12 shadow-xl'>
-                        <DefectTable
-                            data={examples.filter(
-                                item =>
-                                    item.type === 'defect' &&
-                                    item.id.includes(filters.id) &&
-                                    item.question.includes(filters.question) &&
-                                    item.topic.includes(filters.topic)
-                            )}
-                        />
+                        <DefectTable data={dataRender} />
                     </div>
                 </div>
             </section>

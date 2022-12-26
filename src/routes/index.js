@@ -14,6 +14,8 @@ import TestYourSelf from '../Pages/TestYourSelf'
 import WithoutFooter from '../layouts/WithoutFooter'
 import About from '../Pages/About'
 import Contact from '../Pages/Contact'
+import Login from '../Pages/Login'
+import Register from '../Pages/Register'
 const AdminLayout = lazy(() => import('../layouts/AdminLayout'))
 
 const publicRoutes = [
@@ -43,6 +45,14 @@ const publicRoutes = [
     {
         path: config.routes.contact,
         component: Contact
+    },
+    {
+        path: config.routes.login,
+        component: Login
+    },
+    {
+        path: config.routes.register,
+        component: Register
     },
     {
         path: config.routes.admin,

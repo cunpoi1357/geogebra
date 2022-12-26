@@ -8,12 +8,12 @@ import Markdown from '../Markdown'
 import EditQuestionModal from './EditQuestionModal'
 import PreviewQuestionModal from './PreviewQuestionModal'
 
-function QuestionItem({ data, index, onRemove }) {
+function QuestionItem({ data, index, style, onRemove }) {
     const [showEditModal, setShowEditModal] = useState(false)
     const [showPreviewModal, setShowPreviewModal] = useState(false)
 
     return (
-        <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767]'>
+        <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767]' style={style}>
             <td className='px-6 py-4'>{index}</td>
             <td className='px-6 py-4'>{JSON.parse(data.topic).name}</td>
             <td className='px-6 py-4'>

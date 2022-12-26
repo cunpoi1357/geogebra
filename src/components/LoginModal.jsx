@@ -1,7 +1,8 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import { auth } from '../firebase'
 import Button from './Button'
 import { XIcon } from './Icon'
 import Input from './Input'
@@ -9,8 +10,6 @@ import Modal from './Modal'
 
 function LoginModal({ onClose, isOpen }) {
     const { control, handleSubmit, reset } = useForm()
-
-    const auth = getAuth()
 
     const onSubmit = handleSubmit(data => {
         signInWithEmailAndPassword(auth, data.email, data.password)

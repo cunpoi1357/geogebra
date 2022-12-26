@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+import { useContext, useState } from 'react'
+import { signOut } from 'firebase/auth'
 import Button from '../../components/Button'
 import LoginModal from '../../components/LoginModal'
+import { AuthContext } from '../../Context/AuthProvider'
+import { auth } from '../../firebase'
+import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
 
 function AdminHeader({ children }) {
     const [showModal, setShowModal] = useState(false)
-    const [user, setUser] = useState(null)
-
-    const auth = getAuth()
-    useEffect(() => {
-        onAuthStateChanged(auth, user => (user ? setUser(user) : setUser(null)))
-    }, [auth])
+    const { user } = useContext(AuthContext)
 
     const handleLogout = () => {
         signOut(auth)
-            .then(status => console.log(status))
-            .catch(error => console.log(error))
+            .then(() => toast.success('Đăng xuất thành công!'))
+            .catch(error => toast.error(error.message))
     }
 
     const handleCloseModal = () => setShowModal(false)
@@ -25,11 +24,14 @@ function AdminHeader({ children }) {
             <h1 className='text-xl font-bold'>{children}</h1>
             <nav className='flex items-center'>
                 <div className='flex items-center cursor-pointer'>
-                    {user ? (
+                    {user.uid ? (
                         <>
                             <img
                                 className='w-12 h-12 mr-4 rounded-full'
-                                src='http://yt3.ggpht.com/wgneNTiW753q5G6XMnjyNLAzReR4TVFJryTKTpIqJefrKMyhABPwfnyNWIoT5NNGstFlva1tgw=s176-c-k-c0x00ffffff-no-rj-mo'
+                                src={
+                                    user.photoURL ||
+                                    'http://yt3.ggpht.com/wgneNTiW753q5G6XMnjyNLAzReR4TVFJryTKTpIqJefrKMyhABPwfnyNWIoT5NNGstFlva1tgw=s176-c-k-c0x00ffffff-no-rj-mo'
+                                }
                                 alt='F8'
                             />
                             <div className='mr-4 w-44'>
@@ -40,9 +42,11 @@ function AdminHeader({ children }) {
                             </div>
                         </>
                     ) : (
-                        <Button className='bg-neutrals-05' onClick={() => setShowModal(true)}>
-                            Đăng nhập
-                        </Button>
+                        <Link to='/login'>
+                            <Button className='bg-neutrals-05' onClick={() => setShowModal(true)}>
+                                Đăng nhập
+                            </Button>
+                        </Link>
                     )}
                 </div>
             </nav>

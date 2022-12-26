@@ -5,6 +5,8 @@ const routes = {
     testYourSelf: '/test-your-self',
     about: '/about',
     contact: '/contact',
+    login: '/login',
+    register: '/register',
     admin: '/admin',
     structureManagement: '/admin/structure',
     multipleChoiceManagement: '/admin/multiple-choice',

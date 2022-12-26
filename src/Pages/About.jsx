@@ -23,7 +23,7 @@ function About() {
                     Đại Nghĩa, huyện Buôn Đôn.
                 </p>
                 <p>
-                    Giáo viên hướng dẫn: <span className='uppercase'>Trần Ngọc Lam</span>, giáo viên toán THPT Trần Đại
+                    Giáo viên hướng dẫn: <span className='uppercase'>Trần Ngọc Lam</span>, giáo viên Toán THPT Trần Đại
                     Nghĩa. huyện Buôn Đôn.
                 </p>
             </div>
