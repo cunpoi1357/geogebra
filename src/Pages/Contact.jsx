@@ -33,7 +33,13 @@ function Contact() {
                                 <h5 className='mb-4 text-lg font-bold'>Nguyễn Việt Hoàng</h5>
                                 <p className='mb-4 text-gray-500'>Frontend Developer</p>
                                 <ul className='flex justify-center gap-4 mx-auto list-inside'>
-                                    <FacebookIcon className='w-4 h-4 text-blue-600' />
+                                    <a
+                                        href='https://www.facebook.com/nvhbmt1357/'
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        <FacebookIcon className='w-4 h-4 text-blue-600' />
+                                    </a>
                                     <GoogleIcon className='w-4 h-4 text-blue-600' />
                                 </ul>
                             </div>
@@ -66,7 +72,13 @@ function Contact() {
                                 <h5 className='mb-4 text-lg font-bold'>Trần Quốc Khánh</h5>
                                 <p className='mb-4 text-gray-500'>Content creator</p>
                                 <ul className='flex justify-center gap-4 mx-auto list-inside'>
-                                    <FacebookIcon className='w-4 h-4 text-blue-600' />
+                                    <a
+                                        href='https://www.facebook.com/100028977191571'
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                    >
+                                        <FacebookIcon className='w-4 h-4 text-blue-600' />
+                                    </a>
                                     <GoogleIcon className='w-4 h-4 text-blue-600' />
                                 </ul>
                             </div>
