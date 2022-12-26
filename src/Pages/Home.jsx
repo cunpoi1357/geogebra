@@ -11,7 +11,7 @@ import { auth } from '../firebase'
 
 function Home() {
     const {
-        user: { email }
+        user: { email, role }
     } = useContext(AuthContext)
 
     const handleLogout = () => {
@@ -43,6 +43,11 @@ function Home() {
                         ) : (
                             <Link to='/login'>
                                 <Button className='bg-[#fac730] h-12 rounded-xl text-xl'>Đăng nhập</Button>
+                            </Link>
+                        )}
+                        {role?.admin && (
+                            <Link to='/admin'>
+                                <Button className='bg-[#fac730] h-12 rounded-xl text-xl'>Trang quản trị</Button>
                             </Link>
                         )}
                     </nav>
