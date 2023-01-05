@@ -1,10 +1,9 @@
-import { ref, set } from 'firebase/database'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
 import { XIcon } from '../Icon'
-import { database } from '../../firebase'
+import { setDatabase } from '../../firebase/services'
 import Button from '../Button'
 import Modal from '../Modal'
 import Textarea from '../Textarea'
@@ -15,7 +14,7 @@ function CreateDefectModal({ onClose, isOpen }) {
 
     const onSubmit = handleSubmit(data => {
         const id = uuidv4()
-        set(ref(database, 'examples/' + id), {
+        setDatabase(`examples/${id}`, {
             type: 'defect',
             ...data,
             id

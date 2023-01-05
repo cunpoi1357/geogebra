@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import {
     GoogleAuthProvider,
     signInWithPopup,
@@ -12,12 +12,14 @@ import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import Input from '../components/Input'
+import { AuthContext } from '../Context/AuthProvider'
 
 const googleProvider = new GoogleAuthProvider()
 const facebookProvider = new FacebookAuthProvider()
 
 function Register() {
     const navigate = useNavigate()
+    const { user } = useContext(AuthContext)
     const { control, handleSubmit, reset, getValues } = useForm()
 
     const handleLoginWitPopup = provider => {
@@ -49,6 +51,15 @@ function Register() {
                 }
             })
     })
+
+    useEffect(() => {
+        if (user.uid) {
+            navigate('/')
+            toast.info('Bạn đã đăng nhập tài khoản!')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user.uid])
+
     return (
         <div className='min-h-[calc(100vh-236px)]'>
             <div className='h-full px-6 text-gray-800'>

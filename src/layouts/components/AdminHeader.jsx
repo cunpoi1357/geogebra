@@ -6,6 +6,7 @@ import { AuthContext } from '../../Context/AuthProvider'
 import { auth } from '../../firebase'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
+import images from '../../assets/images'
 
 function AdminHeader({ children }) {
     const [showModal, setShowModal] = useState(false)
@@ -28,10 +29,7 @@ function AdminHeader({ children }) {
                         <>
                             <img
                                 className='w-12 h-12 mr-4 rounded-full'
-                                src={
-                                    user.photoURL ||
-                                    'http://yt3.ggpht.com/wgneNTiW753q5G6XMnjyNLAzReR4TVFJryTKTpIqJefrKMyhABPwfnyNWIoT5NNGstFlva1tgw=s176-c-k-c0x00ffffff-no-rj-mo'
-                                }
+                                src={user.photoURL || images.defaultAvatar}
                                 alt='F8'
                             />
                             <div className='mr-4 w-44'>

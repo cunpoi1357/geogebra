@@ -16,6 +16,7 @@ import About from '../Pages/About'
 import Contact from '../Pages/Contact'
 import Login from '../Pages/Login'
 import Register from '../Pages/Register'
+import NotFound from '../Pages/NotFound'
 const AdminLayout = lazy(() => import('../layouts/AdminLayout'))
 
 const publicRoutes = [
@@ -83,6 +84,10 @@ const publicRoutes = [
         path: config.routes.structureManagement,
         component: StructureManagement,
         layout: AdminLayout
+    },
+    {
+        path: config.routes.notFound,
+        component: NotFound
     }
 ]
 

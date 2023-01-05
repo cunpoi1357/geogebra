@@ -1,10 +1,9 @@
-import { child, get, ref } from 'firebase/database'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import DefectQuestion from '../components/Defect/DefectQuestion'
 import MultipleChoiceQuestion from '../components/MultipleChoice/MultipleChoiceQuestion'
-import { database } from '../firebase'
+import { getDatabase } from '../firebase/services'
 
 function Example() {
     const { id } = useParams()
@@ -12,7 +11,7 @@ function Example() {
     const [data, setData] = useState()
 
     useEffect(() => {
-        get(child(ref(database), `examples/${id}`))
+        getDatabase(`examples/${id}`)
             .then(snapshot => {
                 if (snapshot.exists()) {
                     setData(snapshot.val())

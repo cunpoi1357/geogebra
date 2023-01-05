@@ -1,4 +1,5 @@
-import { FacebookIcon, GoogleIcon } from '../components/Icon'
+import { EnvelopeIcon, FacebookIcon } from '../components/Icon'
+import images from '../assets/images'
 
 function Contact() {
     return (
@@ -9,14 +10,11 @@ function Contact() {
                     <div className='mb-6 lg:mb-0'>
                         <div className='block bg-white rounded-lg shadow-lg'>
                             <div className='relative overflow-hidden bg-no-repeat bg-cover'>
-                                <img
-                                    src='https://img.freepik.com/premium-vector/person-avatar-design_24877-38137.jpg?w=2000'
-                                    className='w-full rounded-t-lg'
-                                    alt='avatar'
-                                />
+                                <img src={images.hoang} className='w-full rounded-t-lg' alt='avatar' />
                                 <a href='#!'>
                                     <div className='absolute top-0 bottom-0 left-0 right-0 w-full h-full overflow-hidden bg-fixed' />
                                 </a>
+
                                 <svg
                                     className='absolute'
                                     xmlns='http://www.w3.org/2000/svg'
@@ -31,7 +29,7 @@ function Contact() {
                             </div>
                             <div className='p-6'>
                                 <h5 className='mb-4 text-lg font-bold'>Nguyễn Việt Hoàng</h5>
-                                <p className='mb-4 text-gray-500'>Frontend Developer</p>
+                                <p className='mb-4 text-gray-500'>Developer</p>
                                 <ul className='flex justify-center gap-4 mx-auto list-inside'>
                                     <a
                                         href='https://www.facebook.com/nvhbmt1357/'
@@ -40,7 +38,9 @@ function Contact() {
                                     >
                                         <FacebookIcon className='w-4 h-4 text-blue-600' />
                                     </a>
-                                    <GoogleIcon className='w-4 h-4 text-blue-600' />
+                                    <a href='mailto:hoangnguyen1157@gmail.com'>
+                                        <EnvelopeIcon className='w-4 h-4 text-blue-600' />
+                                    </a>
                                 </ul>
                             </div>
                         </div>
@@ -48,11 +48,7 @@ function Contact() {
                     <div className='mb-6 lg:mb-0'>
                         <div className='block bg-white rounded-lg shadow-lg'>
                             <div className='relative overflow-hidden bg-no-repeat bg-cover'>
-                                <img
-                                    src='https://static.vecteezy.com/system/resources/previews/004/476/164/original/young-man-avatar-character-icon-free-vector.jpg'
-                                    className='w-full rounded-t-lg'
-                                    alt='avatar'
-                                />
+                                <img src={images.khanh} className='w-full rounded-t-lg' alt='avatar' />
                                 <a href='#!'>
                                     <div className='absolute top-0 bottom-0 left-0 right-0 w-full h-full overflow-hidden bg-fixed' />
                                 </a>
@@ -79,7 +75,9 @@ function Contact() {
                                     >
                                         <FacebookIcon className='w-4 h-4 text-blue-600' />
                                     </a>
-                                    <GoogleIcon className='w-4 h-4 text-blue-600' />
+                                    <a href='mailto:trankhanh0525@gmail.com'>
+                                        <EnvelopeIcon className='w-4 h-4 text-blue-600' />
+                                    </a>
                                 </ul>
                             </div>
                         </div>

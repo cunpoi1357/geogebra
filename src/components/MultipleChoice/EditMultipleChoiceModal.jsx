@@ -1,10 +1,10 @@
-import { get, ref, update } from 'firebase/database'
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { database, storage } from '../../firebase'
+import { storage } from '../../firebase'
+import { getDatabase, updateDatabase } from '../../firebase/services'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import Input from '../Input'
@@ -19,7 +19,7 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
     const [image, setImage] = useState(null)
 
     useEffect(() => {
-        get(ref(database, `examples/${id}`)).then(snapshot => {
+        getDatabase(`examples/${id}`).then(snapshot => {
             setQuestion(snapshot.val())
         })
         Array.from(Object.keys(question))
@@ -37,7 +37,7 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
                 await uploadBytes(imagesRef, image)
                 url = await getDownloadURL(imagesRef)
             }
-            await update(ref(database, 'examples/' + id), {
+            await updateDatabase(`examples/${id}`, {
                 ...dataForm,
                 image: url || ''
             })

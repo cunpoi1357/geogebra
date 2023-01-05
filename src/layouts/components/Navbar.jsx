@@ -1,11 +1,15 @@
+import { useContext } from 'react'
+
+import { AppContext } from '../../Context/AppProvider'
 import { PriceTagIcon } from '../../components/Icon'
 import NavParent from './NavParent'
 
-function Navbar({ className, data, expandedMenu, onOpenCreateTestModal, onOpenMenu }) {
+function Navbar({ className, expandedMenu, onOpenCreateTestModal, onOpenMenu }) {
+    const { topics } = useContext(AppContext)
     return (
         <aside className={className} onClick={onOpenMenu}>
             <div className={`${expandedMenu ? 'w-[400px]' : 'w-16'} transition-all ease-linear pb-40`}>
-                {data.map(item => (
+                {topics.map(item => (
                     <NavParent key={item.name} expandedMenu={expandedMenu} {...item} />
                 ))}
                 <button

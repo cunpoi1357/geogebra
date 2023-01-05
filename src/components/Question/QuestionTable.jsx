@@ -1,18 +1,17 @@
-import { ref, remove } from 'firebase/database'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import orderBy from 'lodash/orderBy'
 
-import { database } from '../../firebase'
-import QuestionItem from './QuestionItem'
+import { removeDatabase } from '../../firebase/services'
 import YesNoModal from '../YesNoModal'
+import QuestionItem from './QuestionItem'
 
 function QuestionTable({ data }) {
     const [showYesNoModal, setShowYesNoModal] = useState(false)
     const [removeID, setRemoveID] = useState(null)
 
     const handleRemove = id => {
-        remove(ref(database, 'questions/' + id))
+        removeDatabase(`questions/${id}`)
             .then(() => toast.success('Xóa thành công'))
             .catch(error => toast.error(error.message))
         setShowYesNoModal(false)

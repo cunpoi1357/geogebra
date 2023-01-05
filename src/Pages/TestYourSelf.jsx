@@ -1,11 +1,10 @@
 import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
-import { get, ref } from 'firebase/database'
 import { toast } from 'react-toastify'
 import toArray from 'lodash/toArray'
 import shuffle from 'lodash/shuffle'
 
-import { database } from '../firebase'
+import { getDatabase } from '../firebase/services'
 import TestYourSelfNavBar from '../components/TestYourSelf/TestYourSelfNavBar'
 import TestYourSelfQuestion from '../components/TestYourSelf/TestYourSelfQuestion'
 import Footer from '../layouts/components/Footer'
@@ -21,7 +20,7 @@ function TestYourSelf() {
     useEffect(() => {
         const patten = location.state
         const fetchData = async () => {
-            const snapshot = await get(ref(database, 'questions'))
+            const snapshot = await getDatabase('questions')
             const val = await snapshot.val()
             const questions = toArray(val).filter(item => !!item && JSON.parse(item.topic))
 

@@ -1,11 +1,10 @@
 import { useNavigate } from 'react-router-dom'
-import { get, ref } from 'firebase/database'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import toArray from 'lodash/toArray'
 import sampleSize from 'lodash/sampleSize'
 
-import { database } from '../../firebase'
+import { getDatabase } from '../../firebase/services'
 import { PlusIcon, XIcon } from '../Icon'
 import Button from '../Button'
 import Modal from '../Modal'
@@ -26,7 +25,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const structureSnapshot = await get(ref(database, 'structure'))
+            const structureSnapshot = await getDatabase('structure')
             const structureVal = await structureSnapshot.val()
             const structureData = JSON.parse(structureVal)
             const structure = []
@@ -48,7 +47,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                     )
             )
 
-            const questionsSnapshot = await get(ref(database, 'questions'))
+            const questionsSnapshot = await getDatabase('questions')
             const questionVal = await questionsSnapshot.val()
             const questions = toArray(questionVal).filter(item => !!item)
 

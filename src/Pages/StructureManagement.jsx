@@ -6,19 +6,18 @@ import Ajv from 'ajv'
 import AdminHeader from '../layouts/components/AdminHeader'
 import Button from '../components/Button'
 import { toast } from 'react-toastify'
-import { get, ref, set } from 'firebase/database'
-import { database } from '../firebase'
+import { getDatabase, updateDatabase } from '../firebase/services'
 
 const ajv = new Ajv({ allErrors: true, verbose: true })
 
 function StructureManagement() {
     const [data, setData] = useState([])
     useEffect(() => {
-        get(ref(database, 'structure')).then(snapshot => setData(JSON.parse(snapshot.val())))
+        getDatabase('structure').then(snapshot => setData(JSON.parse(snapshot.val())))
     }, [])
 
     const handleUpdate = () => {
-        set(ref(database, 'structure'), JSON.stringify(data))
+        updateDatabase('structure', JSON.stringify(data))
             .then(() => {
                 toast.success('Cập nhật thành công')
             })

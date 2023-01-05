@@ -1,11 +1,11 @@
-import { ref, set } from 'firebase/database'
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 import { useState } from 'react'
 
-import { database, storage } from '../../firebase'
+import { storage } from '../../firebase'
+import { setDatabase } from '../../firebase/services'
 import Button from '../Button'
 import { ClipBoardIcon, XIcon } from '../Icon'
 import Modal from '../Modal'
@@ -29,7 +29,7 @@ function CreateQuestionModal({ onClose, isOpen }) {
                 await uploadBytes(imagesRef, image)
                 url = await getDownloadURL(imagesRef)
             }
-            await set(ref(database, 'questions/' + id), {
+            await setDatabase(`questions/${id}`, {
                 ...data,
                 image: url || imageUrl || '',
                 id

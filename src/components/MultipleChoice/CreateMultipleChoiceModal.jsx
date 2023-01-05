@@ -1,11 +1,10 @@
-import { ref, set } from 'firebase/database'
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
-import { database, storage } from '../../firebase'
+import { storage } from '../../firebase'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import Input from '../Input'
@@ -13,6 +12,7 @@ import Modal from '../Modal'
 import Select from '../Select'
 import SelectTopic from '../SelectTopic'
 import Textarea from '../Textarea'
+import { setDatabase } from '../../firebase/services'
 
 function CreateMultipleChoiceModal({ onClose, isOpen }) {
     const { control, handleSubmit, reset } = useForm()
@@ -28,7 +28,7 @@ function CreateMultipleChoiceModal({ onClose, isOpen }) {
                 await uploadBytes(imagesRef, image)
                 imageUrl = await getDownloadURL(imagesRef)
             }
-            await set(ref(database, 'examples/' + id), {
+            await setDatabase(`examples/${id}`, {
                 type: 'multiple-choice',
                 ...data,
                 image: imageUrl || '',

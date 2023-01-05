@@ -1,27 +1,26 @@
-import { get, ref } from 'firebase/database'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import toArray from 'lodash/toArray'
 import orderBy from 'lodash/orderBy'
 
-import { database } from '../firebase'
+import { getDatabase } from '../firebase/services'
+import { AppContext } from '../Context/AppProvider'
 import Markdown from '../components/Markdown'
 
 function Topic() {
+    const { examples } = useContext(AppContext)
     const { topic } = useParams()
-    const [examples, setExamples] = useState([])
+    const [examplesFiltered, setExamplesFiltered] = useState([])
     const [content, setContent] = useState('')
     const location = useLocation()
 
     useEffect(() => {
-        get(ref(database, 'examples')).then(snapshot => {
-            setExamples(toArray(snapshot.val()).filter(item => !!item && JSON.parse(item.topic).path === topic))
-        })
+        setExamplesFiltered(examples.filter(item => !!item && JSON.parse(item.topic).path === topic))
 
-        get(ref(database, `theory/${topic}`)).then(snapshot => {
+        getDatabase(`theory/${topic}`).then(snapshot => {
             setContent(snapshot.val().content)
         })
-    }, [topic, location])
+    }, [topic, location, examples])
 
     const sortFn = item => Number(toArray(item.question.match(/^Câu (\d+)\./))[1])
 
@@ -35,7 +34,7 @@ function Topic() {
                     </div>
                 </section>
                 <ul className='grid grid-cols-1 gap-8 p-6 md:grid-cols-4'>
-                    {orderBy(examples, [sortFn], ['esc']).map((item, index) => (
+                    {orderBy(examplesFiltered, [sortFn], ['esc']).map((item, index) => (
                         <li key={item.id} className='relative justify-center col-span-1 cursor-pointer rounded-xl'>
                             <Link className='flex items-center w-full' to={`/question/${item.id}`}>
                                 <span className='bg-[#6382a3] px-4 text-2xl rounded-l-xl text-white pr-6 inline-block'>

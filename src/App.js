@@ -11,7 +11,7 @@ const DefaultLayout = lazy(() => import('./layouts/DefaultLayout'))
 function App() {
     return (
         <>
-            <BrowserRouter>
+            <BrowserRouter basename='/'>
                 <Suspense>
                     <AppProvider>
                         <AuthProvider>

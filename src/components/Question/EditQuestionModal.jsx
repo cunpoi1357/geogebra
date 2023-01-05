@@ -1,9 +1,9 @@
-import { get, ref, update } from 'firebase/database'
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { database, storage } from '../../firebase'
+import { storage } from '../../firebase'
+import { getDatabase, updateDatabase } from '../../firebase/services'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import Modal from '../Modal'
@@ -20,7 +20,7 @@ function EditQuestionModal({ id, onClose, isOpen }) {
     const [image, setImage] = useState(null)
 
     useEffect(() => {
-        get(ref(database, `questions/${id}`)).then(snapshot => {
+        getDatabase(`questions/${id}`).then(snapshot => {
             setQuestion(snapshot.val())
         })
         Array.from(Object.keys(question)).forEach(key => setValue(key, question[key]))
@@ -36,7 +36,7 @@ function EditQuestionModal({ id, onClose, isOpen }) {
                 await uploadBytes(imagesRef, image)
                 url = await getDownloadURL(imagesRef)
             }
-            await update(ref(database, 'questions/' + id), {
+            await updateDatabase(`questions/${id}`, {
                 ...dataForm,
                 image: url || ''
             })

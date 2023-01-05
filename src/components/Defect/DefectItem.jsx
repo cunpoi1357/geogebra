@@ -1,19 +1,11 @@
-import { ref, remove } from 'firebase/database'
-import React, { useState } from 'react'
-import { toast } from 'react-toastify'
+import { useState } from 'react'
 
-import { database } from '../../firebase'
 import { EditIcon, EyeIcon, TrashIcon } from '../Icon'
 import EditDefectModal from './EditDefectModal'
 
-function DefectItem({ data, index }) {
+function DefectItem({ data, index, onRemove }) {
     const [showModal, setShowModal] = useState(false)
 
-    const handleRemove = () => {
-        remove(ref(database, 'examples/' + data.id))
-            .then(() => toast.success('Xóa thành công'))
-            .catch(error => toast.error(error.message))
-    }
     return (
         <tr className='bg-[#fcfcfd] border-b border-[#f0f2f5] text-[#344767]'>
             <td className='px-6 py-4'>{index}</td>
@@ -28,7 +20,7 @@ function DefectItem({ data, index }) {
                 <label title='Sửa' onClick={() => setShowModal(true)}>
                     <EditIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                 </label>
-                <label title='Xóa' onClick={handleRemove}>
+                <label title='Xóa' onClick={onRemove}>
                     <TrashIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                 </label>
                 <EditDefectModal isOpen={showModal} onClose={() => setShowModal(false)} id={data.id} />

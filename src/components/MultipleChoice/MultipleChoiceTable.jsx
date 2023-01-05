@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { ref, remove } from 'firebase/database'
 import { toast } from 'react-toastify'
 import orderBy from 'lodash/orderBy'
 import toArray from 'lodash/toArray'
 
-import { database } from '../../firebase'
+import { removeDatabase } from '../../firebase/services'
 import MultipleChoiceItem from './MultipleChoiceItem'
 import YesNoModal from '../YesNoModal'
 
@@ -13,7 +12,7 @@ function MultipleChoiceTable({ data }) {
     const [removeID, setRemoveID] = useState(null)
 
     const handleRemove = id => {
-        remove(ref(database, 'examples/' + id))
+        removeDatabase(`examples/${id}`)
             .then(() => toast.success('Xóa thành công'))
             .catch(error => toast.error(error.message))
         setShowYesNoModal(false)

@@ -1,9 +1,8 @@
-import { get, ref, update } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { database } from '../../firebase'
+import { getDatabase, updateDatabase } from '../../firebase/services'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import SelectTopic from '../SelectTopic'
@@ -16,7 +15,7 @@ function EditDefectModal({ isOpen, onClose, id }) {
     const [question, setQuestion] = useState({})
 
     useEffect(() => {
-        get(ref(database, `examples/${id}`)).then(snapshot => {
+        getDatabase(`examples/${id}`).then(snapshot => {
             setQuestion(snapshot.val())
         })
         Array.from(Object.keys(question)).forEach(key => setValue(key, question[key]))
@@ -24,7 +23,7 @@ function EditDefectModal({ isOpen, onClose, id }) {
     }, [isOpen])
 
     const onSubmit = handleSubmit(dataForm => {
-        update(ref(database, 'examples/' + id), dataForm)
+        updateDatabase(`examples/${id}`, dataForm)
             .then(() => {
                 toast.success('Cập nhật thành công')
             })

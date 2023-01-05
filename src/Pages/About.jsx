@@ -24,7 +24,7 @@ function About() {
                 </p>
                 <p>
                     Giáo viên hướng dẫn: <span className='uppercase'>Trần Ngọc Lam</span>, giáo viên Toán THPT Trần Đại
-                    Nghĩa. huyện Buôn Đôn.
+                    Nghĩa, huyện Buôn Đôn.
                 </p>
             </div>
         </section>

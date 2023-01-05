@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import sample from 'lodash/sample'
 import toArray from 'lodash/toArray'
-import { get, ref } from 'firebase/database'
 
 import { ShuffleIcon } from './Icon'
-import { database } from '../firebase'
+import { getDatabase } from '../firebase/services'
 
 function GetRandomQuestionButton({ className }) {
     const [examples, setExamples] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
-        get(ref(database, 'examples')).then(snapshot => {
+        getDatabase('examples').then(snapshot => {
             setExamples(toArray(snapshot.val()).filter(item => !!item))
         })
     }, [])

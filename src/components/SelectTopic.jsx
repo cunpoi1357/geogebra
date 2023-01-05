@@ -1,16 +1,13 @@
-import { get, ref } from 'firebase/database'
-import { useEffect, useState } from 'react'
+import { useState, useContext } from 'react'
 import { useController } from 'react-hook-form'
 
-import { database } from '../firebase'
+import { AppContext } from '../Context/AppProvider'
 import { ChevronDownIcon, ChevronUpIcon } from './Icon'
 
 function SelectTopic({ className, name, control, label, isRequired, onChange, placeholder, ...props }) {
+    const { topics } = useContext(AppContext)
     const [isSelected, setIdSelected] = useState(false)
-    const [options, setOptions] = useState([])
-    useEffect(() => {
-        get(ref(database, 'structure')).then(snapshot => setOptions(JSON.parse(snapshot.val())))
-    }, [])
+
     const { field, fieldState } = useController({
         name,
         control,
@@ -46,7 +43,7 @@ function SelectTopic({ className, name, control, label, isRequired, onChange, pl
                 <option value='' disabled>
                     {placeholder ?? label}
                 </option>
-                {options.map(
+                {topics.map(
                     parent =>
                         parent.children &&
                         parent.children.map(child =>

@@ -2,23 +2,16 @@ import React, { useState } from 'react'
 import propsTypes from 'prop-types'
 import { useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
-import { get, ref } from 'firebase/database'
 
 import Navbar from './components/Navbar'
 import Header from './components/Header'
 import CreateTestYourSelfModal from '../components/TestYourSelf/CreateTestYourSelfModal'
-import { database } from '../firebase'
 import Footer from './components/Footer'
 
 function DefaultLayout({ children }) {
     const [isCreateTestShow, setCreateTestShow] = useState(false)
     const [expandedMenu, setExpandedMenu] = useState(false)
     const location = useLocation()
-
-    const [data, setData] = useState([])
-    useEffect(() => {
-        get(ref(database, 'structure')).then(snapshot => setData(JSON.parse(snapshot.val())))
-    }, [])
 
     useEffect(() => {
         setExpandedMenu(false)
@@ -38,7 +31,6 @@ function DefaultLayout({ children }) {
                 } md:bg-white  h-[calc(100vh-80px)]`}
             >
                 <Navbar
-                    data={data}
                     expandedMenu={expandedMenu}
                     onOpenMenu={() => setExpandedMenu(true)}
                     className={`h-screen flex-col lg:flex lg:mx-0 ${
