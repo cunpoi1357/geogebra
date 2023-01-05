@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 
 import DefectQuestion from '../components/Defect/DefectQuestion'
 import MultipleChoiceQuestion from '../components/MultipleChoice/MultipleChoiceQuestion'
@@ -26,6 +27,13 @@ function Example() {
 
     return (
         <>
+            <Helmet>
+                {data?.topic && (
+                    <title>
+                        {JSON.parse(data.topic).name} - Ví dụ {data.question.split(/^Câu (\d+)\./)[1] || ''}
+                    </title>
+                )}
+            </Helmet>
             {data?.type === 'multiple-choice' ? (
                 <MultipleChoiceQuestion data={data} />
             ) : (

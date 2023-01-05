@@ -1,10 +1,16 @@
+import { Helmet } from 'react-helmet-async'
 import AdminHeader from '../layouts/components/AdminHeader'
 
 function Admin() {
     return (
-        <section>
-            <AdminHeader>Trang quản lí</AdminHeader>
-        </section>
+        <>
+            <Helmet>
+                <title>StudyGeo3D.com - Trang quản lí</title>
+            </Helmet>
+            <section>
+                <AdminHeader>Trang quản lí</AdminHeader>
+            </section>
+        </>
     )
 }
 

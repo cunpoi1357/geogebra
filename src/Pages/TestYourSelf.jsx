@@ -8,6 +8,7 @@ import { getDatabase } from '../firebase/services'
 import TestYourSelfNavBar from '../components/TestYourSelf/TestYourSelfNavBar'
 import TestYourSelfQuestion from '../components/TestYourSelf/TestYourSelfQuestion'
 import Footer from '../layouts/components/Footer'
+import { Helmet } from 'react-helmet-async'
 
 function TestYourSelf() {
     const location = useLocation()
@@ -53,39 +54,44 @@ function TestYourSelf() {
     }
 
     return (
-        <div className='flex flex-col grid-cols-4 gap-4 lg:grid'>
-            <div ref={contentRef} className='flex-1 overflow-auto lg:col-span-3 h-[calc(100vh-100px)]'>
-                {question &&
-                    question.map((item, index) => (
-                        <TestYourSelfQuestion
-                            key={item.id}
-                            index={index}
-                            answerKey={answerKeys[index]}
-                            data={item}
-                            choose={answer[index]}
-                            onChoose={handleChoose}
-                            isAnswered={isAnswered}
-                        />
-                    ))}
+        <>
+            <Helmet>
+                <title>StudyGeo3D.com - Đề tự luyện</title>
+            </Helmet>
+            <div className='flex flex-col grid-cols-4 gap-4 lg:grid'>
+                <div ref={contentRef} className='flex-1 overflow-auto lg:col-span-3 h-[calc(100vh-100px)]'>
+                    {question &&
+                        question.map((item, index) => (
+                            <TestYourSelfQuestion
+                                key={item.id}
+                                index={index}
+                                answerKey={answerKeys[index]}
+                                data={item}
+                                choose={answer[index]}
+                                onChoose={handleChoose}
+                                isAnswered={isAnswered}
+                            />
+                        ))}
+                    <TestYourSelfNavBar
+                        className='block mt-4 lg:hidden h-28'
+                        data={answer}
+                        answer={answerKeys}
+                        isAnswered={isAnswered}
+                        onClick={handleScrollToQuestion}
+                        onSubmit={handleSubmit}
+                    />
+                    <Footer />
+                </div>
                 <TestYourSelfNavBar
-                    className='block mt-4 lg:hidden h-28'
+                    className='hidden lg:col-span-1 lg:block'
                     data={answer}
                     answer={answerKeys}
                     isAnswered={isAnswered}
                     onClick={handleScrollToQuestion}
                     onSubmit={handleSubmit}
                 />
-                <Footer />
             </div>
-            <TestYourSelfNavBar
-                className='hidden lg:col-span-1 lg:block'
-                data={answer}
-                answer={answerKeys}
-                isAnswered={isAnswered}
-                onClick={handleScrollToQuestion}
-                onSubmit={handleSubmit}
-            />
-        </div>
+        </>
     )
 }
 

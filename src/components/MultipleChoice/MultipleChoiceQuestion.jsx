@@ -70,7 +70,7 @@ function MultipleChoiceQuestion({ data }) {
                                         className={`flex  ${
                                             lengthMaxOfQuestions >= 80
                                                 ? 'md:col-span-4'
-                                                : lengthMaxOfQuestions < 10
+                                                : lengthMaxOfQuestions <= 5
                                                 ? 'md:col-span-1'
                                                 : 'md:col-span-2'
                                         }

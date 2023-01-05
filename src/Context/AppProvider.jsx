@@ -12,12 +12,13 @@ function AppProvider({ children }) {
     const [topics, setTopics] = useState([])
 
     useEffect(() => {
-        onValue(ref(database), snapshot => {
+        const unsubscribe = onValue(ref(database), snapshot => {
             const { examples, questions, structure } = snapshot.val()
             setExamples(toArray(examples).filter(item => !!item))
             setQuestions(toArray(questions).filter(item => !!item))
             setTopics(JSON.parse(structure).filter(item => !!item))
         })
+        return unsubscribe
     }, [])
     return <AppContext.Provider value={{ examples, questions, topics }}>{children}</AppContext.Provider>
 }

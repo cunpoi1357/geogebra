@@ -6,6 +6,7 @@ import orderBy from 'lodash/orderBy'
 import { getDatabase } from '../firebase/services'
 import { AppContext } from '../Context/AppProvider'
 import Markdown from '../components/Markdown'
+import { Helmet } from 'react-helmet-async'
 
 function Topic() {
     const { examples } = useContext(AppContext)
@@ -18,7 +19,7 @@ function Topic() {
         setExamplesFiltered(examples.filter(item => !!item && JSON.parse(item.topic).path === topic))
 
         getDatabase(`theory/${topic}`).then(snapshot => {
-            setContent(snapshot.val().content)
+            setContent(snapshot.val())
         })
     }, [topic, location, examples])
 
@@ -26,11 +27,14 @@ function Topic() {
 
     return (
         <>
+            <Helmet>
+                <title>{content?.name}</title>
+            </Helmet>
             <div className='p-6 min-h-[calc(100vh-236px)]'>
                 <section className='border border-[#6382a3] rounded-lg bg-white'>
                     <header className='text-white bg-[#6382a3] w-full text-3xl px-4'>{content?.name}</header>
                     <div className='block py-1 text-2xl md:p-2'>
-                        <Markdown>{content}</Markdown>
+                        <Markdown>{content.content}</Markdown>
                     </div>
                 </section>
                 <ul className='grid grid-cols-1 gap-8 p-6 md:grid-cols-4'>

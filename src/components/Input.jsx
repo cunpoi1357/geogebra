@@ -1,8 +1,9 @@
 import { useId } from 'react'
 import { useController } from 'react-hook-form'
 
-function Input({ className, inputClassName, name, control, label, isRequired, onChange, rules, ...props }) {
-    const inputId = useId()
+function Input({ className, id, inputClassName, name, control, label, isRequired, onChange, rules, ...props }) {
+    const idGenerator = useId()
+    const inputId = id || idGenerator
     const { field, fieldState } = useController({
         name,
         control,
