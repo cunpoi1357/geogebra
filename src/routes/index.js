@@ -1,23 +1,25 @@
 import { lazy } from 'react'
+
 import config from '../config'
 
-import Example from '../Pages/Example'
-import Home from '../Pages/Home'
-import Topic from '../Pages/Topic'
-import Admin from '../Pages/Admin'
-import TheoryManagement from '../Pages/TheoryManagement'
-import MultipleChoiceManagement from '../Pages/MultipleChoiceManagement'
-import DefectManagement from '../Pages/DefectManagement'
-import StructureManagement from '../Pages/StructureManagement'
-import QuestionManagement from '../Pages/QuestionManagement'
-import TestYourSelf from '../Pages/TestYourSelf'
 import WithoutFooter from '../layouts/WithoutFooter'
-import About from '../Pages/About'
-import Contact from '../Pages/Contact'
-import Login from '../Pages/Login'
-import Register from '../Pages/Register'
-import NotFound from '../Pages/NotFound'
-const AdminLayout = lazy(() => import('../layouts/AdminLayout'))
+
+const Home = lazy(() => import('../Pages/Home'))
+const About = lazy(() => import('../Pages/About'))
+const Contact = lazy(() => import('../Pages/Contact'))
+const Login = lazy(() => import('../Pages/Login'))
+const Register = lazy(() => import('../Pages/Register'))
+const Example = lazy(() => import('../Pages/Example'))
+const Topic = lazy(() => import('../Pages/Topic'))
+const TestYourSelf = lazy(() => import('../Pages/TestYourSelf'))
+const NotFound = lazy(() => import('../Pages/NotFound'))
+
+const Admin = lazy(() => import('../Pages/Admin'))
+const MultipleChoiceManagement = lazy(() => import('../Pages/MultipleChoiceManagement'))
+const DefectManagement = lazy(() => import('../Pages/DefectManagement'))
+const StructureManagement = lazy(() => import('../Pages/StructureManagement'))
+const QuestionManagement = lazy(() => import('../Pages/QuestionManagement'))
+const TheoryManagement = lazy(() => import('../Pages/TheoryManagement'))
 
 const publicRoutes = [
     {
@@ -56,41 +58,36 @@ const publicRoutes = [
         component: Register
     },
     {
-        path: config.routes.admin,
-        component: Admin,
-        layout: AdminLayout
-    },
-    {
-        path: config.routes.theoryManagement,
-        component: TheoryManagement,
-        layout: AdminLayout
-    },
-    {
-        path: config.routes.multipleChoiceManagement,
-        component: MultipleChoiceManagement,
-        layout: AdminLayout
-    },
-    {
-        path: config.routes.defectManagement,
-        component: DefectManagement,
-        layout: AdminLayout
-    },
-    {
-        path: config.routes.questionManagement,
-        component: QuestionManagement,
-        layout: AdminLayout
-    },
-    {
-        path: config.routes.structureManagement,
-        component: StructureManagement,
-        layout: AdminLayout
-    },
-    {
         path: config.routes.notFound,
         component: NotFound
     }
 ]
 
-const privateRoutes = []
+const privateRoutes = [
+    {
+        path: config.routes.admin,
+        component: Admin
+    },
+    {
+        path: config.routes.theoryManagement,
+        component: TheoryManagement
+    },
+    {
+        path: config.routes.multipleChoiceManagement,
+        component: MultipleChoiceManagement
+    },
+    {
+        path: config.routes.defectManagement,
+        component: DefectManagement
+    },
+    {
+        path: config.routes.questionManagement,
+        component: QuestionManagement
+    },
+    {
+        path: config.routes.structureManagement,
+        component: StructureManagement
+    }
+]
 
 export { publicRoutes, privateRoutes }

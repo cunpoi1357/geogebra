@@ -6,6 +6,11 @@ import AdminNavItem from './AdminNavItem'
 function AdminNavBar() {
     const MENU_LIST = [
         {
+            name: 'Về trang chủ',
+            path: '/',
+            icon: <HomeIcon className='w-5 h-5 text-white' />
+        },
+        {
             name: 'Quản lí chuyên đề',
             path: '/admin/structure',
             icon: <SettingIcon className='w-5 h-5 text-white' />
@@ -44,13 +49,6 @@ function AdminNavBar() {
                     <AdminNavItem key={item.name} {...item} />
                 ))}
             </div>
-            <Link
-                to='/'
-                className='text-white py-4 px-[10px] mx-4 my-[2px] flex items-center rounded-lg hover:bg-[#636369] mb-4'
-            >
-                <HomeIcon className='w-5 h-5 text-white' />
-                <span className='ml-4'>Về trang chủ</span>
-            </Link>
         </aside>
     )
 }

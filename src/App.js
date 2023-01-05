@@ -1,13 +1,17 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
-import { Fragment, lazy, Suspense } from 'react'
-import { publicRoutes } from './routes'
+import { lazy, Suspense } from 'react'
 import { ToastContainer } from 'react-toastify'
 import { HelmetProvider } from 'react-helmet-async'
+import uniq from 'lodash/uniq'
+import isEqual from 'lodash/isEqual'
 import 'react-toastify/dist/ReactToastify.css'
 import 'katex/dist/katex.min.css'
 
+import { publicRoutes, privateRoutes } from './routes'
 import AuthProvider from './Context/AuthProvider'
 import AppProvider from './Context/AppProvider'
+import AdminLayout from './layouts/AdminLayout'
+import Loading from './components/Loading'
 
 const DefaultLayout = lazy(() => import('./layouts/DefaultLayout'))
 function App() {
@@ -19,28 +23,55 @@ function App() {
                         <AppProvider>
                             <AuthProvider>
                                 <Routes>
-                                    {publicRoutes.map((route, index) => {
-                                        const Page = route.component
-                                        let Layout = DefaultLayout
+                                    {uniq(publicRoutes.map(route => route.layout)).map((layout, index) => {
+                                        // get unique layout
+                                        let Wrapper = DefaultLayout
+                                        // map route corresponding to layout
+                                        const routes = publicRoutes
+                                            .filter(route => isEqual(layout, route.layout))
+                                            .map(route => {
+                                                const Page = route.component
+                                                return (
+                                                    <Route
+                                                        key={route.path}
+                                                        path={route.path}
+                                                        element={
+                                                            <Suspense fallback={<Loading />}>
+                                                                <Page />
+                                                            </Suspense>
+                                                        }
+                                                    />
+                                                )
+                                            })
 
-                                        if (route.layout) {
-                                            Layout = route.layout
-                                        } else if (route.layout === null) {
-                                            Layout = Fragment
+                                        if (layout) {
+                                            Wrapper = layout
+                                        } else if (layout === null) {
+                                            return routes
                                         }
-
                                         return (
-                                            <Route
-                                                key={index}
-                                                path={route.path}
-                                                element={
-                                                    <Layout>
-                                                        <Page />
-                                                    </Layout>
-                                                }
-                                            />
+                                            <Route key={index} element={<Wrapper />}>
+                                                {routes}
+                                            </Route>
                                         )
                                     })}
+
+                                    <Route element={<AdminLayout />}>
+                                        {privateRoutes.map(route => {
+                                            const Page = route.component
+                                            return (
+                                                <Route
+                                                    key={route.path}
+                                                    path={route.path}
+                                                    element={
+                                                        <Suspense fallback={<Loading />}>
+                                                            <Page />
+                                                        </Suspense>
+                                                    }
+                                                />
+                                            )
+                                        })}
+                                    </Route>
                                 </Routes>
                             </AuthProvider>
                         </AppProvider>

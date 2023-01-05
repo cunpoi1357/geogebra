@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import propsTypes from 'prop-types'
-import { useLocation } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
 import Navbar from './components/Navbar'
@@ -8,7 +8,7 @@ import Header from './components/Header'
 import CreateTestYourSelfModal from '../components/TestYourSelf/CreateTestYourSelfModal'
 import Footer from './components/Footer'
 
-function DefaultLayout({ children }) {
+function DefaultLayout() {
     const [isCreateTestShow, setCreateTestShow] = useState(false)
     const [expandedMenu, setExpandedMenu] = useState(false)
     const location = useLocation()
@@ -43,7 +43,7 @@ function DefaultLayout({ children }) {
                         expandedMenu ? 'hidden' : ''
                     }`}
                 >
-                    {children}
+                    <Outlet />
                     <Footer />
                 </section>
             </main>

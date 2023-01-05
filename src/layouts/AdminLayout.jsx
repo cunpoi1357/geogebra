@@ -4,8 +4,9 @@ import AdminNavBar from './components/AdminNavBar'
 import AdminHeader from './components/AdminHeader'
 
 import { AuthContext } from '../Context/AuthProvider'
+import { Outlet } from 'react-router-dom'
 
-function AdminLayout({ children }) {
+function AdminLayout() {
     const { user } = useContext(AuthContext)
 
     return (
@@ -13,7 +14,7 @@ function AdminLayout({ children }) {
             <AdminNavBar />
             <main className='flex flex-col flex-1'>
                 {user?.role?.admin ? (
-                    children
+                    <Outlet />
                 ) : (
                     <>
                         <AdminHeader>Trang quản lí</AdminHeader>
