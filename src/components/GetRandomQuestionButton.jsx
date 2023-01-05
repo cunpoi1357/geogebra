@@ -18,7 +18,7 @@ function GetRandomQuestionButton({ className }) {
 
     const handleClick = () => {
         const question = sample(examples)
-        navigate(`/question/${question.id}`)
+        navigate(`/example/${question.id}`)
     }
     return (
         <button className={className} onClick={handleClick}>

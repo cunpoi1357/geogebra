@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 import config from '../config'
 
-import Question from '../Pages/Question'
+import Example from '../Pages/Example'
 import Home from '../Pages/Home'
 import Topic from '../Pages/Topic'
 import Admin from '../Pages/Admin'
@@ -25,8 +25,8 @@ const publicRoutes = [
         component: Home
     },
     {
-        path: config.routes.question,
-        component: Question,
+        path: config.routes.example,
+        component: Example,
         layout: WithoutFooter
     },
     {

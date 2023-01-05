@@ -1,15 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import toArray from 'lodash/toArray'
+import orderBy from 'lodash/orderBy'
 
 import Button from '../Button'
 import Footer from '../../layouts/components/Footer'
+import { AppContext } from '../../Context/AppProvider'
+import { Link } from 'react-router-dom'
 
 function DefectQuestion({ data }) {
+    const { examples } = useContext(AppContext)
     const regex =
         /\[([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+)\]/
     const { handleSubmit, register } = useForm()
     const questionSlice = data.question.split(regex)
+
+    const sortFn = item => Number(toArray(item.question.match(/^Câu (\d+)\./))[1])
+    const listId = orderBy(
+        examples.filter(item => !!item && item.topic === data.topic),
+        [sortFn],
+        ['esc']
+    ).map(item => item.id)
+    const currentIndex = listId.indexOf(data.id)
 
     const onSubmit = handleSubmit(data => {
         let count = 0
@@ -52,6 +65,18 @@ function DefectQuestion({ data }) {
                             Kiểm tra
                         </Button>
                     </form>
+                </div>
+                <div className='flex justify-between w-full mt-8'>
+                    <Link to={listId[currentIndex - 1] ? `/example/${listId[currentIndex - 1]}` : ''}>
+                        <Button className='border border-[#08b1ed] text-[#08b1ed] hover:bg-[#08b1ed] hover:text-white transition-colors ease-in'>
+                            Ví dụ trước
+                        </Button>
+                    </Link>
+                    <Link to={listId[currentIndex + 1] ? `/example/${listId[currentIndex + 1]}` : ''}>
+                        <Button className='justify-self-end border border-[#08b1ed] text-[#08b1ed] hover:bg-[#08b1ed] hover:text-white transition-colors ease-in'>
+                            Ví dụ sau
+                        </Button>
+                    </Link>
                 </div>
             </div>
             <Footer />

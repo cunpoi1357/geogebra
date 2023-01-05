@@ -1,7 +1,7 @@
 const routes = {
     home: '/',
     topic: '/topic/:topic',
-    question: '/question/:id',
+    example: '/example/:id',
     testYourSelf: '/test-your-self',
     about: '/about',
     contact: '/contact',

@@ -13,7 +13,7 @@ function DefectItem({ data, index, onRemove }) {
             <td className='px-6 py-4'>{data.question}</td>
             <td className='flex items-center gap-3 px-6 py-4'>
                 <label title='Xem'>
-                    <a href={`/question/${data.id}`} target='_blank' rel='noopener noreferrer'>
+                    <a href={`/example/${data.id}`} target='_blank' rel='noopener noreferrer'>
                         <EyeIcon className='cursor-pointer hover:text-[#247dea] transition-colors' />
                     </a>
                 </label>

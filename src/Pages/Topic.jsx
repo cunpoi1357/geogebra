@@ -36,7 +36,7 @@ function Topic() {
                 <ul className='grid grid-cols-1 gap-8 p-6 md:grid-cols-4'>
                     {orderBy(examplesFiltered, [sortFn], ['esc']).map((item, index) => (
                         <li key={item.id} className='relative justify-center col-span-1 cursor-pointer rounded-xl'>
-                            <Link className='flex items-center w-full' to={`/question/${item.id}`}>
+                            <Link className='flex items-center w-full' to={`/example/${item.id}`}>
                                 <span className='bg-[#6382a3] px-4 text-2xl rounded-l-xl text-white pr-6 inline-block'>
                                     Ví dụ
                                 </span>
