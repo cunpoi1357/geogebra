@@ -8,7 +8,9 @@ function AdminNavBar() {
         {
             name: 'Về trang chủ',
             path: '/',
-            icon: <HomeIcon className='w-5 h-5 text-white' />
+            icon: <HomeIcon className='w-5 h-5 text-white' />,
+            target: '_blank',
+            rel: 'noopener noreferrer'
         },
         {
             name: 'Quản lí chuyên đề',

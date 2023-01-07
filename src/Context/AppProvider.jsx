@@ -16,7 +16,7 @@ function AppProvider({ children }) {
             const { examples, questions, structure } = snapshot.val()
             setExamples(toArray(examples).filter(item => !!item))
             setQuestions(toArray(questions).filter(item => !!item))
-            setTopics(JSON.parse(structure).filter(item => !!item))
+            setTopics(structure.filter(item => !!item))
         })
         return unsubscribe
     }, [])

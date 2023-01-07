@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { JsonEditor as Editor } from 'jsoneditor-react'
 import 'jsoneditor-react/es/editor.min.css'
 import Ajv from 'ajv'
 
+import { AppContext } from '../Context/AppProvider'
 import AdminHeader from '../layouts/components/AdminHeader'
 import Button from '../components/Button'
 import { toast } from 'react-toastify'
-import { getDatabase, updateDatabase } from '../firebase/services'
+import { setDatabase } from '../firebase/services'
 
 const ajv = new Ajv({ allErrors: true, verbose: true })
 
 function StructureManagement() {
-    const [data, setData] = useState([])
-    useEffect(() => {
-        getDatabase('structure').then(snapshot => setData(JSON.parse(snapshot.val())))
-    }, [])
+    const { topics } = useContext(AppContext)
+    const [data, setData] = useState(topics)
 
     const handleUpdate = () => {
-        updateDatabase('structure', JSON.stringify(data))
+        setDatabase('structure', data)
             .then(() => {
                 toast.success('Cập nhật thành công')
             })

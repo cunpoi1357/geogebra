@@ -19,45 +19,16 @@ function App() {
         <>
             <BrowserRouter basename='/'>
                 <HelmetProvider>
-                    <Suspense>
-                        <AppProvider>
-                            <AuthProvider>
-                                <Routes>
-                                    {uniq(publicRoutes.map(route => route.layout)).map((layout, index) => {
-                                        // get unique layout
-                                        let Wrapper = DefaultLayout
-                                        // map route corresponding to layout
-                                        const routes = publicRoutes
-                                            .filter(route => isEqual(layout, route.layout))
-                                            .map(route => {
-                                                const Page = route.component
-                                                return (
-                                                    <Route
-                                                        key={route.path}
-                                                        path={route.path}
-                                                        element={
-                                                            <Suspense fallback={<Loading />}>
-                                                                <Page />
-                                                            </Suspense>
-                                                        }
-                                                    />
-                                                )
-                                            })
-
-                                        if (layout) {
-                                            Wrapper = layout
-                                        } else if (layout === null) {
-                                            return routes
-                                        }
-                                        return (
-                                            <Route key={index} element={<Wrapper />}>
-                                                {routes}
-                                            </Route>
-                                        )
-                                    })}
-
-                                    <Route element={<AdminLayout />}>
-                                        {privateRoutes.map(route => {
+                    <AppProvider>
+                        <AuthProvider>
+                            <Routes>
+                                {uniq(publicRoutes.map(route => route.layout)).map((layout, index) => {
+                                    // get unique layout
+                                    let Wrapper = DefaultLayout
+                                    // map route corresponding to layout
+                                    const routes = publicRoutes
+                                        .filter(route => isEqual(layout, route.layout))
+                                        .map(route => {
                                             const Page = route.component
                                             return (
                                                 <Route
@@ -70,12 +41,39 @@ function App() {
                                                     }
                                                 />
                                             )
-                                        })}
-                                    </Route>
-                                </Routes>
-                            </AuthProvider>
-                        </AppProvider>
-                    </Suspense>
+                                        })
+
+                                    if (layout) {
+                                        Wrapper = layout
+                                    } else if (layout === null) {
+                                        return routes
+                                    }
+                                    return (
+                                        <Route key={index} element={<Wrapper />}>
+                                            {routes}
+                                        </Route>
+                                    )
+                                })}
+
+                                <Route element={<AdminLayout />}>
+                                    {privateRoutes.map(route => {
+                                        const Page = route.component
+                                        return (
+                                            <Route
+                                                key={route.path}
+                                                path={route.path}
+                                                element={
+                                                    <Suspense fallback={<Loading />}>
+                                                        <Page />
+                                                    </Suspense>
+                                                }
+                                            />
+                                        )
+                                    })}
+                                </Route>
+                            </Routes>
+                        </AuthProvider>
+                    </AppProvider>
                 </HelmetProvider>
             </BrowserRouter>
             <ToastContainer limit={1} autoClose={1000} />

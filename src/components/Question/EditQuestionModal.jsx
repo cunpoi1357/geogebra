@@ -1,9 +1,7 @@
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { storage } from '../../firebase'
-import { getDatabase, updateDatabase } from '../../firebase/services'
+import { getDatabase, updateDatabase, uploadData } from '../../firebase/services'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import Modal from '../Modal'
@@ -23,7 +21,10 @@ function EditQuestionModal({ id, onClose, isOpen }) {
         getDatabase(`questions/${id}`).then(snapshot => {
             setQuestion(snapshot.val())
         })
-        Array.from(Object.keys(question)).forEach(key => setValue(key, question[key]))
+        Array.from(Object.keys(question))
+            .filter(key => key !== 'image')
+            .forEach(key => setValue(key, question[key]))
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen])
 
@@ -32,9 +33,7 @@ function EditQuestionModal({ id, onClose, isOpen }) {
         try {
             if (image) {
                 toast.info('Đang tải ảnh lên....')
-                const imagesRef = storageRef(storage, `question/${image.name}`)
-                await uploadBytes(imagesRef, image)
-                url = await getDownloadURL(imagesRef)
+                url = await uploadData(`question/${image.name}`, image)
             }
             await updateDatabase(`questions/${id}`, {
                 ...dataForm,

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, Fragment } from 'react'
 import { useController } from 'react-hook-form'
 
 import { AppContext } from '../Context/AppProvider'
@@ -45,19 +45,30 @@ function SelectTopic({ className, name, control, label, isRequired, onChange, pl
                 </option>
                 {topics.map(
                     parent =>
-                        parent.children &&
-                        parent.children.map(child =>
-                            child.children ? (
-                                child.children.map(item => (
-                                    <option key={item.name} value={JSON.stringify(item)}>
-                                        {item.name}
-                                    </option>
-                                ))
-                            ) : (
-                                <option key={child.name} value={JSON.stringify(child)}>
-                                    {child.name}
+                        parent.children && (
+                            <Fragment key={parent.name}>
+                                <option value='' disabled>
+                                    {parent.name}
                                 </option>
-                            )
+                                {parent.children.map(child =>
+                                    child.children ? (
+                                        <Fragment key={child.name}>
+                                            <option value='' disabled>
+                                                --- {child.name} ---
+                                            </option>
+                                            {child.children.map(item => (
+                                                <option key={item.path} value={JSON.stringify(item)}>
+                                                    {item.name}
+                                                </option>
+                                            ))}
+                                        </Fragment>
+                                    ) : (
+                                        <option key={child.path} value={JSON.stringify(child)}>
+                                            {child.name}
+                                        </option>
+                                    )
+                                )}
+                            </Fragment>
                         )
                 )}
             </select>

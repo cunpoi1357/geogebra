@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import Button from '../components/Button'
 import MarkdownEditor from '../components/MarkdownEditor'
-import { setDatabase, getDatabase } from '../firebase/services'
+import { setDatabase, getDatabase, updateDatabase } from '../firebase/services'
 
 function TheoryManagement() {
     const [input, setInput] = useState('')
@@ -34,7 +34,7 @@ function TheoryManagement() {
 
     const handleUpdate = () => {
         const { name, path } = JSON.parse(getValues('type'))
-        setDatabase(`theory/${path}`, {
+        updateDatabase(`theory/${path}`, {
             name,
             content: input
         })

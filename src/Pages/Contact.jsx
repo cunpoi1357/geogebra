@@ -1,6 +1,7 @@
+import { Helmet } from 'react-helmet-async'
+
 import { EnvelopeIcon, FacebookIcon } from '../components/Icon'
 import images from '../assets/images'
-import { Helmet } from 'react-helmet-async'
 
 function Contact() {
     return (

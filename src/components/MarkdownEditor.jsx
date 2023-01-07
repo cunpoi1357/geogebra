@@ -1,8 +1,7 @@
 import MdEditor from 'react-markdown-editor-lite'
 // import style manually
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import 'react-markdown-editor-lite/lib/index.css'
-import { storage } from '../firebase'
+import { uploadData } from '../firebase/services'
 import Markdown from '../components/Markdown'
 
 import addGeogebra from '../plugins/addGeogebra'
@@ -15,12 +14,7 @@ MdEditor.use(block)
 MdEditor.use(addGeogebra)
 MdEditor.use(addYoutube)
 
-const handleImageUpload = async file => {
-    const imagesRef = ref(storage, `images/${file.name}`)
-    await uploadBytes(imagesRef, file)
-    const url = await getDownloadURL(imagesRef)
-    return url
-}
+const handleImageUpload = async file => await uploadData(`images/${file.name}`, file)
 
 function MarkdownEditor({ className, value, onChange }) {
     return (

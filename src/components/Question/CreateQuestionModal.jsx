@@ -1,11 +1,9 @@
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 import { useState } from 'react'
 
-import { storage } from '../../firebase'
-import { setDatabase } from '../../firebase/services'
+import { setDatabase, uploadData } from '../../firebase/services'
 import Button from '../Button'
 import { ClipBoardIcon, XIcon } from '../Icon'
 import Modal from '../Modal'
@@ -25,9 +23,7 @@ function CreateQuestionModal({ onClose, isOpen }) {
         try {
             if (image) {
                 toast.info('Đang tải ảnh lên....')
-                const imagesRef = storageRef(storage, `multiple_choice/${image.name}`)
-                await uploadBytes(imagesRef, image)
-                url = await getDownloadURL(imagesRef)
+                url = await uploadData(`question/${image.name}`, image)
             }
             await setDatabase(`questions/${id}`, {
                 ...data,

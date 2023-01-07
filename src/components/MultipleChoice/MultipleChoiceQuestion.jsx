@@ -7,12 +7,12 @@ import toArray from 'lodash/toArray'
 import orderBy from 'lodash/orderBy'
 
 import { BookIcon, ChatBubbleIcon } from '../Icon'
+import { AppContext } from '../../Context/AppProvider'
 import Image from '../Image'
 import Markdown from '../Markdown'
 import Geogebra from '../Geogebra'
 import Button from '../Button'
 import Footer from '../../layouts/components/Footer'
-import { AppContext } from '../../Context/AppProvider'
 
 function MultipleChoiceQuestion({ data }) {
     const [chose, setChose] = useState(null)
@@ -52,7 +52,7 @@ function MultipleChoiceQuestion({ data }) {
                     </header>
                     <section className='overflow-auto md:p-10'>
                         {data.geogebraId && (
-                            <div className='flex justify-center mt-10 md:h-[600px] h-[500px]'>
+                            <div className='flex justify-center mt-10 md:h-[600px] h-[500px] px-4 lg:p-0'>
                                 <Geogebra id={data.geogebraId} />
                             </div>
                         )}

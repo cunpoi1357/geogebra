@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import propsTypes from 'prop-types'
 import { Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import clsx from 'clsx'
 
 import Navbar from './components/Navbar'
 import Header from './components/Header'
@@ -21,22 +22,21 @@ function WithoutFooter() {
         <div className='flex flex-col bg-[#cce2ff] md:p-4 md:pb-0 h-screen'>
             <Header onToggle={() => setExpandedMenu(!expandedMenu)} expandedMenu={expandedMenu} />
             <main
-                className={`flex w-full ${
+                className={clsx(
+                    'flex w-full md:bg-white  h-[calc(100vh-80px)]',
                     expandedMenu ? 'bg-transparent' : 'bg-white'
-                } md:bg-white  h-[calc(100vh-80px)]`}
+                )}
             >
                 <Navbar
                     expandedMenu={expandedMenu}
                     onOpenMenu={() => setExpandedMenu(true)}
-                    className={`h-screen flex-col lg:flex lg:mx-0 ${
-                        expandedMenu ? 'mx-4' : 'mx-0'
-                    } bg-[#0060a7] overflow-auto ${expandedMenu ? 'w-full lg:w-auto' : 'w-0 lg:w-auto'}`}
+                    onCloseMenu={() => setExpandedMenu(false)}
                     onOpenCreateTestModal={() => setCreateTestShow(true)}
                 />
                 <section
-                    className={`relative flex-1 h-[calc(100vh-80px)] overflow-auto lg:overflow-hidden bg lg:pl-4 pt-4 lg:block ${
-                        expandedMenu ? 'hidden' : ''
-                    }`}
+                    className={clsx('relative flex-1 h-full overflow-auto bg lg:pl-4 pt-4 lg:block', {
+                        hidden: expandedMenu
+                    })}
                 >
                     <Outlet />
                 </section>

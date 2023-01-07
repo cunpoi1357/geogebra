@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-function AdminNavItem({ name, path, icon }) {
+function AdminNavItem({ name, path, icon, ...props }) {
     return (
         <NavLink
             className={({ isActive }) =>
@@ -10,6 +10,7 @@ function AdminNavItem({ name, path, icon }) {
                 }`
             }
             to={path}
+            {...props}
         >
             {icon}
             <span className='ml-4'>{name}</span>

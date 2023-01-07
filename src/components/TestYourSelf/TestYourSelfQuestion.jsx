@@ -1,4 +1,5 @@
 import max from 'lodash/max'
+import clsx from 'clsx'
 
 import { BookIcon, ChatBubbleIcon } from '../Icon'
 import Geogebra from '../Geogebra'
@@ -35,18 +36,18 @@ function TestYourSelfQuestion({ index, data, choose, answerKey, isAnswered, onCh
                         {['A', 'B', 'C', 'D'].map(letter => (
                             <button
                                 key={letter}
-                                className={`flex 
-                                ${
+                                className={clsx(
+                                    'flex col-span-4 text-2xl items-center bg-[#f0f9fe] rounded-md border-2 border-[#00adf1] hover:opacity-50 hover:border-black transition-colors',
+                                    {
+                                        'bg-[#fedada]': choose === letter,
+                                        'bg-[#78dc92]': isAnswered && letter === answerKey
+                                    },
                                     lengthMaxOfQuestions >= 80
                                         ? 'md:col-span-4'
                                         : lengthMaxOfQuestions <= 10
                                         ? 'md:col-span-1'
                                         : 'md:col-span-2'
-                                } 
-                                ${choose === letter ? 'bg-[#fedada]' : ''} 
-                                ${
-                                    isAnswered ? (letter === answerKey ? 'bg-[#78dc92]' : '') : ''
-                                } col-span-4 text-2xl items-center bg-[#f0f9fe] rounded-md border-2 border-[#00adf1] hover:opacity-50 hover:border-black transition-colors`}
+                                )}
                                 onClick={() => handleChoose(letter)}
                                 disabled={isAnswered}
                             >

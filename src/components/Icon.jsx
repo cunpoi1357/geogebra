@@ -428,3 +428,78 @@ export const HomeIcon = ({ className }) => (
         />
     </svg>
 )
+
+export const InfoIcon = ({ className }) => (
+    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+        <path
+            d='M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184 184-82.39 184-184S349.61 64 248 64z'
+            fill='none'
+            stroke='currentColor'
+            strokeMiterlimit='10'
+            strokeWidth='32'
+        />
+        <path
+            fill='none'
+            stroke='currentColor'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='32'
+            d='M220 220h32v116'
+        />
+        <path
+            fill='none'
+            stroke='currentColor'
+            strokeLinecap='round'
+            strokeMiterlimit='10'
+            strokeWidth='32'
+            d='M208 340h88'
+        />
+        <path d='M248 130a26 26 0 1026 26 26 26 0 00-26-26z' />
+    </svg>
+)
+
+export const PhoneIcon = ({ className }) => (
+    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+        <path
+            d='M451 374c-15.88-16-54.34-39.35-73-48.76-24.3-12.24-26.3-13.24-45.4.95-12.74 9.47-21.21 17.93-36.12 14.75s-47.31-21.11-75.68-49.39-47.34-61.62-50.53-76.48 5.41-23.23 14.79-36c13.22-18 12.22-21 .92-45.3-8.81-18.9-32.84-57-48.9-72.8C119.9 44 119.9 47 108.83 51.6A160.15 160.15 0 0083 65.37C67 76 58.12 84.83 51.91 98.1s-9 44.38 23.07 102.64 54.57 88.05 101.14 134.49S258.5 406.64 310.85 436c64.76 36.27 89.6 29.2 102.91 23s22.18-15 32.83-31a159.09 159.09 0 0013.8-25.8C465 391.17 468 391.17 451 374z'
+            fill='none'
+            stroke='currentColor'
+            strokeMiterlimit='10'
+            strokeWidth='32'
+        />
+    </svg>
+)
+
+export const LoginIcon = ({ className }) => (
+    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+        <path
+            d='M192 176v-40a40 40 0 0140-40h160a40 40 0 0140 40v240a40 40 0 01-40 40H240c-22.09 0-48-17.91-48-40v-40'
+            fill='none'
+            stroke='currentColor'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='32'
+        />
+        <path
+            fill='none'
+            stroke='currentColor'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth='32'
+            d='M288 336l80-80-80-80M80 256h272'
+        />
+    </svg>
+)
+
+export const LogoutIcon = ({ className }) => (
+    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+        <path
+            d='M304 336v40a40 40 0 01-40 40H104a40 40 0 01-40-40V136a40 40 0 0140-40h152c22.09 0 48 17.91 48 40v40M368 336l80-80-80-80M176 256h256'
+            fill='none'
+            stroke='currentColor'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            strokeWidth={32}
+        />
+    </svg>
+)

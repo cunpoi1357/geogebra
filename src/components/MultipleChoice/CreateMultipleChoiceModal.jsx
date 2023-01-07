@@ -1,10 +1,8 @@
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { v4 as uuidv4 } from 'uuid'
 
-import { storage } from '../../firebase'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import Input from '../Input'
@@ -12,7 +10,7 @@ import Modal from '../Modal'
 import Select from '../Select'
 import SelectTopic from '../SelectTopic'
 import Textarea from '../Textarea'
-import { setDatabase } from '../../firebase/services'
+import { setDatabase, uploadData } from '../../firebase/services'
 
 function CreateMultipleChoiceModal({ onClose, isOpen }) {
     const { control, handleSubmit, reset } = useForm()
@@ -24,9 +22,7 @@ function CreateMultipleChoiceModal({ onClose, isOpen }) {
         try {
             if (image) {
                 toast.info('Đang tải ảnh lên....')
-                const imagesRef = storageRef(storage, `multiple_choice/${image.name}`)
-                await uploadBytes(imagesRef, image)
-                imageUrl = await getDownloadURL(imagesRef)
+                imageUrl = await uploadData(`multiple_choice/${image.name}`, image)
             }
             await setDatabase(`examples/${id}`, {
                 type: 'multiple-choice',

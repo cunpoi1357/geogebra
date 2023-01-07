@@ -1,10 +1,8 @@
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { storage } from '../../firebase'
-import { getDatabase, updateDatabase } from '../../firebase/services'
+import { getDatabase, updateDatabase, uploadData } from '../../firebase/services'
 import Button from '../Button'
 import { XIcon } from '../Icon'
 import Input from '../Input'
@@ -33,9 +31,7 @@ function EditMultipleChoiceModal({ id, onClose, isOpen }) {
         try {
             if (image) {
                 toast.info('Đang tải ảnh lên....')
-                const imagesRef = storageRef(storage, `multiple_choice/${image.name}`)
-                await uploadBytes(imagesRef, image)
-                url = await getDownloadURL(imagesRef)
+                url = await uploadData(`multiple_choice/${image.name}`, image)
             }
             await updateDatabase(`examples/${id}`, {
                 ...dataForm,

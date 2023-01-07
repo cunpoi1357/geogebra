@@ -34,7 +34,7 @@ function Home() {
                                 StudyGeo3D.com
                             </h2>
                         </div>
-                        <nav className='flex justify-end gap-4 -mx-3 md:mx-0'>
+                        <nav className='justify-end hidden gap-4 -mx-3 md:mx-0 lg:flex'>
                             <Link to='/about'>
                                 <Button className='bg-[#fac730] h-12 rounded-xl text-xl'>Giới thiệu</Button>
                             </Link>

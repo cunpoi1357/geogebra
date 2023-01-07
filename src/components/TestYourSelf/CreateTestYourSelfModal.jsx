@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useState } from 'react'
-import toArray from 'lodash/toArray'
 import sampleSize from 'lodash/sampleSize'
 
-import { getDatabase } from '../../firebase/services'
+import { AppContext } from '../../Context/AppProvider'
 import { PlusIcon, XIcon } from '../Icon'
 import Button from '../Button'
 import Modal from '../Modal'
@@ -12,6 +11,7 @@ import SelectNoControl from '../SelectNoControl'
 import InputNoControl from '../InputNoControl'
 
 function CreateTestYourSelfModal({ isOpen, onClose }) {
+    const { topics, questions } = useContext(AppContext)
     const navigate = useNavigate()
     const [data, setData] = useState([])
     const [total, setTotal] = useState(0)
@@ -25,11 +25,8 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const structureSnapshot = await getDatabase('structure')
-            const structureVal = await structureSnapshot.val()
-            const structureData = JSON.parse(structureVal)
             const structure = []
-            structureData.map(
+            topics.map(
                 parent =>
                     parent.children &&
                     parent.children.map(child =>
@@ -46,10 +43,6 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                               })
                     )
             )
-
-            const questionsSnapshot = await getDatabase('questions')
-            const questionVal = await questionsSnapshot.val()
-            const questions = toArray(questionVal).filter(item => !!item)
 
             const result = {}
             structure
@@ -88,7 +81,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
             setTotal(questions.length)
         }
         fetchData()
-    }, [])
+    }, [questions, topics])
 
     const handleChange = (index, e) => {
         const newState = [...formData]
@@ -202,7 +195,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                                 <InputNoControl
                                     className='col-span-4 lg:col-span-2'
                                     type='number'
-                                    inputmode='decimal'
+                                    inputMode='decimal'
                                     name='amount'
                                     min={1}
                                     max={
