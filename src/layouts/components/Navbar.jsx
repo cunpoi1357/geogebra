@@ -57,7 +57,7 @@ function Navbar({ expandedMenu, onOpenCreateTestModal, onOpenMenu, onCloseMenu }
                 </button>
             </div>
             <hr className='lg:hidden' />
-            <div className='lg:hidden'>
+            <div className='lg:hidden pb-40 lg:pb-0'>
                 <Link
                     to='/about'
                     className='text-[#92a6e2] h-[72px] w-full flex items-center cursor-pointer hover:bg-[#4360b5] hover:text-white transition-colors ease-linear outline-none'

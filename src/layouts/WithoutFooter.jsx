@@ -34,7 +34,7 @@ function WithoutFooter() {
                     onOpenCreateTestModal={() => setCreateTestShow(true)}
                 />
                 <section
-                    className={clsx('relative flex-1 h-full overflow-auto bg lg:pl-4 pt-4 lg:block', {
+                    className={clsx('relative flex-1 h-full overflow-auto bg lg:pl-4 pt-4 lg:block  pb-20 lg:pb-0', {
                         hidden: expandedMenu
                     })}
                 >
