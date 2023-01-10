@@ -3,6 +3,7 @@ import { lazy } from 'react'
 import config from '../config'
 
 import WithoutFooter from '../layouts/WithoutFooter'
+import GeogebraManagement from '../Pages/GeogebraManagement'
 
 const Home = lazy(() => import('../Pages/Home'))
 const About = lazy(() => import('../Pages/About'))
@@ -12,6 +13,7 @@ const Register = lazy(() => import('../Pages/Register'))
 const Example = lazy(() => import('../Pages/Example'))
 const Topic = lazy(() => import('../Pages/Topic'))
 const TestYourSelf = lazy(() => import('../Pages/TestYourSelf'))
+const Geogebra = lazy(() => import('../Pages/Geogebra'))
 const NotFound = lazy(() => import('../Pages/NotFound'))
 
 const Admin = lazy(() => import('../Pages/Admin'))
@@ -35,6 +37,10 @@ const publicRoutes = [
         path: config.routes.testYourSelf,
         component: TestYourSelf,
         layout: WithoutFooter
+    },
+    {
+        path: config.routes.geogebra,
+        component: Geogebra
     },
     {
         path: config.routes.topic,
@@ -87,6 +93,10 @@ const privateRoutes = [
     {
         path: config.routes.structureManagement,
         component: StructureManagement
+    },
+    {
+        path: config.routes.geogebraManagement,
+        component: GeogebraManagement
     }
 ]
 

@@ -3,6 +3,7 @@ const routes = {
     topic: '/topic/:topic',
     example: '/example/:id',
     testYourSelf: '/test-your-self',
+    geogebra: '/geogebra/:geogebraId',
     about: '/about',
     contact: '/contact',
     login: '/login',
@@ -13,6 +14,7 @@ const routes = {
     defectManagement: '/admin/defect',
     theoryManagement: '/admin/theory',
     questionManagement: '/admin/question',
+    geogebraManagement: '/admin/geogebra',
     notFound: '*'
 }
 

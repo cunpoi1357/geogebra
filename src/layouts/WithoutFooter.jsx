@@ -6,16 +6,13 @@ import clsx from 'clsx'
 
 import Navbar from './components/Navbar'
 import Header from './components/Header'
-import CreateTestYourSelfModal from '../components/TestYourSelf/CreateTestYourSelfModal'
 
 function WithoutFooter() {
-    const [isCreateTestShow, setCreateTestShow] = useState(false)
     const [expandedMenu, setExpandedMenu] = useState(false)
     const location = useLocation()
 
     useEffect(() => {
         setExpandedMenu(false)
-        setCreateTestShow(false)
     }, [location])
 
     return (
@@ -31,7 +28,6 @@ function WithoutFooter() {
                     expandedMenu={expandedMenu}
                     onOpenMenu={() => setExpandedMenu(true)}
                     onCloseMenu={() => setExpandedMenu(false)}
-                    onOpenCreateTestModal={() => setCreateTestShow(true)}
                 />
                 <section
                     className={clsx('relative flex-1 h-full overflow-auto bg lg:pl-4 pt-4 lg:block  pb-20 lg:pb-0', {
@@ -41,7 +37,6 @@ function WithoutFooter() {
                     <Outlet />
                 </section>
             </main>
-            <CreateTestYourSelfModal isOpen={isCreateTestShow} onClose={() => setCreateTestShow(false)} />
         </div>
     )
 }

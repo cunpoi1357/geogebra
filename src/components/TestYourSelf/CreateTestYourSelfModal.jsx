@@ -19,8 +19,8 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
         {
             topic: '',
             level: '',
-            amount: 1
-        }
+            amount: 1,
+        },
     ])
 
     useEffect(() => {
@@ -34,12 +34,12 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                             ? child.children.map(item =>
                                   structure.push({
                                       path: item.path,
-                                      name: item.name
+                                      name: item.name,
                                   })
                               )
                             : structure.push({
                                   path: child.path,
-                                  name: child.name
+                                  name: child.name,
                               })
                     )
             )
@@ -48,7 +48,8 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
             structure
                 .map(topic => {
                     const questionsFiltered = questions.filter(
-                        question => JSON.parse(question.topic).path === topic.path
+                        question =>
+                            JSON.parse(question.topic).path === topic.path
                     )
 
                     const levels = {}
@@ -64,7 +65,9 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                         topic: topic.name,
                         amount: questionsFiltered.length,
                         levels: levels,
-                        questions: questionsFiltered.map(question => question.id)
+                        questions: questionsFiltered.map(
+                            question => question.id
+                        ),
                     }
                 })
                 .filter(item => item.amount > 0)
@@ -73,7 +76,7 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                         (result[item.topic] = {
                             amount: item.amount,
                             levels: item.levels,
-                            questions: item.questions
+                            questions: item.questions,
                         })
                 )
 
@@ -106,8 +109,8 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
             {
                 topic: '',
                 level: '',
-                amount: 1
-            }
+                amount: 1,
+            },
         ])
     }
 
@@ -125,15 +128,22 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
         // get question id by form data
         formFiltered.forEach(item => {
             if (item.level) {
-                questions.push(...sampleSize(data[item.topic].levels[item.level], item.amount))
+                questions.push(
+                    ...sampleSize(
+                        data[item.topic].levels[item.level],
+                        item.amount
+                    )
+                )
             } else {
-                questions.push(...sampleSize(data[item.topic].questions, item.amount))
+                questions.push(
+                    ...sampleSize(data[item.topic].questions, item.amount)
+                )
             }
         })
 
         if (questions.length > 0) {
             navigate('/test-your-self', {
-                state: questions
+                state: questions,
             })
             onClose()
         }
@@ -145,8 +155,8 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
             style={{
                 overlay: {
                     backgroundColor: 'rgba(0,0,0,.6)',
-                    zIndex: 1000
-                }
+                    zIndex: 1000,
+                },
             }}
             onRequestClose={onClose}
         >
@@ -154,8 +164,13 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                 <div className='flex flex-col w-full align-center'>
                     <header className='flex items-center w-full'>
                         <span className='inline-block w-1 h-4 mr-3 rounded bg-primary-blue' />
-                        <p className='flex-1 inline-block font-bold text-neutrals-07'>Tạo đề tự luyện</p>
-                        <XIcon className='inline-block cursor-pointer text-neutrals-04' onClick={onClose} />
+                        <p className='flex-1 inline-block font-bold text-neutrals-07'>
+                            Tạo đề tự luyện
+                        </p>
+                        <XIcon
+                            className='inline-block cursor-pointer text-neutrals-04'
+                            onClick={onClose}
+                        />
                     </header>
                     <hr className='bg-neutrals-03 w-full h-[1px] my-6'></hr>
                 </div>
@@ -181,9 +196,18 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                                     value={item.level}
                                     options={
                                         (item.topic &&
-                                            ['Nhận biết', 'Thông hiểu', 'Vận dụng thấp', 'Vận dụng cao']
+                                            [
+                                                'Nhận biết',
+                                                'Thông hiểu',
+                                                'Vận dụng thấp',
+                                                'Vận dụng cao',
+                                            ]
                                                 .map(level =>
-                                                    Object.keys(data[item.topic].levels).includes(level) ? level : null
+                                                    Object.keys(
+                                                        data[item.topic].levels
+                                                    ).includes(level)
+                                                        ? level
+                                                        : null
                                                 )
                                                 .filter(item => !!item)) ||
                                         []
@@ -199,14 +223,16 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                                     name='amount'
                                     min={1}
                                     max={
-                                        data[item.topic]?.levels[item.level]?.length ||
+                                        data[item.topic]?.levels[item.level]
+                                            ?.length ||
                                         data[item.topic]?.amount ||
                                         total
                                     }
                                     value={item.amount}
                                     onChange={e => handleChange(index, e)}
                                     label={`Số câu hỏi (hiện có ${
-                                        data[item.topic]?.levels[item.level]?.length ||
+                                        data[item.topic]?.levels[item.level]
+                                            ?.length ||
                                         data[item.topic]?.amount ||
                                         total
                                     })`}
@@ -231,7 +257,10 @@ function CreateTestYourSelfModal({ isOpen, onClose }) {
                         Thêm chuyên đề
                     </button>
 
-                    <Button onClick={onSubmit} className='text-white bg-primary-blue'>
+                    <Button
+                        onClick={onSubmit}
+                        className='text-white bg-primary-blue'
+                    >
                         Tạo
                     </Button>
                 </div>

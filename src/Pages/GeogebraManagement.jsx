@@ -11,21 +11,19 @@ import { setDatabase } from '../firebase/services'
 
 const ajv = new Ajv({ allErrors: true, verbose: true })
 
-function StructureManagement() {
-    const { topics } = useContext(AppContext)
-    const [data, setData] = useState(topics || [{}])
+function GeogebraManagement() {
+    const { geogebras } = useContext(AppContext)
+    const [data, setData] = useState(geogebras || [{}])
 
     const handleUpdate = () => {
-        setDatabase('structure', data)
-            .then(() => {
-                toast.success('Cập nhật thành công')
-            })
+        setDatabase('geogebra', data)
+            .then(() => toast.success('Cập nhật thành công'))
             .catch(error => toast.error(error.message))
     }
 
     return (
         <div className='flex flex-col h-screen overflow-hidden'>
-            <AdminHeader>Quản lí menu</AdminHeader>
+            <AdminHeader>Quản lí hình học 3D</AdminHeader>
             <section className='p-16 h-[calc(100vh-128px)] overflow-auto'>
                 <div className='p-8'>
                     {data.length > 0 && (
@@ -43,4 +41,4 @@ function StructureManagement() {
     )
 }
 
-export default StructureManagement
+export default GeogebraManagement

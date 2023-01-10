@@ -14,7 +14,7 @@ export const EditIcon = ({ className }) => (
             fill='currentColor'
         />
     </svg>
-)
+);
 
 export const TrashIcon = ({ className }) => (
     <svg
@@ -50,7 +50,7 @@ export const TrashIcon = ({ className }) => (
             fill='currentColor'
         />
     </svg>
-)
+);
 
 export const ChevronDownIcon = ({ className }) => (
     <svg
@@ -63,7 +63,7 @@ export const ChevronDownIcon = ({ className }) => (
     >
         <path d='M6 9L12 15L18 9' stroke='currentColor' strokeWidth={2} strokeLinecap='round' strokeLinejoin='round' />
     </svg>
-)
+);
 
 export const ChevronUpIcon = ({ className }) => (
     <svg
@@ -81,7 +81,7 @@ export const ChevronUpIcon = ({ className }) => (
             fill='currentColor'
         />
     </svg>
-)
+);
 
 export const SearchIcon = ({ className }) => (
     <svg
@@ -107,7 +107,7 @@ export const SearchIcon = ({ className }) => (
             strokeLinejoin='round'
         />
     </svg>
-)
+);
 
 export const PlusIcon = ({ className }) => (
     <svg
@@ -121,7 +121,7 @@ export const PlusIcon = ({ className }) => (
         <rect x={21} y={11} width={2} height={18} rx={1} transform='rotate(90 21 11)' fill='currentColor' />
         <rect x={11} y={3} width={2} height={18} rx={1} fill='currentColor' />
     </svg>
-)
+);
 
 export const EyeIcon = ({ className }) => (
     <svg
@@ -145,7 +145,7 @@ export const EyeIcon = ({ className }) => (
             fill='currentColor'
         />
     </svg>
-)
+);
 
 export const XIcon = ({ className, ...props }) => (
     <svg
@@ -170,7 +170,7 @@ export const XIcon = ({ className, ...props }) => (
             fill='currentColor'
         />
     </svg>
-)
+);
 
 export const CheckBoxIcon = ({ className }) => (
     <svg xmlns='http://www.w3.org/2000/svg' className={className} viewBox='0 0 512 512'>
@@ -179,7 +179,7 @@ export const CheckBoxIcon = ({ className }) => (
             fill='currentColor'
         />
     </svg>
-)
+);
 
 export const CreateIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -192,7 +192,7 @@ export const CreateIcon = ({ className }) => (
             fill='currentColor'
         />
     </svg>
-)
+);
 
 export const BookIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -201,7 +201,7 @@ export const BookIcon = ({ className }) => (
             fill='currentColor'
         />
     </svg>
-)
+);
 
 export const MenuIcon = ({ className }) => (
     <svg className={className} focusable='false' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'>
@@ -210,7 +210,7 @@ export const MenuIcon = ({ className }) => (
             d='M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z'
         ></path>
     </svg>
-)
+);
 
 export const ShuffleIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -231,7 +231,7 @@ export const ShuffleIcon = ({ className }) => (
             strokeWidth='32'
         />
     </svg>
-)
+);
 
 export const SettingIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -240,7 +240,7 @@ export const SettingIcon = ({ className }) => (
             d='M256 176a80 80 0 1080 80 80.24 80.24 0 00-80-80zm172.72 80a165.53 165.53 0 01-1.64 22.34l48.69 38.12a11.59 11.59 0 012.63 14.78l-46.06 79.52a11.64 11.64 0 01-14.14 4.93l-57.25-23a176.56 176.56 0 01-38.82 22.67l-8.56 60.78a11.93 11.93 0 01-11.51 9.86h-92.12a12 12 0 01-11.51-9.53l-8.56-60.78A169.3 169.3 0 01151.05 393L93.8 416a11.64 11.64 0 01-14.14-4.92L33.6 331.57a11.59 11.59 0 012.63-14.78l48.69-38.12A174.58 174.58 0 0183.28 256a165.53 165.53 0 011.64-22.34l-48.69-38.12a11.59 11.59 0 01-2.63-14.78l46.06-79.52a11.64 11.64 0 0114.14-4.93l57.25 23a176.56 176.56 0 0138.82-22.67l8.56-60.78A11.93 11.93 0 01209.94 26h92.12a12 12 0 0111.51 9.53l8.56 60.78A169.3 169.3 0 01361 119l57.2-23a11.64 11.64 0 0114.14 4.92l46.06 79.52a11.59 11.59 0 01-2.63 14.78l-48.69 38.12a174.58 174.58 0 011.64 22.66z'
         />
     </svg>
-)
+);
 
 export const FolderIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -249,7 +249,7 @@ export const FolderIcon = ({ className }) => (
             d='M496 152a56 56 0 00-56-56H220.11a23.89 23.89 0 01-13.31-4L179 73.41A55.77 55.77 0 00147.89 64H72a56 56 0 00-56 56v48a8 8 0 008 8h464a8 8 0 008-8zM16 392a56 56 0 0056 56h368a56 56 0 0056-56V216a8 8 0 00-8-8H24a8 8 0 00-8 8z'
         />
     </svg>
-)
+);
 
 export const ChatBubbleIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -258,7 +258,7 @@ export const ChatBubbleIcon = ({ className }) => (
             d='M475.22 206.52c-10.34-48.65-37.76-92.93-77.22-124.68A227.4 227.4 0 00255.82 32C194.9 32 138 55.47 95.46 98.09 54.35 139.33 31.82 193.78 32 251.37a215.66 215.66 0 0035.65 118.76l4.35 6.05L48 480l114.8-28.56s2.3.77 4 1.42 16.33 6.26 31.85 10.6c12.9 3.6 39.74 9 60.77 9 59.65 0 115.35-23.1 156.83-65.06C457.36 365.77 480 310.42 480 251.49a213.5 213.5 0 00-4.78-44.97zM160 288a32 32 0 1132-32 32 32 0 01-32 32zm96 0a32 32 0 1132-32 32 32 0 01-32 32zm96 0a32 32 0 1132-32 32 32 0 01-32 32z'
         />
     </svg>
-)
+);
 
 export const PriceTagIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -267,7 +267,7 @@ export const PriceTagIcon = ({ className }) => (
             d='M467 45.2A44.45 44.45 0 00435.29 32H312.36a30.63 30.63 0 00-21.52 8.89L45.09 286.59a44.82 44.82 0 000 63.32l117 117a44.83 44.83 0 0063.34 0l245.65-245.6A30.6 30.6 0 00480 199.8v-123a44.24 44.24 0 00-13-31.6zM384 160a32 32 0 1132-32 32 32 0 01-32 32z'
         />
     </svg>
-)
+);
 
 export const MarkdownIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -276,7 +276,7 @@ export const MarkdownIcon = ({ className }) => (
             d='M475 64H37C16.58 64 0 81.38 0 102.77v306.42C0 430.59 16.58 448 37 448h438c20.38 0 37-17.41 37-38.81V102.77C512 81.38 495.42 64 475 64zM288 368h-64V256l-48 64-48-64v112H64V144h64l48 80 48-80h64zm96 0l-80-112h48.05L352 144h64v112h48z'
         />
     </svg>
-)
+);
 
 export const PrismIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -289,7 +289,7 @@ export const PrismIcon = ({ className }) => (
             strokeWidth='32'
         />
     </svg>
-)
+);
 
 export const YoutubeIcon = ({ className }) => (
     <svg
@@ -304,7 +304,7 @@ export const YoutubeIcon = ({ className }) => (
     >
         <path d='M960 509.2c0-2.2 0-4.7-.1-7.6-.1-8.1-.3-17.2-.5-26.9-.8-27.9-2.2-55.7-4.4-81.9-3-36.1-7.4-66.2-13.4-88.8a139.52 139.52 0 0 0-98.3-98.5c-28.3-7.6-83.7-12.3-161.7-15.2-37.1-1.4-76.8-2.3-116.5-2.8-13.9-.2-26.8-.3-38.4-.4h-29.4c-11.6.1-24.5.2-38.4.4-39.7.5-79.4 1.4-116.5 2.8-78 3-133.5 7.7-161.7 15.2A139.35 139.35 0 0 0 82.4 304C76.3 326.6 72 356.7 69 392.8c-2.2 26.2-3.6 54-4.4 81.9-.3 9.7-.4 18.8-.5 26.9 0 2.9-.1 5.4-.1 7.6v5.6c0 2.2 0 4.7.1 7.6.1 8.1.3 17.2.5 26.9.8 27.9 2.2 55.7 4.4 81.9 3 36.1 7.4 66.2 13.4 88.8 12.8 47.9 50.4 85.7 98.3 98.5 28.2 7.6 83.7 12.3 161.7 15.2 37.1 1.4 76.8 2.3 116.5 2.8 13.9.2 26.8.3 38.4.4h29.4c11.6-.1 24.5-.2 38.4-.4 39.7-.5 79.4-1.4 116.5-2.8 78-3 133.5-7.7 161.7-15.2 47.9-12.8 85.5-50.5 98.3-98.5 6.1-22.6 10.4-52.7 13.4-88.8 2.2-26.2 3.6-54 4.4-81.9.3-9.7.4-18.8.5-26.9 0-2.9.1-5.4.1-7.6v-5.6zm-72 5.2c0 2.1 0 4.4-.1 7.1-.1 7.8-.3 16.4-.5 25.7-.7 26.6-2.1 53.2-4.2 77.9-2.7 32.2-6.5 58.6-11.2 76.3-6.2 23.1-24.4 41.4-47.4 47.5-21 5.6-73.9 10.1-145.8 12.8-36.4 1.4-75.6 2.3-114.7 2.8-13.7.2-26.4.3-37.8.3h-28.6l-37.8-.3c-39.1-.5-78.2-1.4-114.7-2.8-71.9-2.8-124.9-7.2-145.8-12.8-23-6.2-41.2-24.4-47.4-47.5-4.7-17.7-8.5-44.1-11.2-76.3-2.1-24.7-3.4-51.3-4.2-77.9-.3-9.3-.4-18-.5-25.7 0-2.7-.1-5.1-.1-7.1v-4.8c0-2.1 0-4.4.1-7.1.1-7.8.3-16.4.5-25.7.7-26.6 2.1-53.2 4.2-77.9 2.7-32.2 6.5-58.6 11.2-76.3 6.2-23.1 24.4-41.4 47.4-47.5 21-5.6 73.9-10.1 145.8-12.8 36.4-1.4 75.6-2.3 114.7-2.8 13.7-.2 26.4-.3 37.8-.3h28.6l37.8.3c39.1.5 78.2 1.4 114.7 2.8 71.9 2.8 124.9 7.2 145.8 12.8 23 6.2 41.2 24.4 47.4 47.5 4.7 17.7 8.5 44.1 11.2 76.3 2.1 24.7 3.4 51.3 4.2 77.9.3 9.3.4 18 .5 25.7 0 2.7.1 5.1.1 7.1v4.8zM423 646l232-135-232-133z'></path>
     </svg>
-)
+);
 
 export const TextCenterIcon = ({ className }) => (
     <svg
@@ -322,7 +322,7 @@ export const TextCenterIcon = ({ className }) => (
             d='M4 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z'
         ></path>
     </svg>
-)
+);
 
 export const SubTitleIcon = ({ className }) => (
     <svg
@@ -338,7 +338,7 @@ export const SubTitleIcon = ({ className }) => (
         <path fill='none' d='M0 0h24v24H0V0z'></path>
         <path d='M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6zm0 4h8v2H6zm10 0h2v2h-2zm-6-4h8v2h-8z'></path>
     </svg>
-)
+);
 
 export const CopyIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -363,7 +363,7 @@ export const CopyIcon = ({ className }) => (
             strokeWidth='32'
         />
     </svg>
-)
+);
 
 export const ClipBoardIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -387,7 +387,7 @@ export const ClipBoardIcon = ({ className }) => (
             strokeWidth='32'
         />
     </svg>
-)
+);
 
 export const GoogleIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -396,7 +396,7 @@ export const GoogleIcon = ({ className }) => (
             d='M473.16 221.48l-2.26-9.59H262.46v88.22H387c-12.93 61.4-72.93 93.72-121.94 93.72-35.66 0-73.25-15-98.13-39.11a140.08 140.08 0 01-41.8-98.88c0-37.16 16.7-74.33 41-98.78s61-38.13 97.49-38.13c41.79 0 71.74 22.19 82.94 32.31l62.69-62.36C390.86 72.72 340.34 32 261.6 32c-60.75 0-119 23.27-161.58 65.71C58 139.5 36.25 199.93 36.25 256s20.58 113.48 61.3 155.6c43.51 44.92 105.13 68.4 168.58 68.4 57.73 0 112.45-22.62 151.45-63.66 38.34-40.4 58.17-96.3 58.17-154.9 0-24.67-2.48-39.32-2.59-39.96z'
         />
     </svg>
-)
+);
 
 export const FacebookIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'>
@@ -405,7 +405,7 @@ export const FacebookIcon = ({ className }) => (
             d='M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z'
         />
     </svg>
-)
+);
 
 export const EnvelopeIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -414,7 +414,7 @@ export const EnvelopeIcon = ({ className }) => (
             d='M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z'
         />
     </svg>
-)
+);
 
 export const HomeIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -427,7 +427,7 @@ export const HomeIcon = ({ className }) => (
             d='M490.91 244.15l-74.8-71.56V64a16 16 0 00-16-16h-48a16 16 0 00-16 16v32l-57.92-55.38C272.77 35.14 264.71 32 256 32c-8.68 0-16.72 3.14-22.14 8.63l-212.7 203.5c-6.22 6-7 15.87-1.34 22.37A16 16 0 0043 267.56L250.5 69.28a8 8 0 0111.06 0l207.52 198.28a16 16 0 0022.59-.44c6.14-6.36 5.63-16.86-.76-22.97z'
         />
     </svg>
-)
+);
 
 export const InfoIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -456,7 +456,7 @@ export const InfoIcon = ({ className }) => (
         />
         <path d='M248 130a26 26 0 1026 26 26 26 0 00-26-26z' />
     </svg>
-)
+);
 
 export const PhoneIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -468,7 +468,7 @@ export const PhoneIcon = ({ className }) => (
             strokeWidth='32'
         />
     </svg>
-)
+);
 
 export const LoginIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -489,7 +489,7 @@ export const LoginIcon = ({ className }) => (
             d='M288 336l80-80-80-80M80 256h272'
         />
     </svg>
-)
+);
 
 export const LogoutIcon = ({ className }) => (
     <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
@@ -502,4 +502,13 @@ export const LogoutIcon = ({ className }) => (
             strokeWidth={32}
         />
     </svg>
-)
+);
+
+export const CubeIcon = ({ className }) => (
+    <svg className={className} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'>
+        <path
+            fill='currentColor'
+            d='M234.5 5.7c13.9-5 29.1-5 43.1 0l192 68.6C495 83.4 512 107.5 512 134.6V377.4c0 27-17 51.2-42.5 60.3l-192 68.6c-13.9 5-29.1 5-43.1 0l-192-68.6C17 428.6 0 404.5 0 377.4V134.6c0-27 17-51.2 42.5-60.3l192-68.6zM256 66L82.3 128 256 190l173.7-62L256 66zm32 368.6l160-57.1v-188L288 246.6v188z'
+        />
+    </svg>
+);

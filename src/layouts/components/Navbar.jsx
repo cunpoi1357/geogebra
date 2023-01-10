@@ -1,55 +1,89 @@
-import { useContext } from 'react'
-import { signOut } from 'firebase/auth'
-import { Link } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import clsx from 'clsx'
+import { useContext, useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
+import { Link, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import clsx from "clsx";
 
-import { AppContext } from '../../Context/AppProvider'
-import { AuthContext } from '../../Context/AuthProvider'
-import { InfoIcon, LoginIcon, LogoutIcon, PhoneIcon, PriceTagIcon } from '../../components/Icon'
-import NavParent from './NavParent'
-import { auth } from '../../firebase'
+import { AppContext } from "../../Context/AppProvider";
+import { AuthContext } from "../../Context/AuthProvider";
+import { InfoIcon, LoginIcon, LogoutIcon, PhoneIcon, PriceTagIcon } from "../../components/Icon";
+import NavParent from "./NavParent";
+import { auth } from "../../firebase";
+import CreateTestYourSelfModal from "../../components/TestYourSelf/CreateTestYourSelfModal";
+import CreateGeogebraModal from "../../components/Geogebra/CreateGeogebraModal";
 
-function Navbar({ expandedMenu, onOpenCreateTestModal, onOpenMenu, onCloseMenu }) {
-    const { topics } = useContext(AppContext)
-    const { user } = useContext(AuthContext)
+function Navbar({ expandedMenu, onOpenMenu, onCloseMenu }) {
+    const { topics } = useContext(AppContext);
+    const { user } = useContext(AuthContext);
+    const location = useLocation();
+
+    const [isCreateTestModalShow, setCreateTestModalShow] = useState(false);
+    const [isCreateGeogebraModalShow, setCreateGeogebraModalShow] = useState(false);
 
     const handleLogout = () => {
         signOut(auth)
             .then(() => {
-                toast.success('Đăng xuất thành công!')
-                onCloseMenu()
+                toast.success("Đăng xuất thành công!");
+                onCloseMenu();
             })
-            .catch(error => toast.error(error.message))
-    }
+            .catch((error) => toast.error(error.message));
+    };
+
+    useEffect(() => {
+        setCreateTestModalShow(false);
+        setCreateGeogebraModalShow(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location]);
+
     return (
         <aside
             className={clsx(
-                'flex-col lg:flex lg:mx-0 bg-[#0060a7] overflow-auto',
-                expandedMenu ? 'w-full lg:w-auto mx-4 md:mx-0' : 'mx-0 w-0 lg:w-auto'
+                "flex-col lg:flex lg:mx-0 bg-[#0060a7] overflow-auto",
+                expandedMenu ? "w-full lg:w-auto mx-4 md:mx-0" : "mx-0 w-0 lg:w-auto"
             )}
             onClick={onOpenMenu}
         >
-            <div className={clsx('transition-all ease-linear', expandedMenu ? 'w-full md:w-[400px]' : 'w-16')}>
-                {topics.map(item => (
+            <div className={clsx("transition-all ease-linear", expandedMenu ? "w-full md:w-[400px]" : "w-16")}>
+                {topics.map((item) => (
                     <NavParent key={item.name} expandedMenu={expandedMenu} {...item} />
                 ))}
                 <button
                     className='text-[#92a6e2] h-[72px] w-full flex cursor-pointer hover:bg-[#4360b5] hover:text-white transition-colors ease-linear outline-none'
-                    onClick={onOpenCreateTestModal}
+                    onClick={() => setCreateGeogebraModalShow(true)}
                 >
                     <span
                         className={clsx(
-                            'transition-all ease-linear flex items-center justify-center',
-                            expandedMenu ? 'h-[72px] w-[72px]' : 'h-[72px] w-16'
+                            "transition-all ease-linear flex items-center justify-center",
+                            expandedMenu ? "h-[72px] w-[72px]" : "h-[72px] w-16"
                         )}
                     >
                         <PriceTagIcon className='h-6 mr-1' />
                     </span>
                     <span
                         className={clsx(
-                            'py-6 pr-6 transition-all ease-linear whitespace-nowrap overflow-hidden',
-                            expandedMenu ? 'inline-block' : 'hidden'
+                            "py-6 pr-6 transition-all ease-linear whitespace-nowrap overflow-hidden",
+                            expandedMenu ? "inline-block" : "hidden"
+                        )}
+                    >
+                        Tạo mô hình 3D
+                    </span>
+                </button>
+                <button
+                    className='text-[#92a6e2] h-[72px] w-full flex cursor-pointer hover:bg-[#4360b5] hover:text-white transition-colors ease-linear outline-none'
+                    onClick={() => setCreateTestModalShow(true)}
+                >
+                    <span
+                        className={clsx(
+                            "transition-all ease-linear flex items-center justify-center",
+                            expandedMenu ? "h-[72px] w-[72px]" : "h-[72px] w-16"
+                        )}
+                    >
+                        <PriceTagIcon className='h-6 mr-1' />
+                    </span>
+                    <span
+                        className={clsx(
+                            "py-6 pr-6 transition-all ease-linear whitespace-nowrap overflow-hidden",
+                            expandedMenu ? "inline-block" : "hidden"
                         )}
                     >
                         Đề tự luyện
@@ -64,8 +98,8 @@ function Navbar({ expandedMenu, onOpenCreateTestModal, onOpenMenu, onCloseMenu }
                 >
                     <span
                         className={clsx(
-                            'transition-all ease-linear flex items-center justify-center',
-                            expandedMenu ? 'h-[72px] w-[72px]' : 'h-[72px] w-16'
+                            "transition-all ease-linear flex items-center justify-center",
+                            expandedMenu ? "h-[72px] w-[72px]" : "h-[72px] w-16"
                         )}
                     >
                         <InfoIcon className='h-6 mr-1' />
@@ -78,8 +112,8 @@ function Navbar({ expandedMenu, onOpenCreateTestModal, onOpenMenu, onCloseMenu }
                 >
                     <span
                         className={clsx(
-                            'transition-all ease-linear flex items-center justify-center',
-                            expandedMenu ? 'h-[72px] w-[72px]' : 'h-[72px] w-16'
+                            "transition-all ease-linear flex items-center justify-center",
+                            expandedMenu ? "h-[72px] w-[72px]" : "h-[72px] w-16"
                         )}
                     >
                         <PhoneIcon className='h-6 mr-1' />
@@ -93,8 +127,8 @@ function Navbar({ expandedMenu, onOpenCreateTestModal, onOpenMenu, onCloseMenu }
                     >
                         <span
                             className={clsx(
-                                'transition-all ease-linear flex items-center justify-center',
-                                expandedMenu ? 'h-[72px] w-[72px]' : 'h-[72px] w-16'
+                                "transition-all ease-linear flex items-center justify-center",
+                                expandedMenu ? "h-[72px] w-[72px]" : "h-[72px] w-16"
                             )}
                         >
                             <LogoutIcon className='h-6 mr-1' />
@@ -108,8 +142,8 @@ function Navbar({ expandedMenu, onOpenCreateTestModal, onOpenMenu, onCloseMenu }
                     >
                         <span
                             className={clsx(
-                                'transition-all ease-linear flex items-center justify-center',
-                                expandedMenu ? 'h-[72px] w-[72px]' : 'h-[72px] w-16'
+                                "transition-all ease-linear flex items-center justify-center",
+                                expandedMenu ? "h-[72px] w-[72px]" : "h-[72px] w-16"
                             )}
                         >
                             <LoginIcon className='h-6 mr-1' />
@@ -118,8 +152,10 @@ function Navbar({ expandedMenu, onOpenCreateTestModal, onOpenMenu, onCloseMenu }
                     </Link>
                 )}
             </div>
+            <CreateTestYourSelfModal isOpen={isCreateTestModalShow} onClose={() => setCreateTestModalShow(false)} />
+            <CreateGeogebraModal isOpen={isCreateGeogebraModalShow} onClose={() => setCreateGeogebraModalShow(false)} />
         </aside>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;
