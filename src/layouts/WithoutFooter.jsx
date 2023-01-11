@@ -17,7 +17,10 @@ function WithoutFooter() {
 
     return (
         <div className='flex flex-col bg-[#cce2ff] md:p-4 md:pb-0 h-screen'>
-            <Header onToggle={() => setExpandedMenu(!expandedMenu)} expandedMenu={expandedMenu} />
+            <Header
+                onToggle={() => setExpandedMenu(!expandedMenu)}
+                expandedMenu={expandedMenu}
+            />
             <main
                 className={clsx(
                     'flex w-full md:bg-white  h-[calc(100vh-80px)]',
@@ -30,9 +33,12 @@ function WithoutFooter() {
                     onCloseMenu={() => setExpandedMenu(false)}
                 />
                 <section
-                    className={clsx('relative flex-1 h-full overflow-auto bg lg:pl-4 pt-4 lg:block  pb-20 lg:pb-0', {
-                        hidden: expandedMenu
-                    })}
+                    className={clsx(
+                        'relative flex-1 h-full overflow-auto bg lg:pl-4 pt-4 lg:block',
+                        {
+                            hidden: expandedMenu,
+                        }
+                    )}
                 >
                     <Outlet />
                 </section>
@@ -42,7 +48,7 @@ function WithoutFooter() {
 }
 
 WithoutFooter.propsType = {
-    children: propsTypes.node.isRequired
+    children: propsTypes.node.isRequired,
 }
 
 export default WithoutFooter

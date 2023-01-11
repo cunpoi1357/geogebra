@@ -44,7 +44,8 @@ function CreateGeogebraModal({ isOpen, onClose }) {
                 </div>
                 <div className='grid gap-4'>
                     <SelectGeogebra
-                        placeholder='Mô hình'
+                        placeholder='Chọn mô hình'
+                        label='Mô hình'
                         value={geogebra}
                         onChange={e => setGeogeobra(e.target.value)}
                     />
