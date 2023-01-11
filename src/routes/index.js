@@ -1,9 +1,11 @@
 import { lazy } from 'react'
+import { createBrowserRouter } from 'react-router-dom'
 
 import config from '../config'
 
 import WithoutFooter from '../layouts/WithoutFooter'
-import GeogebraManagement from '../Pages/GeogebraManagement'
+import DefaultLayout from '../layouts/DefaultLayout'
+import AdminLayout from '../layouts/AdminLayout'
 
 const Home = lazy(() => import('../Pages/Home'))
 const About = lazy(() => import('../Pages/About'))
@@ -22,82 +24,99 @@ const DefectManagement = lazy(() => import('../Pages/DefectManagement'))
 const StructureManagement = lazy(() => import('../Pages/StructureManagement'))
 const QuestionManagement = lazy(() => import('../Pages/QuestionManagement'))
 const TheoryManagement = lazy(() => import('../Pages/TheoryManagement'))
+const GeogebraManagement = lazy(() => import('../Pages/GeogebraManagement'))
 
-const publicRoutes = [
-    {
-        path: config.routes.home,
-        component: Home
-    },
-    {
-        path: config.routes.example,
-        component: Example,
-        layout: WithoutFooter
-    },
-    {
-        path: config.routes.testYourSelf,
-        component: TestYourSelf,
-        layout: WithoutFooter
-    },
-    {
-        path: config.routes.geogebra,
-        component: Geogebra
-    },
-    {
-        path: config.routes.topic,
-        component: Topic
-    },
-    {
-        path: config.routes.about,
-        component: About,
-        layout: WithoutFooter
-    },
-    {
-        path: config.routes.contact,
-        component: Contact
-    },
-    {
-        path: config.routes.login,
-        component: Login
-    },
-    {
-        path: config.routes.register,
-        component: Register
-    },
-    {
-        path: config.routes.notFound,
-        component: NotFound
-    }
-]
 
-const privateRoutes = [
+const routes = createBrowserRouter([
+    {
+        element: <DefaultLayout />,
+        children: [
+            {
+                path: config.routes.home,
+                element: <Home />
+            },
+            {
+                path: config.routes.contact,
+                element: <Contact />
+            },
+
+            {
+                path: config.routes.login,
+                element: <Login />
+            },
+            {
+                path: config.routes.register,
+                element: <Register />
+            },
+            {
+                path: config.routes.topic,
+                element: <Topic />
+            },
+            {
+                path: config.routes.geogebra,
+                element: <Geogebra />
+            },
+            {
+                path: config.routes.notFound,
+                element: <NotFound />
+            }
+        ]
+    },
+    {
+        element: <WithoutFooter />,
+        children: [
+            {
+                path: config.routes.about,
+                element: <About />
+            },
+            {
+                path: config.routes.example,
+                element: <Example />
+            },
+            {
+                path: config.routes.example,
+                element: <TestYourSelf />
+            }
+        ]
+    },
     {
         path: config.routes.admin,
-        component: Admin
-    },
-    {
-        path: config.routes.theoryManagement,
-        component: TheoryManagement
-    },
-    {
-        path: config.routes.multipleChoiceManagement,
-        component: MultipleChoiceManagement
-    },
-    {
-        path: config.routes.defectManagement,
-        component: DefectManagement
-    },
-    {
-        path: config.routes.questionManagement,
-        component: QuestionManagement
-    },
-    {
-        path: config.routes.structureManagement,
-        component: StructureManagement
-    },
-    {
-        path: config.routes.geogebraManagement,
-        component: GeogebraManagement
+        element: <AdminLayout />,
+        children: [
+            {
+                path: '',
+                element: <Admin />
+            },
+            {
+                path: config.routes.structureManagement,
+                element: <StructureManagement />
+            }
+            , {
+                path: config.routes.multipleChoiceManagement,
+                element: <MultipleChoiceManagement />
+            },
+            {
+                path: config.routes.defectManagement,
+                element: <DefectManagement />
+            },
+            {
+                path: config.routes.theoryManagement,
+                element: <TheoryManagement />
+            },
+            {
+                path: config.routes.questionManagement,
+                element: <QuestionManagement />
+            },
+            {
+                path: config.routes.geogebraManagement,
+                element: <GeogebraManagement />
+            }
+        ]
     }
-]
+],
+    {
+        basename: '/'
+    }
+)
 
-export { publicRoutes, privateRoutes }
+export default routes 

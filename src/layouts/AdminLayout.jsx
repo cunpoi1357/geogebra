@@ -1,10 +1,11 @@
-import { useContext } from 'react'
+import { Suspense, useContext } from 'react'
 import propsTypes from 'prop-types'
 import AdminNavBar from './components/AdminNavBar'
 import AdminHeader from './components/AdminHeader'
+import { Outlet } from 'react-router-dom'
 
 import { AuthContext } from '../Context/AuthProvider'
-import { Outlet } from 'react-router-dom'
+import Loading from '../components/Loading'
 
 function AdminLayout() {
     const { user } = useContext(AuthContext)
@@ -14,11 +15,15 @@ function AdminLayout() {
             <AdminNavBar />
             <main className='flex flex-col flex-1'>
                 {user?.role?.admin ? (
-                    <Outlet />
+                    <Suspense fallback={<Loading />}>
+                        <Outlet />
+                    </Suspense>
                 ) : (
                     <>
                         <AdminHeader>Trang quản lí</AdminHeader>
-                        <p className='p-10'>Vui lòng đăng nhập tài khoản quản trị!</p>
+                        <p className='p-10'>
+                            Vui lòng đăng nhập tài khoản quản trị!
+                        </p>
                     </>
                 )}
             </main>
@@ -27,7 +32,7 @@ function AdminLayout() {
 }
 
 AdminLayout.propsType = {
-    children: propsTypes.node.isRequired
+    children: propsTypes.node.isRequired,
 }
 
 export default AdminLayout

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import propsTypes from 'prop-types'
 import { Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
@@ -7,6 +7,7 @@ import clsx from 'clsx'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import Loading from '../components/Loading'
 
 function DefaultLayout() {
     const [expandedMenu, setExpandedMenu] = useState(false)
@@ -42,7 +43,9 @@ function DefaultLayout() {
                         }
                     )}
                 >
-                    <Outlet />
+                    <Suspense fallback={<Loading />}>
+                        <Outlet />
+                    </Suspense>
                     <Footer />
                 </section>
             </main>
